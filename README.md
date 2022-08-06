@@ -36,6 +36,22 @@ Anything clever here probably came from those guys, show them some love.  Anythi
 
 This is highly experimental and fluid, in testing the lower puzzle blocks I definitely see there are some issues to resolve and I'm working through them.
 
+# Phase 1
+(mostly complete)
+
+Establish a toolset with the following characteristics:
+Fast RNG generation.   Better control over Private Key Generation (masked keys, support for sequential and random blended keys, better control over byte pools to encourage collisions).   Leak-free reprocessing of the same base keys with configurable processing directives: (stride, random stride, redistribution, etc)
+
+# Phase 2
+(in progress)
+
+Early experimentation phase. Generate keys based on hybrid sequential and random scenarios for lower-bit length keys and find patterns of strides, redistribution and masks with higher colission occurrences.   Note the differences and attempt to scale.  Try to gain a better understanding on the distribution qualities and how the distribution can be constraining to predictive key generation. 
+
+# Phase 3
+(fall 2022)
+
+Train data models based on per-position key occurrences from historical datasets and Phase 2 findings.  Adjust the thrust RND keygens to include predictors or weights from the trained model. For instance... If constructing a new key if uint256.v[0]= {A642}, then the statistical liklihood of the uint256.v[1] being {A642} also, should be minimal.   The goal being to reflect natural distributive diversity in the key generation and to document and discover previously unknown statistical relationships between the unsigned ints that make up the uint256 struct.
+
 # Theory of Operation
 
 I wanted something Random-based but targetable for this task.   Everytime someone asks for Random-based features, the feature forks I've found were half-measures or got backed out entirely b/c smart-people-concensus was "Random will never work at scale, so don't bother."
@@ -216,44 +232,44 @@ Cycles on the stridemask and MaxCycles as a start parameter are used to control 
 # Usage
 See /samples  - the batch file is what I've been running in search for btc32 puzzl 64.
 ```
-KeyStepper --help
+KeyScanner --help
 
 ```
 BTC32 Puzzle 64 Mask and Stride (Middle-key up to 4 positions)
 ```
-keystepper --keyspace 8000000000000000:8fffffffffffffff --keymask 8nnn0000rrrrnnnn --stride 0000000100000000 --maxcycles 65536 -c -b 82 -t 256 -p 128 16jY7qLJnxb7CHZyqBP8qca9d51gAjyXQN -o 64-puzzle-out.txt
-keystepper --keyspace 9000000000000000:9fffffffffffffff --keymask 9nnn0000rrrrnnnn --stride 0000000100000000 --maxcycles 65536 -c -b 82 -t 256 -p 128 16jY7qLJnxb7CHZyqBP8qca9d51gAjyXQN -o 64-puzzle-out.txt
-keystepper --keyspace a000000000000000:afffffffffffffff --keymask annn0000rrrrnnnn --stride 0000000100000000 --maxcycles 65536 -c -b 82 -t 256 -p 128 16jY7qLJnxb7CHZyqBP8qca9d51gAjyXQN -o 64-puzzle-out.txt
-keystepper --keyspace b000000000000000:bfffffffffffffff --keymask bnnn0000rrrrnnnn --stride 0000000100000000 --maxcycles 65536 -c -b 82 -t 256 -p 128 16jY7qLJnxb7CHZyqBP8qca9d51gAjyXQN -o 64-puzzle-out.txt
-keystepper --keyspace c000000000000000:cfffffffffffffff --keymask cnnn0000rrrrnnnn --stride 0000000100000000 --maxcycles 65536 -c -b 82 -t 256 -p 128 16jY7qLJnxb7CHZyqBP8qca9d51gAjyXQN -o 64-puzzle-out.txt
-keystepper --keyspace d000000000000000:dfffffffffffffff --keymask dnnn0000rrrrnnnn --stride 0000000100000000 --maxcycles 65536 -c -b 82 -t 256 -p 128 16jY7qLJnxb7CHZyqBP8qca9d51gAjyXQN -o 64-puzzle-out.txt
-keystepper --keyspace e000000000000000:efffffffffffffff --keymask ennn0000rrrrnnnn --stride 0000000100000000 --maxcycles 65536 -c -b 82 -t 256 -p 128 16jY7qLJnxb7CHZyqBP8qca9d51gAjyXQN -o 64-puzzle-out.txt
-keystepper --keyspace f000000000000000:ffffffffffffffff --keymask fnnn0000rrrrnnnn --stride 0000000100000000 --maxcycles 65536 -c -b 82 -t 256 -p 128 16jY7qLJnxb7CHZyqBP8qca9d51gAjyXQN -o 64-puzzle-out.txt
+keyscanner --keyspace 8000000000000000:8fffffffffffffff --keymask 8nnn0000rrrrnnnn --stride 0000000100000000 --maxcycles 65536 -c -b 82 -t 256 -p 128 16jY7qLJnxb7CHZyqBP8qca9d51gAjyXQN -o 64-puzzle-out.txt
+keyscanner --keyspace 9000000000000000:9fffffffffffffff --keymask 9nnn0000rrrrnnnn --stride 0000000100000000 --maxcycles 65536 -c -b 82 -t 256 -p 128 16jY7qLJnxb7CHZyqBP8qca9d51gAjyXQN -o 64-puzzle-out.txt
+keyscanner --keyspace a000000000000000:afffffffffffffff --keymask annn0000rrrrnnnn --stride 0000000100000000 --maxcycles 65536 -c -b 82 -t 256 -p 128 16jY7qLJnxb7CHZyqBP8qca9d51gAjyXQN -o 64-puzzle-out.txt
+keyscanner --keyspace b000000000000000:bfffffffffffffff --keymask bnnn0000rrrrnnnn --stride 0000000100000000 --maxcycles 65536 -c -b 82 -t 256 -p 128 16jY7qLJnxb7CHZyqBP8qca9d51gAjyXQN -o 64-puzzle-out.txt
+keyscanner --keyspace c000000000000000:cfffffffffffffff --keymask cnnn0000rrrrnnnn --stride 0000000100000000 --maxcycles 65536 -c -b 82 -t 256 -p 128 16jY7qLJnxb7CHZyqBP8qca9d51gAjyXQN -o 64-puzzle-out.txt
+keyscanner --keyspace d000000000000000:dfffffffffffffff --keymask dnnn0000rrrrnnnn --stride 0000000100000000 --maxcycles 65536 -c -b 82 -t 256 -p 128 16jY7qLJnxb7CHZyqBP8qca9d51gAjyXQN -o 64-puzzle-out.txt
+keyscanner --keyspace e000000000000000:efffffffffffffff --keymask ennn0000rrrrnnnn --stride 0000000100000000 --maxcycles 65536 -c -b 82 -t 256 -p 128 16jY7qLJnxb7CHZyqBP8qca9d51gAjyXQN -o 64-puzzle-out.txt
+keyscanner --keyspace f000000000000000:ffffffffffffffff --keymask fnnn0000rrrrnnnn --stride 0000000100000000 --maxcycles 65536 -c -b 82 -t 256 -p 128 16jY7qLJnxb7CHZyqBP8qca9d51gAjyXQN -o 64-puzzle-out.txt
 
 ```
 .. takes about 2 minutes per key range portion
 
 BTC32 Puzzle 64 Mask and Stride (Middle-key up to 5 positions)
 ```
-keystepper --keyspace 8000000000000000:8fffffffffffffff --keymask 8nnn00000rrrnnnn --stride 0000000010000000 --maxcycles 1048576 -c -b 82 -t 256 -p 64 16jY7qLJnxb7CHZyqBP8qca9d51gAjyXQN -o 64-puzzle-out.txt
-keystepper --keyspace 9000000000000000:9fffffffffffffff --keymask 9nnn00000rrrnnnn --stride 0000000010000000 --maxcycles 1048576 -c -b 82 -t 256 -p 64 16jY7qLJnxb7CHZyqBP8qca9d51gAjyXQN -o 64-puzzle-out.txt
-keystepper --keyspace a000000000000000:afffffffffffffff --keymask annn00000rrrnnnn --stride 0000000010000000 --maxcycles 1048576 -c -b 82 -t 256 -p 64 16jY7qLJnxb7CHZyqBP8qca9d51gAjyXQN -o 64-puzzle-out.txt
-keystepper --keyspace b000000000000000:bfffffffffffffff --keymask bnnn00000rrrnnnn --stride 0000000010000000 --maxcycles 1048576 -c -b 82 -t 256 -p 64 16jY7qLJnxb7CHZyqBP8qca9d51gAjyXQN -o 64-puzzle-out.txt
-keystepper --keyspace c000000000000000:cfffffffffffffff --keymask cnnn00000rrrnnnn --stride 0000000010000000 --maxcycles 1048576 -c -b 82 -t 256 -p 64 16jY7qLJnxb7CHZyqBP8qca9d51gAjyXQN -o 64-puzzle-out.txt
-keystepper --keyspace d000000000000000:dfffffffffffffff --keymask dnnn00000rrrnnnn --stride 0000000010000000 --maxcycles 1048576 -c -b 82 -t 256 -p 64 16jY7qLJnxb7CHZyqBP8qca9d51gAjyXQN -o 64-puzzle-out.txt
-keystepper --keyspace e000000000000000:efffffffffffffff --keymask ennn00000rrrnnnn --stride 0000000010000000 --maxcycles 1048576 -c -b 82 -t 256 -p 64 16jY7qLJnxb7CHZyqBP8qca9d51gAjyXQN -o 64-puzzle-out.txt
-keystepper --keyspace f000000000000000:ffffffffffffffff --keymask fnnn00000rrrnnnn --stride 0000000010000000 --maxcycles 1048576 -c -b 82 -t 256 -p 64 16jY7qLJnxb7CHZyqBP8qca9d51gAjyXQN -o 64-puzzle-out.txt
+keyscanner --keyspace 8000000000000000:8fffffffffffffff --keymask 8nnn00000rrrnnnn --stride 0000000010000000 --maxcycles 1048576 -c -b 82 -t 256 -p 64 16jY7qLJnxb7CHZyqBP8qca9d51gAjyXQN -o 64-puzzle-out.txt
+keyscanner --keyspace 9000000000000000:9fffffffffffffff --keymask 9nnn00000rrrnnnn --stride 0000000010000000 --maxcycles 1048576 -c -b 82 -t 256 -p 64 16jY7qLJnxb7CHZyqBP8qca9d51gAjyXQN -o 64-puzzle-out.txt
+keyscanner --keyspace a000000000000000:afffffffffffffff --keymask annn00000rrrnnnn --stride 0000000010000000 --maxcycles 1048576 -c -b 82 -t 256 -p 64 16jY7qLJnxb7CHZyqBP8qca9d51gAjyXQN -o 64-puzzle-out.txt
+keyscanner --keyspace b000000000000000:bfffffffffffffff --keymask bnnn00000rrrnnnn --stride 0000000010000000 --maxcycles 1048576 -c -b 82 -t 256 -p 64 16jY7qLJnxb7CHZyqBP8qca9d51gAjyXQN -o 64-puzzle-out.txt
+keyscanner --keyspace c000000000000000:cfffffffffffffff --keymask cnnn00000rrrnnnn --stride 0000000010000000 --maxcycles 1048576 -c -b 82 -t 256 -p 64 16jY7qLJnxb7CHZyqBP8qca9d51gAjyXQN -o 64-puzzle-out.txt
+keyscanner --keyspace d000000000000000:dfffffffffffffff --keymask dnnn00000rrrnnnn --stride 0000000010000000 --maxcycles 1048576 -c -b 82 -t 256 -p 64 16jY7qLJnxb7CHZyqBP8qca9d51gAjyXQN -o 64-puzzle-out.txt
+keyscanner --keyspace e000000000000000:efffffffffffffff --keymask ennn00000rrrnnnn --stride 0000000010000000 --maxcycles 1048576 -c -b 82 -t 256 -p 64 16jY7qLJnxb7CHZyqBP8qca9d51gAjyXQN -o 64-puzzle-out.txt
+keyscanner --keyspace f000000000000000:ffffffffffffffff --keymask fnnn00000rrrnnnn --stride 0000000010000000 --maxcycles 1048576 -c -b 82 -t 256 -p 64 16jY7qLJnxb7CHZyqBP8qca9d51gAjyXQN -o 64-puzzle-out.txt
 ```
 .. takes about 25 minutes per key range portion 
 
 BTC32 Puzzle 64 with StrideMask Input File (various stride methods, including random)  8000-8fff block only
 ```
-keystepper --keyspace 8000000000000000:8fffffffffffffff --keymask 8nnnrrrrrrrrnnnn --stride 0000000000001000 --stridemap stridemap64r.txt -c -b 46 -t 256 -p 512 16jY7qLJnxb7CHZyqBP8qca9d51gAjyXQN -o 64-puzzle-out.txt
+keyscanner --keyspace 8000000000000000:8fffffffffffffff --keymask 8nnnrrrrrrrrnnnn --stride 0000000000001000 --stridemap stridemap64r.txt -c -b 46 -t 256 -p 512 16jY7qLJnxb7CHZyqBP8qca9d51gAjyXQN -o 64-puzzle-out.txt
 
 ```
 Example quick run from 9800-98ff btc32 puzzle 64
 ```
-keystepper --keyspace 9800000000000000:98ffffffffffffff --keymask 98nnrrrrrrrrnnnn --stride 0000000000001000 --maxseconds 0 --maxhrs 0 --stridemap stridemap64r.txt --maxcycles 1024 -c -b 46 -t 256 -p 512 16jY7qLJnxb7CHZyqBP8qca9d51gAjyXQN -o 64-puzzle-out.txt
+keyscanner --keyspace 9800000000000000:98ffffffffffffff --keymask 98nnrrrrrrrrnnnn --stride 0000000000001000 --maxseconds 0 --maxhrs 0 --stridemap stridemap64r.txt --maxcycles 1024 -c -b 46 -t 256 -p 512 16jY7qLJnxb7CHZyqBP8qca9d51gAjyXQN -o 64-puzzle-out.txt
 [2022-06-23.14:11:06] [Info] Compression : compressed
 [2022-06-23.14:11:06] [Info] Search mode : ADDRESS
 [2022-06-23.14:11:06] [Info] Starting at : 9800000000000000 (64 bit)
