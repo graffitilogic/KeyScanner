@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LocalDebuggerCommandArguments>--keyspace 900000000:9ffffffff --keymask 9nnrrrrnn --stride 00000000010 --stridemap C:\crypto\code\Bitcrack2022\KeyStepper\x64\Debug\stridemap36.txt -c -b 46 -t 256 -p 128 1Be2UF9NLfyLFbtm3TCbmuocc9N1Kduci1 -o C:\crypto\code\Bitcrack2022\KeyStepper\x64\Debug\found36.txt</LocalDebuggerCommandArguments>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LocalDebuggerCommandArguments>--keyspace 1000000000:ffffffffff --keymask ennrrrrnnn --stridemap C:\crypto\code\Bitcrack2022\KeyStepper\x64\Release\stridemap40.txt -c -b 46 -t 256 -p 256 1EeAxcprB2PpCnr34VfZdFrkUWuxyiNEFv -o C:\crypto\code\Bitcrack2022\KeyStepper\x64\Release\found40-Atxt</LocalDebuggerCommandArguments>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+  </PropertyGroup>
+</Project>
