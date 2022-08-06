@@ -3,10 +3,34 @@ _BTC32 Private Key Experiments_
 
 These Probably aren't the Droids You're Looking For.
 
-This is heavily based on experiments from [BitCrack](https://github.com/brichard19/BitCrack) by [brichard19](https://github.com/brichard19) and includes quality of life improvements from [BitCrack2](https://github.com/secp8x32/BitCrack2) by [secpk8x32](https://github.com/secp8x32)
+Speaking of looking for things... I was thinking on the [BTC32 Puzzle](https://privatekeys.pw/faq#puzzle) about alternate searching algorithms, potential weaknesses in the RNG, alternative GPU solutions as alternatives to the scalar point multiplcation, ML solutions for discoverying patterns or anti-patterns that could lead to deterministic brute force exploits.
 
-Anything clever here probably came from those guys, show them some love.  Anything hackneyed and bullshit probably came from me screwing around. 
-This is CUDA only, sorry.  My boring-ass real job keeps me pretty busy so multi-platform isn't in the cards for a hobby project atm.
+Motivation & considerations:
+
+Myself, I have an unrecoverable wallet with a fraction of a btc from ~2012.  Laptop hard drive failure.  Attempted a clean-room-ish physical reconstruction of the drive but many sectors were corrupted in the failure.
+
+POSIT:
+Many of the abandoned wallets on the blockchain were based on Private Keys generated from very early openSSL (.98h) builds.
+
+Theory:
+Could there be exploits to recover my key based on BN_Rand_Range and contemporary platform limitations?
+
+Test:
+I generated a billion keys using from-the-era hardware and OSs and did analysis looking for grouping anomalies in the set.   Even early openSSL         builds seem to have done a good job of stirring the pool between requests and using perfcounters to approximate random seeds and re-stirring parms.
+
+CONCLUSION: I don't think there is anything here.  My BTC private key from that time is lost.  At least it wasn't life-changing money.
+
+During the course of the above experiment, I did run into some interesting behaviors in the bn_rand_range when the range is a fraction of the order of G.  Call it a.. overwrap that seemed to defeat the distribution uniforminity, somewhat.  Researching this behavior, I ran into the BTC32 Puzzle Transactions.   A set of deterministically generated private keys, funded with a fraction of BTC equal to the bitlength of the key.  As of the time of this writing, the 64bit puzzle block hasn't been solved after (years) of effort in the community.  The 0 and 5 keys have exposed public keys, which open up Pollard Rho, Baby-Step/Giant-Step exploits but keys 64,66,67,68,69,71 and so fourth remain pure bruteforce metrics for algorithm testing.
+
+The point of this project is to build out flexible test scenarios to poke at the Puzzle 64 problem.  Puzzle 64 is a key in the range of 8000000000000000:ffffffffffffffff.  18,438,744,073,709,551,615 keys are in the range. Assuming a single RTX 3090 could solve at 1.8 Billion Keys per second, it would take that card 118,561 days to traverse the keyspace.  Almost 325 years!  If you had 255 cards running with no hashrate lost and collaborative overlap, it would take 1.27 years.  You'd spend $275k in electricity for the chance to crack 0.64BTC in a ~year and it gets exponentially more difficult with each bit length in difficulty.
+
+Imagine the security implications of this wasn't the case, though.  I'm not just referring to btc, either.   ECC brute force shortcuts would have a tremendous impact on information security and you better believe this is an area of study for bad actors and white hates, alike.
+
+..and.. that long winded intro is why I'm fascinated by this area of research:  The impact of emerging capabilities of GPUs, Machine Learning, Quantum Stepping algorithms and predictive modeling on communications security.
+
+This is heavily based on experiments from [BitCrack](https://github.com/brichard19/BitCrack) by [brichard19](https://github.com/brichard19) and includes quality of life improvements contributed from [BitCrack2](https://github.com/secp8x32/BitCrack2) by [secpk8x32](https://github.com/secp8x32)
+
+Anything clever here probably came from those guys, show them some love.  Anything hackneyed and bs probably came from me, throwing things against the wall. This is CUDA only, sorry.  My boring real job keeps me pretty busy so multi-platform isn't in the cards for this hobby project atm.
 
 This is highly experimental and fluid, in testing the lower puzzle blocks I definitely see there are some issues to resolve and I'm working through them.
 
@@ -14,8 +38,8 @@ This is highly experimental and fluid, in testing the lower puzzle blocks I defi
 
 I wanted something Random-based but targetable for this task.   Everytime someone asks for Random-based features, the feature forks I've found were half-measures or got backed out entirely b/c smart-people-concensus was "Random will never work at scale, so don't bother."
 
-What I wanted out of this project was essentially a billion-spins-per-second private-key war dialer with configurable directives.
-My thought was more along the line of a random-assisted combing action than a comprehensive stepping-leapfrog action of the original BitCrack project.   The performance breakthrough of Bitcrack (IMO) was the genius CUDA implementation of the EC point addition / multiplication.   Any straight random-number based scenarios I could come up with would loose some of that performance.   
+What I wanted out of this project was essentially a billion-spins-per-second private-key war dialer with configurable directives. 
+My thought was more along the line of a random-assisted combing action than a comprehensive stepping-leapfrog action of the original Bitcrack and VanitySearch projects.   Their performance breakthrough (IMO) was the genius CUDA implementation of the EC scalar multiplication.   Any straight random-number based scenarios I could come up with would loose some of that performance but I wanted to write experiments directly trying to explot the distributive qualities of RNGs.    Search the keys between keys... Using distribution constraints as a keymap for directed random searches.
 
 It seems like Random Start Points iterating by Masked Random Strides sort-of fit the picture of what I wanted, so here we are.
 
