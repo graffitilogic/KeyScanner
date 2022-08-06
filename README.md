@@ -20,6 +20,7 @@ I generated a billion keys using from-the-era hardware and OSs and did analysis 
 
 CONCLUSION: I don't think there is anything here.  My BTC private key from that time is lost.  At least it wasn't life-changing money.
 
+_Into the Looking Glass_
 During the course of the above experiment, I did run into some interesting behaviors in the bn_rand_range when the range is a fraction of the order of G.  Call it a.. overwrap that seemed to defeat the distribution uniforminity, somewhat.  Researching this behavior, I ran into the BTC32 Puzzle Transactions.   A set of deterministically generated private keys, funded with a fraction of BTC equal to the bitlength of the key.  As of the time of this writing, the 64bit puzzle block hasn't been solved after (years) of effort in the community.  The 0 and 5 keys have exposed public keys, which open up Pollard Rho, Baby-Step/Giant-Step exploits but keys 64,66,67,68,69,71 and so fourth remain pure bruteforce metrics for algorithm testing.
 
 The point of this project is to build out flexible test scenarios to poke at the Puzzle 64 problem.  Puzzle 64 is a key in the range of 8000000000000000:ffffffffffffffff.  18,438,744,073,709,551,615 keys are in the range. Assuming a single RTX 3090 could solve at 1.8 Billion Keys per second, it would take that card 118,561 days to traverse the keyspace.  Almost 325 years!  If you had 255 cards running with no hashrate lost and collaborative overlap, it would take 1.27 years.  You'd spend $275k in electricity for the chance to crack 0.64BTC in a ~year and it gets exponentially more difficult with each bit length in difficulty.
@@ -151,7 +152,7 @@ Supported Directives:
 
 stride - just denotes a regular stride entry to try
 randomstride - denotes a randomly generated stride, based on the stride mask provided
-reset - restores a copy of the starting point keys from the device buffer
+redistribute - shifts the keys by a factor specified in the cycle position x the iteration at runtime
 regenerate - regenerates (just the random portions) of the start keys without having to fully reinitialize the gpu
 
 For Example:
@@ -159,24 +160,19 @@ For Example:
 256;0000000000010000;stride;
 256;0000000100000000;stride;
 256;0001000000000000;stride;
-0;0;reset;
 256;0000000000000100;stride;
-0;0;reset;
 256;0000000000010000;stride;
-0;0;reset;
 256;0000000000030000;stride;
 ```
-This stride map would tell Keystepper to run the 1st three strides for 256 cycles each, then reset the keys and try the strides individually with resets between each stride.
+This stride map would tell Keystepper to run each strides for 256 cycles each, then reset the keys between each stride.
 
 A more complicated example with retries and randoms:
 
 ```
 8;0;repeat;
 512;0000xxxxxxxx0000;randomstride:0|1|0|3|0;
-0;0;reset;
 512;0000xxxxxxxx0000;randomstride:0-3;
 512;0000xxxxxxxx0000;randomstride:0|3;
-0;0;reset;
 8;0;endrepeat;
 ```
 This would repeat everything between repeat and endrepeat 8 times. 
@@ -191,43 +187,25 @@ Back to the code-breaker slot machine mental image, this allows you to control w
 The following example will repeat 8 times and regenerate only the random portions of the keys between each repeat.
 
 ```
- 8;0;repeat;
+8;0;repeat;
 256;000000000000001;stride;
-0;0;reset;
 256;0000000000000100;stride;
-0;0;reset;
 256;0000000000001000;stride;
-0;0;reset;
 256;0000000000010000;stride;
-0;0;reset;
 256;0000000000100000;stride;
-0;0;reset;
 256;0000000001000000;stride;
-0;0;reset;
 256;0000000010000000;stride;
-0;0;reset;
 256;0000000100000000;stride;
-0;0;reset;
 256;0000001000000000;stride;
-0;0;reset;
 256;0000010000000000;stride;
-0;0;reset;
 256;0000100000000000;stride;
-0;0;reset;
 256;0001000000000000;stride;
-0;0;reset;
 256;0010000000000000;stride;
-0;0;reset;
 256;0100000000000000;stride;
-0;0;reset;
 256;1000000000000000;stride;
-0;0;reset;
 256;0000xxxxxxxx0000;randomstride:0-3;
-0;0;reset;
 256;0000xxxxxxxx0000;randomstride:0|1|0|1|0;
-0;0;reset;
 256;0000xxxxxxxx0000;randomstride:0|1|0|3|0;
-0;0;reset;
 256;0000xxxxxxxx0000;randomstride:0|1|0|0|0;
 0;0;regenerate;
 8;0;endrepeat;
