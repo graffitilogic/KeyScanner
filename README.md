@@ -48,7 +48,7 @@ Fast RNG generation.   Better control over Private Key Generation (masked keys, 
 Early experimentation phase. Generate keys based on hybrid sequential and random scenarios for lower-bit length keys and find patterns of strides, redistribution and masks with higher colission occurrences.   Note the differences and attempt to scale.  Try to gain a better understanding on the distribution qualities and how the distribution can be constraining to predictive key generation. 
 
 # Phase 3
-(fall 2022)
+(fall-winter 2022)
 
 Train data models based on per-position key occurrences from historical datasets and Phase 2 findings.  Adjust the thrust RND keygens to include predictors or weights from the trained model. For instance... If constructing a new key if uint256.v[0]= {A642}, then the statistical liklihood of the uint256.v[1] being {A642} also, should be minimal.   The goal being to reflect natural distributive diversity in the key generation and to document and discover previously unknown statistical relationships between the unsigned ints that make up the uint256 struct.
 
