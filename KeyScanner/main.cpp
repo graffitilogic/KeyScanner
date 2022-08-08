@@ -465,6 +465,7 @@ void doSearchStep(CudaKeySearchDevice*& cudaDvc, secp256k1::StrideMapEntry lastS
 
 }
 
+
 void showStrideQueue(std::vector<secp256k1::StrideMapEntry> strideQueue) {
 	std::stringstream ss;
 	for (int s = 0; s < strideQueue.size(); s++) {

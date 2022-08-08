@@ -717,6 +717,7 @@ namespace secp256k1 {
 		std::vector<uint256> Keys;  
 		std::vector<uint256> BetaKeys;
 		std::vector<uint256> RootKeys;
+		std::vector<uint256> Distances;
 		//std::vector<std::vector<uint256>> Keys;  //keys[0] = first pass, keys[1] = 2nd pass and so on
 
 		std::vector<std::vector<unsigned int>> Randomizers;

@@ -129,10 +129,13 @@ void CudaKeySearchDevice::init(const secp256k1::uint256& start, const secp256k1:
 		reGenerateStartingPoints();
 	}
 	else if (stride.directive == "redistribute") {
-		reDistributeStartingPoints(stride.cycles, false);
+		reDistributeStartingPoints(stride.cycles, false, false);
 	}
 	else if (stride.directive == "redistribute-random") {
-		reDistributeStartingPoints(stride.cycles, true);
+		reDistributeStartingPoints(stride.cycles, true, false);
+	}
+	else if (stride.directive == "redistribute-distance") {
+		reDistributeStartingPoints(stride.cycles, false, true);
 	}
 	else {
 		if (_startingKeys.Keys.size() == 0) {
@@ -159,32 +162,6 @@ void CudaKeySearchDevice::init(const secp256k1::uint256& start, const secp256k1:
 	cudaCall(setIncrementorPoint(p.x, p.y));
 }
 
-/*
-void CudaKeySearchDevice::setStrideQueue(std::vector<secp256k1::StrideMapEntry> strideQueue, bool showSamples) {
-	_strideQueue = strideQueue;
-
-	//std::reverse(_strideQueue.begin(), _strideQueue.end());
-
-	int targetLen = 0;
-	for each (secp256k1::StrideMapEntry sqe in strideQueue) {  //find the largest stride
-		std::string thisStride = sqe.stride.toString();
-		if (thisStride.size() > targetLen) targetLen = thisStride.size();
-	}
-
-	if (showSamples) Logger::log(LogLevel::Debug, "----- STRIDE QUEUE (len: " + std::to_string(targetLen) + ", sz:" + std::to_string(strideQueue.size()) + ")------");
-	int sCount = 0;
-	for each (secp256k1::StrideMapEntry sqe in strideQueue) {
-		std::string thisStride = sqe.stride.toString();
-		while (thisStride.size() < targetLen) thisStride = "0" + thisStride;
-		if (showSamples) Logger::log(LogLevel::Debug, std::to_string(sCount) + "-SQ: " + thisStride + " (" + sqe.directive + ")");
-		sCount++;
-	}
-
-	if (_strideQueue.size() > 0) {
-		_stride = _strideQueue[0].stride;
-		_strideQueueIndex = 0;
-	}
-}*/
 
 secp256k1::KeyBuffers CudaKeySearchDevice::getKeyBuffers() {
 	return _startingKeys;
@@ -622,12 +599,7 @@ void CudaKeySearchDevice::assembleKeys() {
 
 void CudaKeySearchDevice::generateStartingPoints()
 {
-
 	_deviceKeys = new CudaDeviceKeys();
-	//std::vector<secp256k1::uint256> exponents;
-
-	//secp256k1::uint256 one = secp256k1::uint256(1);
-	//secp256k1::uint256 incrementor = secp256k1::uint256(4096);
 
 	uint64_t RND_POOL_MULTIPLIER = 1;
 
@@ -656,6 +628,28 @@ void CudaKeySearchDevice::generateStartingPoints()
 
 	generateKeyBuffers(_keyTemplate, totalPoints);
 	assembleKeys();
+
+	if (true) { //todo: optionalize this
+		uint64_t REPORTING_SIZE = _startingKeys.Keys.size() / 8;
+		uint64_t generatedDistances = 0;
+
+		Logger::log(LogLevel::Info, "Sorting keys.. ");
+		std::vector<secp256k1::uint256> sortedKeys = RandomHelper::sortKeys(_startingKeys.Keys);
+		_startingKeys.Distances = RandomHelper::getDistances(sortedKeys);
+
+		Logger::log(LogLevel::Info, "Sorting Distances.. ");
+		_startingKeys.Distances = RandomHelper::sortKeys(_startingKeys.Distances);
+
+		//set the zeroeth distance against the starting key
+		_startingKeys.Distances[0] = _startingKeys.Keys[0] - _startExponent;
+
+		for (int k = 0; k < _startingKeys.Distances.size(); k++) {
+
+			if (generatedDistances % REPORTING_SIZE == 0)  Logger::log(LogLevel::Info, "SAMPLE Distance " + _startingKeys.Distances[k].toString() + " (" + util::formatThousands(generatedDistances) + ")");
+			generatedDistances++;
+		}
+	}
+
 
 	//exponents = _startingKeys.Keys;
 	Logger::log(LogLevel::Info, "Key Buffer Size: " + util::formatThousands(_startingKeys.Keys.size()));
@@ -807,7 +801,7 @@ void CudaKeySearchDevice::restoreStartingPoints()
 	Logger::log(LogLevel::Info, "Done");
 }
 
-void CudaKeySearchDevice::reDistributeStartingPoints(uint64_t divider, bool randomOnly)
+void CudaKeySearchDevice::reDistributeStartingPoints(uint64_t divider, bool randomOnly, bool distance_based)
 {
 	Logger::log(LogLevel::Info, "Re-distributing Starting Points.. " + util::formatThousands(_startingKeys.Keys.size()));
 	uint64_t REPORTING_SIZE = _startingKeys.Keys.size() / 8;
@@ -838,9 +832,29 @@ void CudaKeySearchDevice::reDistributeStartingPoints(uint64_t divider, bool rand
 		Logger::log(LogLevel::Info, "Shifting Random Mask by Distribution: " + evenDistribution.toString() + " Divider: " + util::formatThousands(divider));
 		//Logger::log(LogLevel::Debug, "BetaKey Basis:" + _startingKeys.BetaKeys[0].toString());
 		Logger::log(LogLevel::Debug, "KeySpace:" + keySpace.toString());
-		//Logger::log(LogLevel::Debug, "KeyA:" + bkm.keyA.toString());
-		//Logger::log(LogLevel::Debug, "KeyB:" + bkm.keyB.toString());
-		//Logger::log(LogLevel::Debug, "Expander:" + bkm.expander.toString());
+		Logger::log(LogLevel::Debug, "KeyA:" + bkm.keyA.toString());
+		Logger::log(LogLevel::Debug, "KeyB:" + bkm.keyB.toString());
+		for (uint64_t k = 0; k < _startingKeys.Keys.size();k++) {
+			_startingKeys.Keys[k] = _startingKeys.Keys[k] + evenDistribution;
+			if (shiftedKeys % REPORTING_SIZE == 0)  Logger::log(LogLevel::Info, "SAMPLE Key: " + _startingKeys.RootKeys[k].toString() + " -> " + _startingKeys.Keys[k].toString());
+			shiftedKeys++;
+		}
+	}
+	else if (distance_based) {
+		keySpace = _endExponent.sub(_startExponent);
+
+		while (divider <= 1) {
+			divider++;
+		}
+
+		Logger::log(LogLevel::Debug, "Divider: " + util::formatThousands(divider));
+
+		Logger::log(LogLevel::Info, "Shifting Keys by Distance-Variable Distribution,  Divider: " + util::formatThousands(divider));
+		for (uint64_t k = 0; k < _startingKeys.Keys.size();k++) {
+			_startingKeys.Keys[k] = _startingKeys.Keys[k] + (_startingKeys.Distances[k].div(divider));
+			if (shiftedKeys % REPORTING_SIZE == 0)  Logger::log(LogLevel::Info, "SAMPLE Key: " + _startingKeys.RootKeys[k].toString() + " -> " + _startingKeys.Keys[k].toString());
+			shiftedKeys++;
+		}
 	}
 	else {
 		keySpace = _endExponent.sub(_startExponent);
@@ -848,23 +862,19 @@ void CudaKeySearchDevice::reDistributeStartingPoints(uint64_t divider, bool rand
 		Logger::log(LogLevel::Debug, "KeySpace: " + keySpace.toString());
 		Logger::log(LogLevel::Debug, "Divider: " + util::formatThousands(divider));
 
-		/*keySpace = secp256k1::G().x;
-		//reduce until smaller than sub-range
-		while (keySpace > _endExponent) {
-			keySpace = keySpace.div(8);
-		}
-		*/
+
 		evenDistribution = keySpace.div(_startingKeys.Keys.size());
 		evenDistribution = evenDistribution.div(divider);
 		Logger::log(LogLevel::Info, "Shifting Keys by Distribution: " + evenDistribution.toString() + " Divider: " + util::formatThousands(divider));
+		for (uint64_t k = 0; k < _startingKeys.Keys.size();k++) {
+			_startingKeys.Keys[k] = _startingKeys.Keys[k] + evenDistribution;
+			if (shiftedKeys % REPORTING_SIZE == 0)  Logger::log(LogLevel::Info, "SAMPLE Key: " + _startingKeys.RootKeys[k].toString() + " -> " + _startingKeys.Keys[k].toString());
+			shiftedKeys++;
+		}
 	}
 
 
-	for (uint64_t k = 0; k < _startingKeys.Keys.size();k++) {
-		_startingKeys.Keys[k] = _startingKeys.Keys[k] + evenDistribution;
-		if (shiftedKeys % REPORTING_SIZE == 0)  Logger::log(LogLevel::Info, "SAMPLE Key: " + _startingKeys.RootKeys[k].toString() + " -> " + _startingKeys.Keys[k].toString());
-		shiftedKeys++;
-	}
+
 
 
 	Logger::log(LogLevel::Info, "Key Buffer Size: " + util::formatThousands(_startingKeys.Keys.size()));

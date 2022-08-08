@@ -73,7 +73,7 @@ private:
 
 	void restoreStartingPoints();
 
-	void reDistributeStartingPoints(uint64_t divider, bool randomOnly);
+	void reDistributeStartingPoints(uint64_t divider, bool randomOnly, bool distance_based);
 
 	CudaDeviceKeys* _deviceKeys;
 	CudaAtomicList _resultList;

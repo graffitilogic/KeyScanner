@@ -1,5 +1,5 @@
 #pragma once
-#include "../KeyStepper/Secp256k1/secp256k1.h"
+#include "../KeyScanner/Secp256k1/secp256k1.h"
 #include <vector>
 
 class mathstuff

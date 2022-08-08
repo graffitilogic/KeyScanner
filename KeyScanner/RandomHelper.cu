@@ -3,6 +3,7 @@
 #include <thrust/host_vector.h>
 #include <set>
 #include <thrust/sort.h>
+#include <thrust/functional.h>
 #include <thrust/copy.h>
 
 
@@ -319,4 +320,48 @@ std::vector<uint64_t> RandomHelper::getCPURndRange(uint64_t seed, std::vector<ui
 	return results;
 }
 
+
+std::vector<secp256k1::uint256> RandomHelper::sortKeys(std::vector<secp256k1::uint256> keys) {
+	std::vector<secp256k1::uint256> results;
+	thrust::host_vector<secp256k1::uint256> hostKeys;
+	//thrust::device_vector<secp256k1::uint256> deviceKeys = keys;
+
+	for (int k = 0; k < keys.size(); k++) {
+		hostKeys.push_back(keys[k]);
+	}
+
+	//thrust::copy(keys.begin(), keys.end(), hostKeys.begin());
+	thrust::sort(hostKeys.begin(), hostKeys.end());
+	//thrust::sort(deviceKeys.begin(), deviceKeys.end());
+
+	// Transfer data back to host.
+	//thrust::copy(deviceKeys.begin(), deviceKeys.end(), results.begin());
+	//thrust::copy(hostKeys.begin(), hostKeys.end(), results.begin());
+
+	for (int k = 0; k < hostKeys.size(); k++) {
+		results.push_back(hostKeys[k]);
+	}
+
+	return results;
+}
+
+
+std::vector<secp256k1::uint256> RandomHelper::getDistances(std::vector<secp256k1::uint256> keys) {
+	std::vector<secp256k1::uint256> results;
+	thrust::host_vector<secp256k1::uint256> hostKeys;
+
+	//iterate through the keys, determine the intra-key distances
+	secp256k1::uint256 lastKey;
+	for (int k = 0; k < keys.size(); k++) {
+		if (k > 0) {
+			results.push_back(keys[k] - lastKey);
+		}
+		else {
+			results.push_back(0);
+		}
+		lastKey = keys[k];
+	}
+
+	return results;
+}
 
