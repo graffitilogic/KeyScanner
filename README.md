@@ -13,7 +13,7 @@ POSIT:
 Many of the abandoned wallets on the blockchain were based on Private Keys generated from very early openSSL (.98h) builds.
 
 Theory:
-Could there be exploits to recover my key based on BN_Rand_Range and contemporary platform limitations?
+Could there be exploits to recover my key based on BN_Rand_Range and contemporary platform limitations?  For instance, I know what version my btc client was running, what OS and hardware, I know a portion of the private key, the public key, the p2pkh address.  Coupled with known perfcounter value ranges, knowledge of when the key was created and the ability to mostly recreate that environment, could I set up a test scenaria to try to brute force my own missing private key?  (spoiler alert: no.)
 
 Test:
 I generated a billion keys using from-the-era hardware and OSs and did analysis looking for grouping anomalies in the set.   Even early openSSL         builds seem to have done a good job of stirring the pool between requests and using perfcounters to approximate random seeds and re-stirring parms.
