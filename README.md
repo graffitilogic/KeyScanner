@@ -13,7 +13,7 @@ POSIT:
 Many of the abandoned wallets on the blockchain were based on Private Keys generated from very early openSSL (.98h) builds.
 
 Theory:
-Could there be exploits to recover my key based on BN_Rand_Range and contemporary platform limitations?
+Could there be exploits to recover my key based on BN_Rand_Range and contemporary platform limitations?  For instance, I know what version my btc client was running, what OS and hardware, I know a portion of the private key, the public key, the p2pkh address.  Coupled with known perfcounter value ranges, knowledge of when the key was created and the ability to mostly recreate that environment, could I set up a test scenaria to try to brute force my own missing private key?  (spoiler alert: no.)
 
 Test:
 I generated a billion keys using from-the-era hardware and OSs and did analysis looking for grouping anomalies in the set.   Even early openSSL         builds seem to have done a good job of stirring the pool between requests and using perfcounters to approximate random seeds and re-stirring parms.
@@ -24,9 +24,9 @@ _Into the Looking Glass_
 
 During the course of the above experiment, I did run into some interesting behaviors in the bn_rand_range when the range is a fraction of the order of G.  Call it a.. overwrap that seemed to defeat the distribution uniforminity, somewhat.  Researching this behavior, I ran into the BTC32 Puzzle Transactions.   A set of deterministically generated private keys, funded with a fraction of BTC equal to the bitlength of the key.  As of the time of this writing, the 64bit puzzle block hasn't been solved after (years) of effort in the community.  The 0 and 5 keys have exposed public keys, which open up Pollard Rho, Baby-Step/Giant-Step exploits but keys 64,66,67,68,69,71 and so fourth remain pure bruteforce metrics for algorithm testing.
 
-The point of this project is to build out flexible test scenarios to poke at the Puzzle 64 problem.  Puzzle 64 is a key in the range of 8000000000000000:ffffffffffffffff.  18,438,744,073,709,551,615 keys are in the range. Assuming a single RTX 3090 could solve at 1.8 Billion Keys per second, it would take that card 118,561 days to traverse the keyspace.  Almost 325 years!  If you had 255 cards running with no hashrate lost and collaborative overlap, it would take 1.27 years.  You'd spend $275k in electricity for the chance to crack 0.64BTC in a ~year and it gets exponentially more difficult with each bit length in difficulty.
+The point of this project is to build out flexible test scenarios to poke at the Puzzle 64 problem.  Puzzle 64 is a key in the range of 8000000000000000:ffffffffffffffff.  18,438,744,073,709,551,615 keys are in the range. Assuming a single RTX 3090 could solve at 1.8 Billion Keys per second, it would take that card 118,561 days to traverse the keyspace.  Almost 325 years!  If you had 255 cards running with no hashrate loss and collaborative overlap, it would take 1.27 years.  You'd spend $275k in electricity for the chance to crack 0.64BTC in a ~year and it gets exponentially more difficult with each bit length in difficulty.
 
-Imagine the security implications of this wasn't the case, though.  I'm not just referring to btc, either.   ECC brute force shortcuts would have a tremendous impact on information security and you better believe this is an area of study for bad actors and white hates, alike.
+Imagine the security implications if this wasn't the case, though.  I'm not just referring to btc, either.   ECC brute force shortcuts would have a tremendous impact on information security and you better believe this is an area of study for bad actors and white hats, alike.
 
 ..and.. that long winded intro is why I'm fascinated by this area of research:  The impact of emerging capabilities of GPUs, Machine Learning, Quantum Stepping algorithms and predictive modeling on communications security.
 
@@ -48,7 +48,7 @@ Fast RNG generation.   Better control over Private Key Generation (masked keys, 
 Early experimentation phase. Generate keys based on hybrid sequential and random scenarios for lower-bit length keys and find patterns of strides, redistribution and masks with higher colission occurrences.   Note the differences and attempt to scale.  Try to gain a better understanding on the distribution qualities and how the distribution can be constraining to predictive key generation. 
 
 # Phase 3
-(fall 2022)
+(fall-winter 2022)
 
 Train data models based on per-position key occurrences from historical datasets and Phase 2 findings.  Adjust the thrust RND keygens to include predictors or weights from the trained model. For instance... If constructing a new key if uint256.v[0]= {A642}, then the statistical liklihood of the uint256.v[1] being {A642} also, should be minimal.   The goal being to reflect natural distributive diversity in the key generation and to document and discover previously unknown statistical relationships between the unsigned ints that make up the uint256 struct.
 
