@@ -642,14 +642,8 @@ namespace secp256k1 {
 	uint256 getDefaultCPURandomRangeExt(uint256 min, uint256 max, uint64_t max_repeats);
 
 	uint256 getMTCPURandomRange(uint256 min, uint256 max);
-
 	uint256 getDefaultCPURandomRange(uint256 min, uint256 max);
 
-	void setDefaultGPURandomBuffer(std::vector<unsigned int> random_buff);
-	uint256 getDefaultGPURandomRange16(uint256 min, uint256 max);
-	uint256 getDefaultGPURandomRange32(uint256 min, uint256 max);
-
-	std::vector<uint256> getGPUAssistedRandoms(std::vector<std::vector<unsigned int>> bufferpool, uint256 min, uint256 max, uint64_t length);
 
 	std::vector<StrideMapEntry> makeStrideQueue(uint64_t cycles, uint256 baseStride, uint256 maxStride, uint64_t count);
 

@@ -173,65 +173,30 @@ CudaKeySearchDevice::~CudaKeySearchDevice()
 	_deviceKeys = NULL;
 }
 
-std::vector<secp256k1::uint256> CudaKeySearchDevice::getGPUAssistedRandoms(std::vector<unsigned int> bufferpool, std::vector<std::vector<unsigned int>> randomizers, std::vector<uint64_t>& bufferRowIndex, secp256k1::uint256 min, secp256k1::uint256 max, uint64_t length) {
+std::vector<secp256k1::uint256> CudaKeySearchDevice::getGPUAssistedRandoms( secp256k1::uint256 min, secp256k1::uint256 max, uint64_t length) {
+
 	//bufferpool is a sequential vector of unsigned ints from 0 to 0xffff; 
 	//randomizers are a [col][row] vector of random values from 0 to 0xffff;
 	//Constructs a random uint256 by assembling uint.v[column] from bufferpool[randomizers[col][row]
 	//- so that randomizers doesn't necessarily have to match len() - handy for experimentation
+	//Why the staticpool[randomizers] gimmick? Well, in the future I'm hoping to deprioritize some of the available range based on ML predictions.
+	Logger::log(LogLevel::Debug, "getGPUAssistedRandoms(), Range: " + min.toString() + ":" + max.toString());
+	Logger::log(LogLevel::Info, "Building Randomizers..");
 
-	secp256k1::uint256 range = max.sub(min);
-	std::vector<secp256k1::uint256> results;
+	std::vector<std::vector<unsigned int>>().swap(_startingKeys.Randomizers);
+	uint64_t timeSeed = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
 
-	int col_max = bufferpool.size();
-	uint64_t block_size = 65536;
-
-	//uint64_t bufferIndex = 1;
-
-	unsigned char targetByteSize = (range.getBitRange() + 31) / 32;
-
-	while (results.size() < length) {
-
-		secp256k1::uint256 result;
-
-		for (int i = 0; i < 8; i++) {
-
-			if (targetByteSize > i) {
-
-				//int bColOffset = i + 8;
-				int rowOffset = bufferRowIndex[i];
-				int randomizerRow = randomizers[i][bufferRowIndex[i]];
-				int randomizerRowAlt = randomizers[i + 8][bufferRowIndex[i + 8]];
-
-				unsigned int partA = bufferpool[randomizerRow];
-				unsigned int partB = bufferpool[randomizerRowAlt];
-
-				result.v[i] = (partA * block_size) + partB;  // combine the two parts - I was thinking of doing an AB/BA tiktok here but ...that doesn't really do what I thought.
-
-				if (targetByteSize > i && targetByteSize <= i + 1 && range.v[i] != 0 && result.v[i] > range.v[i]) {
-					result.v[i] %= range.v[i];
-				}
-
-			}
-
-
-			bufferRowIndex[i]++;  //increment row index for this column
-			if (bufferRowIndex[i] >= randomizers[i].size()) bufferRowIndex[i] = 0;  //rollover if needed.
-
-			bufferRowIndex[i + 8]++;  //increment row index for this column
-			if (bufferRowIndex[i + 8] >= randomizers[i + 8].size()) bufferRowIndex[i + 8] = 0;  //rollover if needed.
-			//if (bufferIndex >= bufferpool[0].size()) bufferIndex = 1;  //rollover if needed.
-
-		}
-
-
-		//bufferIndex++;
-		//if (results.size() % 2000 == 0) Logger::log(LogLevel::Info, "A:" + result.toString() + " B:" + result.reverse_shallow().toString());
-
-		results.push_back(result);
-		results.push_back(result.reverse());
+	Random::GPURandom rndGPU;
+	//reusable randomizers.. disabled for now.
+	if (false) { // (_startingKeys.Randomizers.size() > 0) {
+		rndGPU.setRandomizers(_startingKeys.Randomizers);
+	}
+	else {
+		rndGPU.loadRandomizers(timeSeed, length);
+		_startingKeys.Randomizers = rndGPU.getRandomizers();
 	}
 
-	return results;
+	return rndGPU.getRandomPool(min, max, length);
 }
 
 secp256k1::KeyScaffold CudaKeySearchDevice::parseKeyMask(std::string keyMaskStr, uint64_t totalPoints) {
@@ -286,7 +251,7 @@ secp256k1::KeyScaffold CudaKeySearchDevice::parseKeyMask(std::string keyMaskStr,
 }
 
 void CudaKeySearchDevice::generateKeyBuffers(secp256k1::KeyScaffold bufferTemplate, uint64_t totalPoints) {
-	uint64_t bufferSizes = totalPoints / 2;
+	uint64_t bufferSizes = totalPoints;// / 2;
 	uint64_t startMs;
 	uint64_t endMs;
 	float elapsedMs;
@@ -365,7 +330,7 @@ void CudaKeySearchDevice::generateKeyBuffers(secp256k1::KeyScaffold bufferTempla
 			uint64_t sz = sequentialPools[s].size();
 			uint64_t startRndRange = 0;
 			uint64_t endRndRange = sequentialPools[s][sz - 1].toInt64() -1; //todo:research implications of 1 start vs 0 start and skipped keys
-			std::vector<uint64_t> results = RandomHelper::getRndRange(timeSeed, startRndRange, endRndRange, sz - 1);
+			std::vector<uint64_t> results = Random::RandomHelper::getRndRange(timeSeed, startRndRange, endRndRange, sz - 1);
 			sequentialRandomizers.push_back(results);
 			sequentialIndexes.push_back(0);
 		}
@@ -443,12 +408,12 @@ void CudaKeySearchDevice::generateKeyBuffers(secp256k1::KeyScaffold bufferTempla
 	//reusable randomizers
 	if (containsRandom) {
 
-		Logger::log(LogLevel::Info, "Building Randomizers..");
-		uint64_t timeSeed = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
+		//Logger::log(LogLevel::Info, "Building Randomizers..");
+		//uint64_t timeSeed = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
 
 		std::vector<std::vector<unsigned int>>().swap(_startingKeys.Randomizers);
 		//_startingKeys.Randomizers.clear();
-		_startingKeys.Randomizers = RandomHelper::getRandomizers(timeSeed, bufferSizes, 16);
+		//_startingKeys.Randomizers = Random::RandomHelper::getRandomizers(timeSeed, 0xffff, bufferSizes, 16);
 
 		std::vector<uint64_t> bufferRowIndex;
 
@@ -456,7 +421,7 @@ void CudaKeySearchDevice::generateKeyBuffers(secp256k1::KeyScaffold bufferTempla
 			bufferRowIndex.push_back(0);
 		}
 
-		std::vector<unsigned int> static_assembly_buffer = RandomHelper::getStaticAssemblyBuffer();
+		//std::vector<unsigned int> static_assembly_buffer = Random::RandomHelper::getStaticAssemblyBuffer(0xffff);
 		std::vector<std::vector<secp256k1::uint256>> randomPools;
 
 		Logger::log(LogLevel::Info, "Generating Random Keys..");
@@ -466,9 +431,18 @@ void CudaKeySearchDevice::generateKeyBuffers(secp256k1::KeyScaffold bufferTempla
 			if (bufferTemplate.RandomMask[c] == 'r') randomCount++;
 			if (bufferTemplate.RandomMask[c] != 'r' && randomCount > 0) {
 				//fill a random buffer of [rnd count] length
-				secp256k1::uint256 startRange = secp256k1::getRangeStart(randomCount, "1");
-				secp256k1::uint256 endRange = secp256k1::getRangeEnd(randomCount, "F");
-				std::vector<secp256k1::uint256> tmpRandoms = getGPUAssistedRandoms(static_assembly_buffer, _startingKeys.Randomizers, bufferRowIndex, startRange, endRange, totalPoints);
+				secp256k1::uint256 startRange;
+				secp256k1::uint256 endRange;
+				if (bufferTemplate.KeyMask.substr(0, 1) == "r") {
+					startRange = secp256k1::getRangeStart(randomCount, _startExponent.toString().substr(0,1));
+					endRange =  secp256k1::getRangeEnd(randomCount, _startExponent.toString().substr(0, 1));
+				}
+				else {
+					startRange = secp256k1::getRangeStart(randomCount, "1");
+					endRange = secp256k1::getRangeEnd(randomCount, "F");
+				}
+
+				std::vector<secp256k1::uint256> tmpRandoms = getGPUAssistedRandoms(startRange, endRange, totalPoints);
 				randomPools.push_back(tmpRandoms);
 
 				std::vector<secp256k1::uint256>().swap(tmpRandoms);
@@ -479,9 +453,18 @@ void CudaKeySearchDevice::generateKeyBuffers(secp256k1::KeyScaffold bufferTempla
 		//any randoms left to generate?
 		if (randomCount > 0) {
 			//fill a random buffer of [rnd count] length
-			secp256k1::uint256 startRange = secp256k1::getRangeStart(randomCount, "1");
-			secp256k1::uint256 endRange = secp256k1::getRangeEnd(randomCount, "F");
-			std::vector<secp256k1::uint256> tmpRandoms = getGPUAssistedRandoms(static_assembly_buffer, _startingKeys.Randomizers, bufferRowIndex, startRange, endRange, totalPoints);
+			secp256k1::uint256 startRange;
+			secp256k1::uint256 endRange;
+			if (bufferTemplate.KeyMask.substr(0, 1) == "r") {
+				startRange = secp256k1::getRangeStart(randomCount, _startExponent.toString().substr(0, 1));
+				endRange = secp256k1::getRangeEnd(randomCount, _startExponent.toString().substr(0, 1));
+			}
+			else {
+				startRange = secp256k1::getRangeStart(randomCount, "1");
+				endRange = secp256k1::getRangeEnd(randomCount, "F");
+			}
+
+			std::vector<secp256k1::uint256> tmpRandoms = getGPUAssistedRandoms(startRange, endRange, totalPoints);
 			randomPools.push_back(tmpRandoms);
 			std::vector<secp256k1::uint256>().swap(tmpRandoms);
 		}
@@ -560,7 +543,7 @@ void CudaKeySearchDevice::assembleKeys() {
 
 	startMs = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
 	uint64_t timeSeed = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
-	std::vector<uint64_t> randomizers = RandomHelper::getRndRange(timeSeed, 0, _startingKeys.Randoms.size() - 1, _startingKeys.Keys.size());
+	std::vector<uint64_t> randomizers = Random::RandomHelper::getRndRange(timeSeed, 0, _startingKeys.Randoms.size() - 1, _startingKeys.Keys.size());
 
 	endMs = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
 	elapsedMs = endMs - startMs;
@@ -634,22 +617,56 @@ void CudaKeySearchDevice::generateStartingPoints()
 		uint64_t generatedDistances = 0;
 
 		Logger::log(LogLevel::Info, "Sorting keys.. ");
-		std::vector<secp256k1::uint256> sortedKeys = RandomHelper::sortKeys(_startingKeys.Keys);
-		_startingKeys.Distances = RandomHelper::getDistances(sortedKeys);
+		std::vector<secp256k1::uint256> sortedKeys = Random::RandomHelper::sortKeys(_startingKeys.Keys);
+		
+		//show the sorted keys
+		uint64_t generatedSortedKeys = 0;
+		for (int k = 0; k < sortedKeys.size(); k++) {
+			if (generatedSortedKeys % REPORTING_SIZE == 0)  Logger::log(LogLevel::Info, "SAMPLE Sorted Key: " + sortedKeys[k].toString() + " (" + util::formatThousands(generatedSortedKeys) + ")");
+			generatedSortedKeys++;
+		}
+
+
+		std::vector<secp256k1::uint256>().swap(_startingKeys.Distances);
+		//_startingKeys.Distances = Random::RandomHelper::getDistances(sortedKeys);
+
+		//uint64_t generatedDistances = 0;
+
+		//iterate through the keys, determine the intra-key distances
+		secp256k1::uint256 lastKey;
+		for (int k = 0; k < sortedKeys.size(); k++) {
+			if (k > 0) {
+				_startingKeys.Distances.push_back(sortedKeys[k] - lastKey);
+			}
+			else {
+				_startingKeys.Distances.push_back(0);
+			}
+
+			if (generatedDistances % REPORTING_SIZE == 0)  Logger::log(LogLevel::Info, "SAMPLE Distance:  " + _startingKeys.Distances[k].toString() + " (" + sortedKeys[k].toString() + " - " + lastKey.toString());
+			generatedDistances++;
+
+			lastKey = sortedKeys[k];
+		}
+
+
+
 
 		Logger::log(LogLevel::Info, "Sorting Distances.. ");
-		_startingKeys.Distances = RandomHelper::sortKeys(_startingKeys.Distances);
+		_startingKeys.Distances = Random::RandomHelper::sortKeys(_startingKeys.Distances);
 
+		secp256k1::uint256 startSub =  secp256k1::getRangeStart(_startingKeys.Keys[0].toString().size(), _startingKeys.Keys[0].toString().substr(0,1));
+
+		Logger::log(LogLevel::Info, "Start Dist Calc " + sortedKeys[0].toString() + " - " + startSub.toString());
 		//set the zeroeth distance against the starting key
-		_startingKeys.Distances[0] = _startingKeys.Keys[0] - _startExponent;
-
+		_startingKeys.Distances[0] = sortedKeys[0].sub(startSub);
+		Logger::log(LogLevel::Info, "Start Dist " + _startingKeys.Distances[0].toString());
+		//show the sorted distances
 		for (int k = 0; k < _startingKeys.Distances.size(); k++) {
 
 			if (generatedDistances % REPORTING_SIZE == 0)  Logger::log(LogLevel::Info, "SAMPLE Distance " + _startingKeys.Distances[k].toString() + " (" + util::formatThousands(generatedDistances) + ")");
 			generatedDistances++;
 		}
 	}
-
 
 	//exponents = _startingKeys.Keys;
 	Logger::log(LogLevel::Info, "Key Buffer Size: " + util::formatThousands(_startingKeys.Keys.size()));
@@ -849,9 +866,10 @@ void CudaKeySearchDevice::reDistributeStartingPoints(uint64_t divider, bool rand
 
 		Logger::log(LogLevel::Debug, "Divider: " + util::formatThousands(divider));
 
+		uint64_t keySize = _startingKeys.Keys.size();
 		Logger::log(LogLevel::Info, "Shifting Keys by Distance-Variable Distribution,  Divider: " + util::formatThousands(divider));
-		for (uint64_t k = 0; k < _startingKeys.Keys.size();k++) {
-			_startingKeys.Keys[k] = _startingKeys.Keys[k] + (_startingKeys.Distances[k].div(divider));
+		for (uint64_t k = 0; k < keySize;k++) {
+			_startingKeys.Keys[k] = _startingKeys.Keys[k].add(_startingKeys.Distances[k].div(divider));
 			if (shiftedKeys % REPORTING_SIZE == 0)  Logger::log(LogLevel::Info, "SAMPLE Key: " + _startingKeys.RootKeys[k].toString() + " -> " + _startingKeys.Keys[k].toString());
 			shiftedKeys++;
 		}
@@ -872,10 +890,6 @@ void CudaKeySearchDevice::reDistributeStartingPoints(uint64_t divider, bool rand
 			shiftedKeys++;
 		}
 	}
-
-
-
-
 
 	Logger::log(LogLevel::Info, "Key Buffer Size: " + util::formatThousands(_startingKeys.Keys.size()));
 	Logger::log(LogLevel::Info, "Writing " + util::formatThousands(_startingKeys.Keys.size()) + " keys to " + _info.name + "...");
@@ -1078,41 +1092,6 @@ void CudaKeySearchDevice::getResultsInternal(secp256k1::uint256 current_stride, 
 
 }
 
-/*
-// Verify a private key produces the public key and hash
-bool CudaKeySearchDevice::verifyKeyHash160(const secp256k1::uint256& privateKey, const secp256k1::ecpoint& publicKey, const unsigned int hash[5], bool compressed)
-{
-	secp256k1::ecpoint g = secp256k1::G();
-
-	secp256k1::ecpoint p = secp256k1::multiplyPoint(privateKey, g);
-
-	if (!(p == publicKey)) {
-		return false;
-	}
-
-	unsigned int xWords[8];
-	unsigned int yWords[8];
-
-	p.x.exportWords(xWords, 8, secp256k1::uint256::BigEndian);
-	p.y.exportWords(yWords, 8, secp256k1::uint256::BigEndian);
-
-	unsigned int digest[5];
-	if (compressed) {
-		Hash::hashPublicKeyCompressed(xWords, yWords, digest);
-	}
-	else {
-		Hash::hashPublicKey(xWords, yWords, digest);
-	}
-
-	for (int i = 0; i < 5; i++) {
-		if (digest[i] != hash[i]) {
-			return false;
-		}
-	}
-
-	return true;
-}
-*/
 
 size_t CudaKeySearchDevice::getResults(std::vector<KeySearchResult>& resultsOut)
 {

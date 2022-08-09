@@ -56,7 +56,7 @@ private:
 
 	void cudaCall(cudaError_t err);
 
-	std::vector<secp256k1::uint256> getGPUAssistedRandoms(std::vector<unsigned int> bufferpool, std::vector<std::vector<unsigned int>> randomizers, std::vector<uint64_t>& bufferRowIndex, secp256k1::uint256 min, secp256k1::uint256 max, uint64_t length);
+	std::vector<secp256k1::uint256> getGPUAssistedRandoms(secp256k1::uint256 min, secp256k1::uint256 max, uint64_t length);
 
 	secp256k1::KeyScaffold parseKeyMask(std::string keyMaskStr, uint64_t totalPoints);
 

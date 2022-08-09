@@ -525,7 +525,7 @@ namespace util {
 				uint64_t timeSeed = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
 				timeSeed = timeSeed * (i + 1);
 				//std::vector<uint64_t> rnds = RandomHelper::getRndRange(timeSeed, strideVals, util::occurrencesOf(strideVal, 'x').size());
-				std::vector<uint64_t> rnds = RandomHelper::getCPURndRange(timeSeed, strideVals, util::occurrencesOf(strideVal, 'x').size());
+				std::vector<uint64_t> rnds = Random::RandomHelper::getCPURndRange(timeSeed, strideVals, util::occurrencesOf(strideVal, 'x').size());
 
 				/*
 				Logger::log(LogLevel::Debug, "Random Stride Mask:" + strideVal);

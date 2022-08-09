@@ -7,42 +7,13 @@
 #include <thrust/copy.h>
 
 
+using namespace Random;
 
-
-int RandomHelper::randTest()
-{
-	int MAX_VALUE = 64535;
-
-	// Generate 32M random numbers serially.
-	thrust::default_random_engine rng(1337);
-	thrust::uniform_int_distribution<int> dist;
-	thrust::host_vector<int> h_vec(32 << 20);
-	thrust::generate(h_vec.begin(), h_vec.end(), [&] { return dist(rng); });
-
-	// Transfer data to the device.
-	thrust::device_vector<int> d_vec = h_vec;
-
-	// Sort data on the device.
-	//thrust::sort(d_vec.begin(), d_vec.end());
-
-	// Transfer data back to host.
-	thrust::copy(d_vec.begin(), d_vec.end(), h_vec.begin());
-
-	std::vector<int> results;
-	for (int i : h_vec) {
-		if (i <= MAX_VALUE) results.push_back(i);
-	}
-
-	
-	return  EXIT_SUCCESS;
-
-}
-
-std::vector<unsigned int> RandomHelper::getStaticAssemblyBuffer() {
+std::vector<unsigned int> RandomHelper::getStaticAssemblyBuffer(unsigned int max) {
 
 	std::vector<unsigned int> result;
 
-	unsigned int max = 0xffff;
+	//unsigned int max = 0xffff;
 	unsigned int ui = 0;
 	while (ui <= max) {
 		result.push_back(ui);
@@ -53,19 +24,20 @@ std::vector<unsigned int> RandomHelper::getStaticAssemblyBuffer() {
 	return result;
 }
 
-std::vector<std::vector<unsigned int>> RandomHelper::getRandomizers(uint64_t seed, uint64_t len, uint64_t width) {
-	return getRndBuffer(seed, 0, 0xffff, len, width, false);
+std::vector<std::vector<unsigned int>> RandomHelper::getRandomizers(uint64_t seed, unsigned int max, uint64_t len, uint64_t width) {
+	return getRndBuffer(seed, 0, max, len, width, false);
 }
 
 std::vector<std::vector<unsigned int>> RandomHelper::getRndBuffer(uint64_t seed, unsigned int min, unsigned int max, uint64_t len, uint64_t width, bool singlePool) {
 
 	std::vector<std::vector<unsigned int>> results;
 
+	std::vector<uint64_t> seedMods = RandomHelper::randRange(width, 0, 69000000);
 	for (int64_t i = 0; i < width; i++) {
 		if (!singlePool || i == 0) {
 			//time for the devrnd seed
 
-			thrust::default_random_engine rng(seed * i);
+			thrust::default_random_engine rng(seed * seedMods[i]);
 
 			thrust::uniform_int_distribution<unsigned int> dist(min, max);
 
