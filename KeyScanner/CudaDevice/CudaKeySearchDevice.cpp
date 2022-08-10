@@ -477,6 +477,7 @@ void CudaKeySearchDevice::generateKeyBuffers(secp256k1::KeyScaffold bufferTempla
 		}
 
 
+		uint64_t randomsGenerated = 0;
 		while (randomKeys.size() < totalPoints) {
 			int randomBlock = 0;
 
@@ -490,8 +491,10 @@ void CudaKeySearchDevice::generateKeyBuffers(secp256k1::KeyScaffold bufferTempla
 
 				if (bufferTemplate.RandomMask[c] == 'r') rCount++;
 				if (bufferTemplate.RandomMask[c] != 'r' && rCount > 0) {
-					uint64_t poolIndex = _startingKeys.Randomizers[randomBlock][randomIndexes[randomBlock]];
-					secp256k1::uint256 thisKeyPart = randomPools[randomBlock][poolIndex];
+					//uint64_t poolIndex = _startingKeys.Randomizers[randomBlock][randomIndexes[randomBlock]];
+					//uint64_t poolIndex = _startingKeys.Randomizers[randomIndexes[randomBlock]];
+					//secp256k1::uint256 thisKeyPart = randomPools[randomBlock][poolIndex];
+					secp256k1::uint256 thisKeyPart = randomPools[0][randomsGenerated];
 					thisKey = thisKey.add(thisKeyPart);
 
 					randomIndexes[randomBlock]++;
@@ -514,6 +517,7 @@ void CudaKeySearchDevice::generateKeyBuffers(secp256k1::KeyScaffold bufferTempla
 			}
 
 			randomKeys.push_back(thisKey);
+			randomsGenerated++;
 		}
 
 		std::vector<std::vector<secp256k1::uint256>>().swap(randomPools);

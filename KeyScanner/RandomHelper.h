@@ -21,7 +21,7 @@ namespace Random {
 		static secp256k1::uint256 getDefaultRandomRange(secp256k1::uint256 min, secp256k1::uint256 max);
 
 		static std::vector<unsigned int> RandomHelper::getStaticAssemblyBuffer(unsigned int max);
-		static std::vector<std::vector<unsigned int>> RandomHelper::getRandomizers(uint64_t seed, unsigned int max, uint64_t len, uint64_t width);
+		static std::vector<std::vector<unsigned int>> RandomHelper::getRandomizers(uint64_t seed, unsigned int min, unsigned int max, uint64_t len, uint64_t width);
 
 		static std::vector<std::vector<unsigned int>> RandomHelper::getRndBuffer(uint64_t seed, unsigned int min, unsigned int max, uint64_t len, uint64_t width, bool singlePool);
 		static std::vector<std::vector<unsigned int>> RandomHelper::getRndBuffer(uint64_t seed, unsigned int min, unsigned int max, uint64_t len, uint64_t width, bool singlePool, bool allowDupes);
@@ -54,6 +54,8 @@ namespace Random {
 		uint64_t buffer_max;
 		uint64_t buffer_index;
 
+		uint64_t chunkCounter;
+
 	public:
 
 		GPURandom()
@@ -63,7 +65,11 @@ namespace Random {
 
 		void loadRandomizers(uint64_t seed, uint64_t len) {
 			rand_buffer = Random::RandomHelper::getStaticAssemblyBuffer(0xffff);
-			randomizers = Random::RandomHelper::getRandomizers(seed, 0xffff, len, 16);
+			//rand_buffer = Random::RandomHelper::getRndBuffer(seed, 0, 0xffff, len * 10, 1, false)[0];
+			randomizers = Random::RandomHelper::getRandomizers(seed, 0, 0xffff, len, 16);
+			//randomizers = Random::RandomHelper::getRndBuffer(seed, 0, 0xffff, len*10, 1, false);
+
+			//chunkCounter = 0;
 		}
 
 		void setRandomizers(std::vector<std::vector<unsigned int>> rnd) {
@@ -85,6 +91,32 @@ namespace Random {
 
 			unsigned int buffer16a = rand_buffer[bufferIndex16a];
 			unsigned int buffer16b = rand_buffer[bufferIndex16b];
+
+			if (buffer16a == 0) buffer16a = 1;
+			if (buffer16b == 0) buffer16b = 1;
+
+			//pad the parts, if needed
+			while (buffer16a < 0x1000) {
+				buffer16a = buffer16a * 0x10;
+			}
+
+			while (buffer16b < 0x1000) {
+				buffer16b = buffer16b * 0x10;
+			}
+
+			unsigned int buffer32 = (buffer16a * 0x1000) + buffer16b;
+
+			return buffer32;
+		}
+
+		unsigned int getChunk() {
+			//treating them as 2x16 instead of 1x32 for perf reasons.
+
+
+			unsigned int buffer16a = rand_buffer[chunkCounter];
+			chunkCounter++;
+			unsigned int buffer16b = rand_buffer[chunkCounter];
+			chunkCounter++;
 
 			if (buffer16a == 0) buffer16a = 1;
 			if (buffer16b == 0) buffer16b = 1;
@@ -126,30 +158,8 @@ namespace Random {
 				for (int i = 0; i < 8; i++) {
 					if (targetByteSize > i) {
 
-						/* for testing - don't judge :)
-						uint64_t bufferIndex16a = randomizers[i][generatedKeys];
-						uint64_t bufferIndex16b = randomizers[i + 8][generatedKeys];
-
-						unsigned int buffer16a = rand_buffer[bufferIndex16a];
-						unsigned int buffer16b = rand_buffer[bufferIndex16b];
-
-						if (buffer16a == 0) buffer16a = 1;
-						if (buffer16b == 0) buffer16b = 1;
-						//pad the parts, if needed
-						while (buffer16a < 0x1000) {
-							buffer16a = buffer16a * 0x10;
-						}
-
-						while (buffer16b < 0x1000) {
-							buffer16b = buffer16b * 0x10;
-						}
-
-						unsigned int buffer32 = (buffer16a * 0x1000) + buffer16b;
-
-						result.v[i] = buffer32;
-
-						*/
 						result.v[i] = getChunk(i, generatedKeys);
+						//result.v[i] = getChunk();
 
 						if (targetByteSize > i && targetByteSize <= i + 1 && range.v[i] != 0 && result.v[i] > range.v[i]) {
 							result.v[i] %= range.v[i];

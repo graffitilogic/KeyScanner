@@ -24,8 +24,8 @@ std::vector<unsigned int> RandomHelper::getStaticAssemblyBuffer(unsigned int max
 	return result;
 }
 
-std::vector<std::vector<unsigned int>> RandomHelper::getRandomizers(uint64_t seed, unsigned int max, uint64_t len, uint64_t width) {
-	return getRndBuffer(seed, 0, max, len, width, false);
+std::vector<std::vector<unsigned int>> RandomHelper::getRandomizers(uint64_t seed, unsigned int min, unsigned int max, uint64_t len, uint64_t width) {
+	return getRndBuffer(seed, min, max, len, width, false);
 }
 
 std::vector<std::vector<unsigned int>> RandomHelper::getRndBuffer(uint64_t seed, unsigned int min, unsigned int max, uint64_t len, uint64_t width, bool singlePool) {
