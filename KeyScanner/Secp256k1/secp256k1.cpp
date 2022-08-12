@@ -125,6 +125,7 @@ static void multiply(const unsigned int* x, int xLen, const unsigned int* y, int
 	}
 }
 
+
 static uint256 rightShift(const uint256& x, int count)
 {
 	uint256 r;
@@ -137,6 +138,13 @@ static uint256 rightShift(const uint256& x, int count)
 	r.v[7] = x.v[7] >> count;
 
 	return r;
+}
+
+
+uint256 uint256::rShift(uint32_t val) const
+{
+	uint256 t = *this;
+	return rightShift(t, val);
 }
 
 uint256 uint256::mul(const uint256& x) const
@@ -1266,8 +1274,9 @@ std::vector<uint256> secp256k1::getSequentialRange(uint256 start, uint256 end, b
 
 	secp256k1::uint256 lastKey = 0;
 	if (thinProvisioning) lastKey = getRangeStart(end.toString(16).size(), "1");
+	results.push_back(lastKey);
 	while (lastKey < end) {
-		secp256k1::uint256 sequential = lastKey + 1;
+		secp256k1::uint256 sequential = lastKey.add(1);
 		results.push_back(sequential);
 		lastKey = sequential;
 	}

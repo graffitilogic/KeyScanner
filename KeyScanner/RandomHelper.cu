@@ -9,12 +9,12 @@
 
 using namespace Random;
 
-std::vector<unsigned int> RandomHelper::getStaticAssemblyBuffer(unsigned int max) {
+std::vector<unsigned int> RandomHelper::getStaticAssemblyBuffer(unsigned int min, unsigned int max) {
 
 	std::vector<unsigned int> result;
 
 	//unsigned int max = 0xffff;
-	unsigned int ui = 0;
+	unsigned int ui = min;
 	while (ui <= max) {
 		result.push_back(ui);
 		ui++;
@@ -185,13 +185,14 @@ std::vector<uint64_t> RandomHelper::sequentialRange(uint64_t buffer_len, uint64_
 std::vector<uint64_t> RandomHelper::getRndRange(uint64_t seed, uint64_t min_value, uint64_t max_value, uint64_t size) {
 	std::vector<uint64_t> results;
 
-	while (results.size() <= size) {
+	while (results.size() < size) {
 		thrust::host_vector<uint64_t> rndBuffer = getRndBatch(seed, min_value, max_value, size);
 		for (uint64_t i : rndBuffer) {
 			//printf("%d \n", i );
 			if (i <= max_value) results.push_back(i);
-			if (results.size() == size) break;;
+			if (results.size() == size) break;
 		}
+		if (results.size() == size) break;
 	}
 	return results;
 }
@@ -318,22 +319,49 @@ std::vector<secp256k1::uint256> RandomHelper::sortKeys(std::vector<secp256k1::ui
 }
 
 
-std::vector<secp256k1::uint256> RandomHelper::getDistances(std::vector<secp256k1::uint256> keys) {
+std::vector<secp256k1::uint256> RandomHelper::getDistances(std::vector<secp256k1::uint256> keys, uint64_t truncate) {
 	std::vector<secp256k1::uint256> results;
-	thrust::host_vector<secp256k1::uint256> hostKeys;
 
 	//iterate through the keys, determine the intra-key distances
+	//uint32_t scaler = std::pow(16, truncate);
+
+	//secp256k1::uint256 scaler256 = secp256k1::uint256("4096");
 	secp256k1::uint256 lastKey;
+	secp256k1::uint256 thisKey;
+	secp256k1::uint256 thisDistance;
+	secp256k1::uint256 referenceDistance;
 	for (int k = 0; k < keys.size(); k++) {
+
+		//Logger::log(LogLevel::Debug, "ThisK1: " + _startingKeys.Keys[k].toString());
+		thisKey = keys[k];
+		//thisKey = keys[k].div(scaler);
+		//thisKey = keys[k].rShift(scaler);
+
+		//thisKey = keys[k].div(;
+
 		if (k > 0) {
-			results.push_back(keys[k] - lastKey);
+			//truncate the end of the comparison key - so we are measuruing random-only differences not including a right-padded sequential
+			thisDistance = thisKey.sub(lastKey);
+
+			//pad the right of the distance so that it can be cleanly added without disturbing the sequentials
+			//thisDistance = thisDistance.mul(scaler);
+
+			if (thisDistance == 0) {
+				thisDistance = referenceDistance;
+			}
+			else {
+				referenceDistance = thisDistance;
+			}
+
+			results.push_back(thisDistance);
 		}
 		else {
 			results.push_back(0);
 		}
-		lastKey = keys[k];
+		lastKey = thisKey;
 	}
 
 	return results;
 }
+
 

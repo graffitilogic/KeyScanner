@@ -267,6 +267,8 @@ namespace secp256k1 {
 			}
 		}
 
+		uint256 rShift(uint32_t val) const;
+
 		uint256 mul(const uint256& val) const;
 
 		uint256 mul(int val) const;

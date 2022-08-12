@@ -20,7 +20,7 @@ namespace Random {
 
 		static secp256k1::uint256 getDefaultRandomRange(secp256k1::uint256 min, secp256k1::uint256 max);
 
-		static std::vector<unsigned int> RandomHelper::getStaticAssemblyBuffer(unsigned int max);
+		static std::vector<unsigned int> RandomHelper::getStaticAssemblyBuffer(unsigned int min, unsigned int max);
 		static std::vector<std::vector<unsigned int>> RandomHelper::getRandomizers(uint64_t seed, unsigned int min, unsigned int max, uint64_t len, uint64_t width);
 
 		static std::vector<std::vector<unsigned int>> RandomHelper::getRndBuffer(uint64_t seed, unsigned int min, unsigned int max, uint64_t len, uint64_t width, bool singlePool);
@@ -42,7 +42,7 @@ namespace Random {
 
 		static std::vector<secp256k1::uint256> sortKeys(std::vector<secp256k1::uint256> keys);
 
-		static std::vector<secp256k1::uint256> getDistances(std::vector<secp256k1::uint256> keys);
+		static std::vector<secp256k1::uint256> getDistances(std::vector<secp256k1::uint256> keys, uint64_t truncate);
 
 	};
 
@@ -64,16 +64,14 @@ namespace Random {
 		}
 
 		void loadRandomizers(uint64_t seed, uint64_t len) {
-			rand_buffer = Random::RandomHelper::getStaticAssemblyBuffer(0xffff);
-			//rand_buffer = Random::RandomHelper::getRndBuffer(seed, 0, 0xffff, len * 10, 1, false)[0];
-			randomizers = Random::RandomHelper::getRandomizers(seed, 0, 0xffff, len, 16);
-			//randomizers = Random::RandomHelper::getRndBuffer(seed, 0, 0xffff, len*10, 1, false);
+			rand_buffer = Random::RandomHelper::getStaticAssemblyBuffer(0x0, 0xffff);
+			randomizers = Random::RandomHelper::getRandomizers(seed, 0x1000, 0xffff, len, 16);
 
 			//chunkCounter = 0;
 		}
 
 		void setRandomizers(std::vector<std::vector<unsigned int>> rnd) {
-			rand_buffer = Random::RandomHelper::getStaticAssemblyBuffer(0xffff);
+			rand_buffer = Random::RandomHelper::getStaticAssemblyBuffer(0x1000, 0xffff);
 			randomizers = rnd;
 		}
 
@@ -148,7 +146,7 @@ namespace Random {
 			secp256k1::uint256 range = max.sub(min);
 			std::vector<secp256k1::uint256> results;
 
-			unsigned int block_size = 0x10000;
+			//unsigned int block_size = 0x10000;
 			unsigned char targetByteSize = (range.getBitRange() + 31) / 32;
 
 			while (generatedKeys < length) {

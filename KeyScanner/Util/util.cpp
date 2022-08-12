@@ -484,7 +484,16 @@ namespace util {
 			else if (sme.directive == "redistribute-distance") {
 				if (sme.cycles == 0) sme.cycles = 1;
 				if (sme.stride == 0) sme.stride = 1;
-				sme.cycles = sme.cycles * (repeatCount + 1);  //increment the cycle, which in this case is the divider
+				//sme.cycles = sme.cycles * (repeatCount + 1);  //increment the cycle, which in this case is the divider
+				sme.cycles = sme.cycles + repeatCount;  //increment the cycle, which in this case is the divider
+				results.push_back(sme);
+			}
+			else if (sme.directive == "redistribute-distance-binary") {
+				if (sme.cycles == 0) sme.cycles = 1;
+				if (sme.stride == 0) sme.stride = 1;
+				//sme.cycles = sme.cycles * (repeatCount * 2);  //increment the cycle, which in this case is the divider
+				sme.cycles = pow(2, (sme.cycles + (repeatCount +1)));
+				//sme.cycles = sme.cycles + repeatCount;  //increment the cycle, which in this case is the divider
 				results.push_back(sme);
 			}
 			else if (sme.directive == "stride") {
