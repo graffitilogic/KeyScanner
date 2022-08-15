@@ -43,6 +43,8 @@ namespace Random {
 		static std::vector<secp256k1::uint256> sortKeys(std::vector<secp256k1::uint256> keys);
 
 		static std::vector<secp256k1::uint256> getDistances(std::vector<secp256k1::uint256> keys, uint64_t truncate);
+		static secp256k1::uint256 getDistanceAverage(std::vector<secp256k1::uint256> keys);
+		static secp256k1::uint256 getDistanceMean(std::vector<secp256k1::uint256> keys);
 
 	};
 

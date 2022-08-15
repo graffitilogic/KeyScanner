@@ -364,4 +364,46 @@ std::vector<secp256k1::uint256> RandomHelper::getDistances(std::vector<secp256k1
 	return results;
 }
 
+secp256k1::uint256 RandomHelper::getDistanceAverage(std::vector<secp256k1::uint256> keys) {
+	secp256k1::uint256 result;
+
+	secp256k1::uint256 thisDistance;
+	secp256k1::uint256 distanceSum;
+	secp256k1::uint256 keyCount = secp256k1::uint256(0);
+	secp256k1::uint256 one = secp256k1::uint256(1);
+
+	for (int k = 0; k < keys.size(); k++) {
+
+		thisDistance = keys[k];
+		distanceSum = distanceSum.add(thisDistance);
+		keyCount = keyCount.add(one);
+	}
+
+	result = distanceSum.div(keyCount);
+	return result;
+}
+
+secp256k1::uint256 RandomHelper::getDistanceMean(std::vector<secp256k1::uint256> keys) {
+	secp256k1::uint256 result;
+
+	uint64_t startKey = keys.size() * 0.25;
+	uint64_t endKey = keys.size() - startKey;
+
+
+	secp256k1::uint256 thisDistance;
+	secp256k1::uint256 distanceSum;
+	secp256k1::uint256 keyCount = secp256k1::uint256(0);
+	secp256k1::uint256 one = secp256k1::uint256(1);
+
+	for (int k = startKey; k < endKey; k++) {
+
+		thisDistance = keys[k];
+		distanceSum = distanceSum.add(thisDistance);
+		keyCount = keyCount.add(one);
+	}
+
+	result = distanceSum.div(keyCount);
+	return result;
+}
+
 
