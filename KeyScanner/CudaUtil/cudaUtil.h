@@ -40,6 +40,12 @@ namespace cuda {
 
 	int getDeviceCount();
 
-	//std::vector<secp256k1::uint256> gpuVectorSort(std::vector<secp256k1::uint256> fuckTonOfKeys);
+	enum DistributionMode {
+		DISTANCERANDOM,
+		DISTANCEMULTIPLE,
+		DISTANCEBINARY,
+		DISTANCEAVERAGE,
+		DISTANCEMEANAVERAGE
+	};
 }
 #endif

@@ -129,16 +129,22 @@ void CudaKeySearchDevice::init(const secp256k1::uint256& start, const secp256k1:
 		reGenerateStartingPoints();
 	}
 	else if (stride.directive == "redistribute") {
-		reDistributeStartingPoints(stride.cycles, false, false);
+		reDistributeStartingPoints(stride.cycles, cuda::DistributionMode::DISTANCEMULTIPLE);
 	}
 	else if (stride.directive == "redistribute-random") {
-		reDistributeStartingPoints(stride.cycles, true, false);
+		reDistributeStartingPoints(stride.cycles, cuda::DistributionMode::DISTANCERANDOM);
 	}
 	else if (stride.directive == "redistribute-distance") {
-		reDistributeStartingPoints(stride.cycles, false, true);
+		reDistributeStartingPoints(stride.cycles, cuda::DistributionMode::DISTANCEMULTIPLE);
 	}
 	else if (stride.directive == "redistribute-distance-binary") {
-		reDistributeStartingPoints(stride.cycles, false, true);
+		reDistributeStartingPoints(stride.cycles, cuda::DistributionMode::DISTANCEBINARY);
+	}
+	else if (stride.directive == "redistribute-distance-average") {
+		reDistributeStartingPoints(stride.cycles, cuda::DistributionMode::DISTANCEAVERAGE);
+	}
+	else if (stride.directive == "redistribute-distance-mean-average") {
+		reDistributeStartingPoints(stride.cycles, cuda::DistributionMode::DISTANCEMEANAVERAGE);
 	}
 	else {
 		if (_startingKeys.Keys.size() == 0) {
@@ -891,7 +897,7 @@ void CudaKeySearchDevice::restoreStartingPoints()
 	Logger::log(LogLevel::Info, "Done");
 }
 
-void CudaKeySearchDevice::reDistributeStartingPoints(uint64_t divider, bool randomOnly, bool distance_based)
+void CudaKeySearchDevice::reDistributeStartingPoints(uint64_t divider, cuda::DistributionMode dist_mode)
 {
 	Logger::log(LogLevel::Info, "Re-distributing Starting Points.. " + util::formatThousands(_startingKeys.Keys.size()));
 	uint64_t REPORTING_SIZE = _startingKeys.Keys.size() / 8;
@@ -906,7 +912,7 @@ void CudaKeySearchDevice::reDistributeStartingPoints(uint64_t divider, bool rand
 	secp256k1::uint256 keySpace; 
 	secp256k1::uint256 evenDistribution; 
 
-	if (randomOnly) {
+	if (dist_mode == cuda::DistributionMode::DISTANCERANDOM) {
 		secp256k1::BetaKeyManipulator bkm = secp256k1::parseBetaKey(_startingKeys.BetaKeys[0], '0');
 		keySpace = bkm.keyB.sub(bkm.keyA);
 		evenDistribution = keySpace.div(_startingKeys.Keys.size());
@@ -932,30 +938,19 @@ void CudaKeySearchDevice::reDistributeStartingPoints(uint64_t divider, bool rand
 			shiftedKeys++;
 		}
 	}
-	else if (false) {
-		keySpace = _endExponent.sub(_startExponent);
+	else if (dist_mode == cuda::DistributionMode::DISTANCEMULTIPLE) {
 
-		while (divider <= 1) {
-			divider++;
-		}
+		uint64_t multiplier = divider;
+		Logger::log(LogLevel::Info, "Shifting Keys by Variable Distribution.  Multiplier: " + util::formatThousands(multiplier));
 
-		//Logger::log(LogLevel::Debug, "Divider: " + util::formatThousands(divider));
-
-		uint64_t keySize = _startingKeys.Keys.size();
-		Logger::log(LogLevel::Info, "Shifting Keys by Distance-Variable Distribution,  Divider: " + util::formatThousands(divider));
-		for (uint64_t k = 0; k < keySize;k++) {
-			_startingKeys.Keys[k] = _startingKeys.Keys[k].add(_startingKeys.Distances[k].div(divider));
-			if (shiftedKeys % REPORTING_SIZE == 0) {
-				Logger::log(LogLevel::Info, "--------------------------------------------------------------------");
-				Logger::log(LogLevel::Info, "SAMPLE Key: " + _startingKeys.RootKeys[k].toString());
-				Logger::log(LogLevel::Info, "          + " + _startingKeys.Distances[k].toString());
-				Logger::log(LogLevel::Info, "    ->      " + _startingKeys.Keys[k].toString());
-				Logger::log(LogLevel::Info, "--------------------------------------------------------------------");
-			}
+		for (uint64_t k = 0; k < _startingKeys.Keys.size();k++) {
+			_startingKeys.Keys[k] = _startingKeys.Keys[k] + (_startingKeys.Distances[k] * multiplier);
+			if (shiftedKeys % REPORTING_SIZE == 0)  Logger::log(LogLevel::Info, "SAMPLE Key: " + _startingKeys.RootKeys[k].toString() + " -> " + _startingKeys.Keys[k].toString());
 			shiftedKeys++;
 		}
+
 	}
-	else if (distance_based) {
+	else if (dist_mode == cuda::DistributionMode::DISTANCEBINARY) {
 
 		secp256k1::uint256 startRange = secp256k1::getRangeStart(_startExponent.toString().length(), _startingKeys.Keys[0].toString().substr(0, 1));
 		secp256k1::uint256 endRange = secp256k1::getRangeEnd(_endExponent.toString().length(), _startingKeys.Keys[0].toString().substr(0, 1));
@@ -997,6 +992,12 @@ void CudaKeySearchDevice::reDistributeStartingPoints(uint64_t divider, bool rand
 			}
 			shiftedKeys++;
 		}
+	}
+	else if (dist_mode == cuda::DistributionMode::DISTANCEAVERAGE) {
+		//need to implement
+	}
+	else if (dist_mode == cuda::DistributionMode::DISTANCEMEANAVERAGE) {
+		//need to implement
 	}
 	else {
 		keySpace = _endExponent.sub(_startExponent);

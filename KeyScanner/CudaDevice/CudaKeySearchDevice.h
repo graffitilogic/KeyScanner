@@ -28,19 +28,13 @@ class CudaKeySearchDevice {
 private:
 
 	int _device;
-
 	int _blocks;
-
 	int _threads;
-
 	int _pointsPerThread;
-
 	int _compression;
-
 	int _searchMode;
 
 	std::vector<KeySearchResult> _results;
-
 	std::string _deviceName;
 
 	secp256k1::uint256 _startExponent;
@@ -64,16 +58,11 @@ private:
 	void CudaKeySearchDevice::assembleKeys();
 	
 	void generateStartingPoints();
-
 	void showAssemblyBuffer(std::vector<std::vector<unsigned int>> assembly_buffer, bool showDetail);
-
 	void reGenerateStartingPoints();
-
 	void reUseStartingPoints();
-
 	void restoreStartingPoints();
-
-	void reDistributeStartingPoints(uint64_t divider, bool randomOnly, bool distance_based);
+	void reDistributeStartingPoints(uint64_t divider, cuda::DistributionMode dist_mode);
 
 	CudaDeviceKeys* _deviceKeys;
 	CudaAtomicList _resultList;
