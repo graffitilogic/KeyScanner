@@ -364,46 +364,44 @@ std::vector<secp256k1::uint256> RandomHelper::getDistances(std::vector<secp256k1
 	return results;
 }
 
-secp256k1::uint256 RandomHelper::getDistanceAverage(std::vector<secp256k1::uint256> keys) {
+secp256k1::uint256 RandomHelper::getDistanceAverage(std::vector<secp256k1::uint256> distances) {
+
 	secp256k1::uint256 result;
 
+	//running average isn't exact but good enough for this.
 	secp256k1::uint256 thisDistance;
-	secp256k1::uint256 distanceSum;
-	secp256k1::uint256 keyCount = secp256k1::uint256(0);
-	secp256k1::uint256 one = secp256k1::uint256(1);
-
-	for (int k = 0; k < keys.size(); k++) {
-
-		thisDistance = keys[k];
-		distanceSum = distanceSum.add(thisDistance);
-		keyCount = keyCount.add(one);
+	secp256k1::uint256 running_average = distances[0];
+	uint64_t count = 0;
+	for (int k = 0; k < distances.size(); k++) {
+		
+		thisDistance = distances[k];
+		running_average = running_average.running_average(running_average, distances[k], count + 1);
+		count++;
 	}
 
-	result = distanceSum.div(keyCount);
-	return result;
+	return running_average;
+
 }
 
-secp256k1::uint256 RandomHelper::getDistanceMean(std::vector<secp256k1::uint256> keys) {
+secp256k1::uint256 RandomHelper::getDistanceMean(std::vector<secp256k1::uint256> distances) {
 	secp256k1::uint256 result;
 
-	uint64_t startKey = keys.size() * 0.25;
-	uint64_t endKey = keys.size() - startKey;
+	uint64_t startKey = distances.size() * 0.10;
+	uint64_t endKey = distances.size() * 0.90;//  distances.size() - startKey;
 
 
 	secp256k1::uint256 thisDistance;
-	secp256k1::uint256 distanceSum;
-	secp256k1::uint256 keyCount = secp256k1::uint256(0);
-	secp256k1::uint256 one = secp256k1::uint256(1);
-
+	secp256k1::uint256 running_average = distances[0];
+	uint64_t count = 0;
 	for (int k = startKey; k < endKey; k++) {
 
-		thisDistance = keys[k];
-		distanceSum = distanceSum.add(thisDistance);
-		keyCount = keyCount.add(one);
+		thisDistance = distances[k];
+		running_average = running_average.running_average(running_average, distances[k], count + 1);
+		count++;
 	}
 
-	result = distanceSum.div(keyCount);
-	return result;
+
+	return running_average;
 }
 
 

@@ -533,7 +533,7 @@ int run()
 
 		Logger::log(LogLevel::Info, "Stopping after: " + strMaxCycles + " cycles");
 	}
-	//Logger::log(LogLevel::Info, "Counting by : " + _config.stride.toString() + " (" + std::to_string(_config.stride.getBitRange()) + " bit)");
+
 
 	try {
 
