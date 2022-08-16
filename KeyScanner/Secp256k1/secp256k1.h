@@ -497,6 +497,24 @@ namespace secp256k1 {
 			return uint256(result);
 		}
 
+		uint256 running_average(uint256 running_avg, uint256 new_value, uint64_t setLen) {
+			//uint256 sz = uint256(setLen);
+			running_avg = running_avg.sub(running_avg.div(setLen));
+			running_avg = running_avg.add(new_value.div(setLen));
+			return running_avg;
+		}
+
+		/*
+		public static BigInteger approxRollingAverage(BigInteger avg, BigInteger new_sample, Int64 size)
+        {
+            BigInteger sz = new BigInteger(size.ToString(), 10);
+
+            avg = avg.Subtract(avg.Divide(sz));
+            avg = avg.Add(new_sample.Divide(sz));
+
+            return avg;
+        }
+		*/
 		std::vector<uint256> getChunks() {
 			uint64_t sixteen = 16;
 			uint256 v = *this;

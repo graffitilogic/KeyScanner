@@ -87,7 +87,7 @@ KeyFinder::KeyFinder(CudaKeySearchDevice*& cudaDvc, const secp256k1::uint256& st
 	
 
 	if (_randomStride) _stride = secp256k1::getRandom128(_randomSrtrideBits, _rStrideHistory);
-	Logger::log(LogLevel::Info, "Counting by : " + _stride.toString() + " (" + std::to_string(_stride.getBitRange()) + " bit)");
+	Logger::log(LogLevel::Info, "Counting by : [" + _stride.toString() + "] (" + std::to_string(_stride.getBitRange()) + " bit)");
 }
 
 KeyFinder::KeyFinder()

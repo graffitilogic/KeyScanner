@@ -613,7 +613,7 @@ void CudaKeySearchDevice::assembleKeys() {
 	 generatedKeys = 0;
 	 for (int k = 0; k < _startingKeys.Keys.size(); k++) {
 		 //Logger::log(LogLevel::Info, "S-Key: " + _startingKeys.Keys[k].toString() + " (" + util::formatThousands(generatedKeys) + ")");
-		 if (generatedKeys % REPORTING_SIZE == 0)  Logger::log(LogLevel::Info, "SAMPLE Sorted Key: " + _startingKeys.Keys[k].toString() + " (" + util::formatThousands(generatedKeys) + ")");
+		 if (generatedKeys % REPORTING_SIZE == 0)  Logger::log(LogLevel::Info, "SAMPLE Sorted Key: " + _startingKeys.Keys[k].toString() + " (pos: " + util::formatThousands(generatedKeys) + ")");
 		 generatedKeys++;
 	 }
 }
@@ -690,7 +690,7 @@ void CudaKeySearchDevice::generateStartingPoints()
 		//show the sorted distances
 		for (int k = 0; k < _startingKeys.Distances.size(); k++) {
 
-			if (generatedDistances % REPORTING_SIZE == 0)  Logger::log(LogLevel::Info, "SAMPLE Distance " + _startingKeys.Distances[k].toString() + " (" + util::formatThousands(generatedDistances) + ")");
+			if (generatedDistances % REPORTING_SIZE == 0)  Logger::log(LogLevel::Info, "SAMPLE Distance " + _startingKeys.Distances[k].toString() + " (pos: " + util::formatThousands(generatedDistances) + ")");
 			generatedDistances++;
 		}
 	}
@@ -790,7 +790,7 @@ void CudaKeySearchDevice::reUseStartingPoints()
 	uint64_t totalMemory = totalPoints * 40;
 
 
-	Logger::log(LogLevel::Info, "Writing " + util::formatThousands(_startingKeys.Keys.size()) + " keys back to " + _info.name + " for stride [" + _stride.toString() + "]");
+	Logger::log(LogLevel::Info, "Writing " + util::formatThousands(_startingKeys.Keys.size()) + " keys back to " + _info.name + "."); // for stride [" + _stride.toString() + "] ");
 
 	cudaCall(_deviceKeys->init(_blocks, _threads, _pointsPerThread, _startingKeys.Keys));
 
@@ -912,17 +912,6 @@ void CudaKeySearchDevice::reDistributeStartingPoints(uint64_t divider, cuda::Dis
 		//find a divider that doesn't overlow
 		secp256k1::uint256 ksDivider = keySpace.div(divider);
 
-		/*
-		secp256k1::uint256 testKey = _startingKeys.Keys[_startingKeys.Keys.size() - 1];
-
-		while (testKey > endRange) {
-			divider++;
-			ksDivider = keySpace.div(divider);
-			testKey = _startingKeys.Keys[_startingKeys.Keys.size() - 1];
-		}
-		*/
-
-		//Logger::log(LogLevel::Debug, "Divider: " + util::formatThousands(divider));
 
 		uint64_t keySize = _startingKeys.Keys.size();
 		Logger::log(LogLevel::Info, "Shifting Keys by Distance-Variable Distribution,  Divider: " + util::formatThousands(divider));
@@ -941,16 +930,21 @@ void CudaKeySearchDevice::reDistributeStartingPoints(uint64_t divider, cuda::Dis
 	}
 	else if (dist_mode == cuda::DistributionMode::DISTANCEAVERAGE) {
 
-		uint64_t multiplier = divider;
-		secp256k1::uint256 averageDistance = Random::RandomHelper::getDistanceAverage(_startingKeys.RootKeys);
-		secp256k1::uint256 ksModifier = averageDistance.mul(multiplier);
+		//uint64_t multiplier = divider;  Multiplier or divider?  will adjust after some testing..
+
+		secp256k1::uint256 averageDistance = Random::RandomHelper::getDistanceAverage(_startingKeys.Distances);
+		//secp256k1::uint256 ksModifier = averageDistance.mul(multiplier);
+		secp256k1::uint256 ksModifier = averageDistance.div(divider);
+
+		//find a divider that doesn't overlow
 
 		uint64_t keySize = _startingKeys.Keys.size();
 
-		Logger::log(LogLevel::Info, "Shifting Keys by Variable Distribution.  Multiplier: " + util::formatThousands(multiplier));
-		Logger::log(LogLevel::Debug, "Based on average " + averageDistance.toString());
+		//Logger::log(LogLevel::Info, "Shifting Keys by Variable Distribution.  Multiplier: " + util::formatThousands(multiplier));
+		Logger::log(LogLevel::Info, "Shifting Keys by Variable Distribution.");
+		Logger::log(LogLevel::Debug, "Based on average " + averageDistance.toString() + " / " + util::formatThousands(divider));
 		for (uint64_t k = 0; k < keySize;k++) {
-			_startingKeys.Keys[k] = _startingKeys.Keys[k].add(multiplier);
+			_startingKeys.Keys[k] = _startingKeys.Keys[k].add(ksModifier);
 			if (shiftedKeys % REPORTING_SIZE == 0) {
 				Logger::log(LogLevel::Info, "--------------------------------------------------------------------");
 				Logger::log(LogLevel::Info, "SAMPLE Key: " + _startingKeys.RootKeys[k].toString());
@@ -963,16 +957,39 @@ void CudaKeySearchDevice::reDistributeStartingPoints(uint64_t divider, cuda::Dis
 
 	}
 	else if (dist_mode == cuda::DistributionMode::DISTANCEMEANAVERAGE) {
-		uint64_t multiplier = divider;
-		secp256k1::uint256 averageDistance = Random::RandomHelper::getDistanceMean(_startingKeys.RootKeys);
-		secp256k1::uint256 ksModifier = averageDistance.mul(multiplier);
+
+		//uint64_t multiplier = divider;  Multiplier or divider?  will adjust after some testing..
+		secp256k1::uint256 averageDistance = Random::RandomHelper::getDistanceMean(_startingKeys.Distances);
+		//secp256k1::uint256 ksModifier = averageDistance.mul(multiplier);
+
+		/*
+		secp256k1::uint256 averageDistance;
+
+		uint64_t startKey = _startingKeys.Distances.size() * 0.25;
+		uint64_t endKey = _startingKeys.Distances.size() - startKey;
+
+		secp256k1::uint256 thisDistance;
+		secp256k1::uint256 running_average = _startingKeys.Distances[0];
+
+		uint64_t ct = 0;
+		for (int k = startKey; k < endKey; k++) {
+
+			thisDistance = _startingKeys.Distances[k];
+			running_average = running_average.running_average(running_average, _startingKeys.Distances[k], ct + 1);
+			ct++;
+			if (k % 1200==0) Logger::log(LogLevel::Debug, "MeanAvg: " + running_average.toString());
+		}
+
+		averageDistance = running_average;*/
+		secp256k1::uint256 ksModifier = averageDistance.div(divider);
 
 		uint64_t keySize = _startingKeys.Keys.size();
 
-		Logger::log(LogLevel::Info, "Shifting Keys by Variable Distribution.  Multiplier: " + util::formatThousands(multiplier));
-		Logger::log(LogLevel::Debug, "Based on average " + averageDistance.toString());
+		//Logger::log(LogLevel::Info, "Shifting Keys by Variable Distribution.  Multiplier: " + util::formatThousands(multiplier));
+		Logger::log(LogLevel::Info, "Shifting Keys by Variable Distribution.");
+		Logger::log(LogLevel::Debug, "Based on mean-average " + averageDistance.toString() + " / " + util::formatThousands(divider));
 		for (uint64_t k = 0; k < keySize;k++) {
-			_startingKeys.Keys[k] = _startingKeys.Keys[k].add(multiplier);
+			_startingKeys.Keys[k] = _startingKeys.Keys[k].add(ksModifier);
 			if (shiftedKeys % REPORTING_SIZE == 0) {
 				Logger::log(LogLevel::Info, "--------------------------------------------------------------------");
 				Logger::log(LogLevel::Info, "SAMPLE Key: " + _startingKeys.RootKeys[k].toString());
