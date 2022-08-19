@@ -352,6 +352,7 @@ namespace secp256k1 {
 			return 0;
 		}
 
+
 		uint256 pow(int n)
 		{
 			uint256 product(1);
@@ -367,6 +368,20 @@ namespace secp256k1 {
 			}
 
 			return product;
+		}
+
+		uint256 divide(uint64_t divisor) {
+
+			uint256 src = *this;
+			uint256 result = 0;
+
+			for (int v = 0; v < 8; v++) {
+				if (src.v[v] > 0) {
+					result.v[v] = src.v[v] / divisor;
+				}
+			}
+
+			return result;
 		}
 
 		int length() {
@@ -504,17 +519,7 @@ namespace secp256k1 {
 			return running_avg;
 		}
 
-		/*
-		public static BigInteger approxRollingAverage(BigInteger avg, BigInteger new_sample, Int64 size)
-        {
-            BigInteger sz = new BigInteger(size.ToString(), 10);
 
-            avg = avg.Subtract(avg.Divide(sz));
-            avg = avg.Add(new_sample.Divide(sz));
-
-            return avg;
-        }
-		*/
 		std::vector<uint256> getChunks() {
 			uint64_t sixteen = 16;
 			uint256 v = *this;
@@ -729,9 +734,12 @@ namespace secp256k1 {
 		std::vector<uint256> Sequentials;
 		std::vector<uint256> Randoms;
 		std::vector<uint256> Keys;  
+		std::vector<uint256> SortedKeys;
 		std::vector<uint256> BetaKeys;
 		std::vector<uint256> RootKeys;
-		std::vector<uint256> Distances;
+		std::vector<uint256> SortedKeyDistances;
+		std::vector<uint256> KeyDistances;
+
 		//std::vector<std::vector<uint256>> Keys;  //keys[0] = first pass, keys[1] = 2nd pass and so on
 
 		std::vector<std::vector<unsigned int>> Randomizers;
