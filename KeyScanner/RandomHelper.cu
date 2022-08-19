@@ -386,9 +386,14 @@ secp256k1::uint256 RandomHelper::getDistanceAverage(std::vector<secp256k1::uint2
 secp256k1::uint256 RandomHelper::getDistanceMean(std::vector<secp256k1::uint256> distances) {
 	secp256k1::uint256 result;
 
+	/*
 	uint64_t startKey = distances.size() * 0.10;
 	uint64_t endKey = distances.size() * 0.90;//  distances.size() - startKey;
+	*/
 
+
+	uint64_t startKey = distances.size() * 0.05;
+	uint64_t endKey = distances.size() * 0.95;//  distances.size() - startKey;
 
 	secp256k1::uint256 thisDistance;
 	secp256k1::uint256 running_average = distances[0];

@@ -62,7 +62,7 @@ private:
 	void reGenerateStartingPoints();
 	void reUseStartingPoints();
 	void restoreStartingPoints();
-	void reDistributeStartingPoints(uint64_t divider, cuda::DistributionMode dist_mode);
+	void reDistributeStartingPoints(uint64_t cycle, uint64_t stride, cuda::DistributionMode dist_mode);
 
 	CudaDeviceKeys* _deviceKeys;
 	CudaAtomicList _resultList;

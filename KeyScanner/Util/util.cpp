@@ -475,6 +475,12 @@ namespace util {
 				sme.cycles = sme.cycles * (repeatCount+1);  //increment the cycle, which in this case is the divider
 				results.push_back(sme);
 			}
+			else if (sme.directive == "redistribute-even") {
+				if (sme.cycles == 0) sme.cycles = 1;
+				if (sme.stride == 0) sme.stride = 1;
+				sme.cycles = sme.cycles * (repeatCount + 1);  //increment the cycle, which in this case is the divider
+				results.push_back(sme);
+			}
 			else if (sme.directive == "redistribute-random") {
 				if (sme.cycles == 0) sme.cycles = 1;
 				if (sme.stride == 0) sme.stride = 1;
@@ -485,6 +491,18 @@ namespace util {
 				if (sme.cycles == 0) sme.cycles = 1;
 				if (sme.stride == 0) sme.stride = 1;
 				sme.cycles = sme.cycles * (repeatCount + 1);  //increment the cycle, which in this case is a multiplier
+				results.push_back(sme);
+			}
+			else if (sme.directive == "redistribute-distance-multiply") {
+				if (sme.cycles == 0) sme.cycles = 1;
+				if (sme.stride == 0) sme.stride = 1;
+				sme.cycles = sme.cycles + (repeatCount + sme.stride.toInt32()); //increment the cycle, which in this case is a multiplier
+				results.push_back(sme);
+			}
+			else if (sme.directive == "redistribute-distance-divide") {
+				if (sme.cycles == 0) sme.cycles = 1;
+				if (sme.stride == 0) sme.stride = 1;
+				sme.cycles = sme.cycles + (repeatCount + sme.stride.toInt32() );  //increment the cycle, which in this case is a divider
 				results.push_back(sme);
 			}
 			else if (sme.directive == "redistribute-distance-binary") {
