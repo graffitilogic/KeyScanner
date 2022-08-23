@@ -31,8 +31,10 @@ std::vector<std::vector<unsigned int>> RandomHelper::getRandomizers(uint64_t see
 std::vector<std::vector<unsigned int>> RandomHelper::getRndBuffer(uint64_t seed, unsigned int min, unsigned int max, uint64_t len, uint64_t width, bool singlePool) {
 
 	std::vector<std::vector<unsigned int>> results;
+	
+	//std::vector<uint64_t> seedMods = RandomHelper::randRange(width, 0, 69000000);
+	std::vector<uint64_t> seedMods = RandomHelper::randRange(width, min, max);
 
-	std::vector<uint64_t> seedMods = RandomHelper::randRange(width, 0, 69000000);
 	for (int64_t i = 0; i < width; i++) {
 		if (!singlePool || i == 0) {
 			//time for the devrnd seed
@@ -330,6 +332,8 @@ std::vector<secp256k1::uint256> RandomHelper::getDistances(std::vector<secp256k1
 	secp256k1::uint256 thisKey;
 	secp256k1::uint256 thisDistance;
 	secp256k1::uint256 referenceDistance;
+
+
 	for (int k = 0; k < keys.size(); k++) {
 
 		//Logger::log(LogLevel::Debug, "ThisK1: " + _startingKeys.Keys[k].toString());
@@ -356,11 +360,12 @@ std::vector<secp256k1::uint256> RandomHelper::getDistances(std::vector<secp256k1
 			results.push_back(thisDistance);
 		}
 		else {
-			results.push_back(0);
+			results.push_back(0); //will be filled in laterwith distance of key[0] to start of range
 		}
 		lastKey = thisKey;
 	}
 
+	results.push_back(0); //will be filled in laterwith distance of key[end] to end of range
 	return results;
 }
 

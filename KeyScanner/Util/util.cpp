@@ -499,7 +499,7 @@ namespace util {
 				sme.cycles = sme.cycles + (repeatCount + sme.stride.toInt32()); //increment the cycle, which in this case is a multiplier
 				results.push_back(sme);
 			}
-			else if (sme.directive == "redistribute-distance-divide") {
+			else if (sme.directive == "redistribute-distance-divide") {   ///TODO fix distance (0) pos(0)
 				if (sme.cycles == 0) sme.cycles = 1;
 				if (sme.stride == 0) sme.stride = 1;
 				sme.cycles = sme.cycles + (repeatCount + sme.stride.toInt32() );  //increment the cycle, which in this case is a divider

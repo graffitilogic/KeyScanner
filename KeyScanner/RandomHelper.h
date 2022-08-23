@@ -67,10 +67,18 @@ namespace Random {
 
 		void loadRandomizers(uint64_t seed, uint64_t len) {
 			rand_buffer = Random::RandomHelper::getStaticAssemblyBuffer(0x0, 0xffff);
-			randomizers = Random::RandomHelper::getRandomizers(seed, 0x1000, 0xffff, len, 16);
+			randomizers = Random::RandomHelper::getRandomizers(seed, 0x0, 0xffff, len, 16);
 
+			//randomizers = Random::RandomHelper::getRandomizers(seed, 0x1000, 0xffff, len, 16);
 			//chunkCounter = 0;
 		}
+
+		void loadRandomizers32(uint64_t seed, uint64_t len) {
+			rand_buffer = Random::RandomHelper::getRndBuffer32(len);
+\
+			randomizers = Random::RandomHelper::getRandomizers(seed, 0x0, len-1,  len, 8);
+		}
+
 
 		void setRandomizers(std::vector<std::vector<unsigned int>> rnd) {
 			rand_buffer = Random::RandomHelper::getStaticAssemblyBuffer(0x1000, 0xffff);
@@ -96,16 +104,37 @@ namespace Random {
 			if (buffer16b == 0) buffer16b = 1;
 
 			//pad the parts, if needed
-			while (buffer16a < 0x1000) {
+			while (buffer16a < 10000) {
 				buffer16a = buffer16a * 0x10;
 			}
 
-			while (buffer16b < 0x1000) {
-				buffer16b = buffer16b * 0x10;
+			while (buffer16b < 10000) {
+				buffer16b = buffer16b * 10;
 			}
 
-			unsigned int buffer32 = (buffer16a * 0x1000) + buffer16b;
+			unsigned int buffer32 = (buffer16a * 100000) + buffer16b;
+			//unsigned int buffer32 = (buffer16a * 0x10000) + buffer16b;
 
+			return buffer32;
+		}
+
+		unsigned int getChunk32(uint64_t col, uint64_t row) {
+			//treating them as 2x16 instead of 1x32 for perf reasons.
+			//bufferpool is a sequential vector of unsigned ints from 0 to 0xffff of length[len]; 
+			//randomizers are a [col][row] vector of random values from 0 to 0xffff;
+
+			uint64_t bufferIndex = randomizers[col][row];
+
+
+			unsigned int buffer32 = rand_buffer[bufferIndex];
+
+
+			if (buffer32 == 0) buffer32 = 1;
+
+			//pad the parts, if needed
+			while (buffer32 < 0x10000000) {
+				buffer32 = buffer32 * 0x10;
+			}
 			return buffer32;
 		}
 
@@ -142,13 +171,13 @@ namespace Random {
 			//Constructs a random uint256 by assembling uint.v[column] from bufferpool[randomizers[col][row]
 			//- so that randomizers doesn't necessarily have to match len() - handy for experimentation
 
+			//max = max.mul(16);
 			uint64_t REPORTING_SIZE = length / 8;
 			uint64_t generatedKeys = 0;
 
 			secp256k1::uint256 range = max.sub(min);
 			std::vector<secp256k1::uint256> results;
 
-			//unsigned int block_size = 0x10000;
 			unsigned char targetByteSize = (range.getBitRange() + 31) / 32;
 
 			while (generatedKeys < length) {
@@ -159,14 +188,15 @@ namespace Random {
 					if (targetByteSize > i) {
 
 						result.v[i] = getChunk(i, generatedKeys);
-						//result.v[i] = getChunk();
+						//result.v[i] = getChunk32(i, generatedKeys);
 
 						if (targetByteSize > i && targetByteSize <= i + 1 && range.v[i] != 0 && result.v[i] > range.v[i]) {
 							result.v[i] %= range.v[i];
 						}
+						
 					}
 				}
-				results.push_back(result);
+				results.push_back(result.add(min));
 				generatedKeys++;
 			}
 
