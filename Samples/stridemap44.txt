@@ -1,13 +1,8 @@
-16;0;repeat
+8;0;repeat
 600;00000000001;stride;
 600;00000000100;stride;
 600;00000010000;stride;
 600;00001000000;stride;
 600;00100000000;stride;
-3;0;redistribute-distance-binary;
-600;00000000001;stride;
-600;00000000100;stride;
-600;00000010000;stride;
-600;00001000000;stride;
-600;00100000000;stride;
-16;0;endrepeat;
+1;1;redistribute-distance-multiply;
+8;0;endrepeat;
