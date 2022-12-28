@@ -84,6 +84,19 @@ Output:
   [00:01:40] [R: 392] [3FF4FC9A22C] [F: 1] [GPU: 573.31 Mk/s] [T: 4,624,471,818,240]
 ```
 
+Note: The hash rate reported about was pretty low, that particular run used OpenSSL instead of the Thrust for RNG so the Key Generation wasn't performant. Keep in mind, lower R values will regenerate keys more frequently, which is at least partially CPU bound.   Higher R values lean more on the GPU.
+
+
+Known Issues:
+
+Really: single address and low-bit addresses is the only thing I've spent any time on to this point.  
+(Comparing btcv1 contemporary OpenSSL vs Marsenne Twister vs Thrust)
+
+Again, this is exploration and education for me. I'm not claiming any breakthroughs here! Just learnin' stuff.
+
+There is code here for multi - address and xpoint (not my code, honestly)  based on an input file but I intend to refactor those eventually to something a little more user-friendly.   Also, I'm trying to understand how to implement alternate stepping sizes in a way that is similar to BitCrack's stride but doing so sort of violates the original auther's design, ultimately from VanitySearch, as far as I can tell.  I need some quiet time with JunLucPons' creation to understand it more thoroughly in order to do this in a way that doesn't break the implied matrix alignment.  It would really suck to solve 66 and have it return the wrong private key in output :)
+
+
 ## Tip Jar
 - BTC: 31pjgrq8esTi9jKUL3S2Y4435MVABK4iHk
 - ETH: 0x3cbe8027e756b9fe0cf18dcbbed9efb89b7ad9f0
