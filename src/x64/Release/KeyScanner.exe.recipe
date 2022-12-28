@@ -2,7 +2,7 @@
 <Project>
   <ProjectOutputs>
     <ProjectOutput>
-      <FullPath>C:\crypto\code\repos\KeyScanner2\x64\Release\KeyScanner.exe</FullPath>
+      <FullPath>C:\crypto\code\repos\KeyScanner\msvc\x64\Release\KeyScanner.exe</FullPath>
     </ProjectOutput>
   </ProjectOutputs>
   <ContentFiles />

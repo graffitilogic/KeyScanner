@@ -1,0 +1,30 @@
+﻿  Compiling CUDA source file GPURand.cu...
+  Compiling CUDA source file GPU\GPUEngine.cu...
+  
+  C:\crypto\code\repos\KeyScanner\src>"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.2\bin\nvcc.exe" -gencode=arch=compute_30,code=\"sm_30,compute_30\" -gencode=arch=compute_35,code=\"sm_35,compute_35\" -gencode=arch=compute_37,code=\"sm_37,compute_37\" -gencode=arch=compute_50,code=\"sm_50,compute_50\" -gencode=arch=compute_52,code=\"sm_52,compute_52\" -gencode=arch=compute_60,code=\"sm_60,compute_60\" -gencode=arch=compute_61,code=\"sm_61,compute_61\" -gencode=arch=compute_70,code=\"sm_70,compute_70\" -gencode=arch=compute_75,code=\"sm_75,compute_75\" --use-local-env -ccbin "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.29.30133\bin\HostX86\x64" -x cu  -IC:\crypto\code\lib\openssl\include -IC:\crypto\code\btc.current\secp256k1\include -IC:\crypto\code\repos\KeyScanner\msvc\gmp\include -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.2\include" -I"C:\crypto\code\vcpkg\scripts\buildsystems\msbuild\..\..\..\installed\x64-windows\include" -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.2\include"     --keep-dir x64\Release -maxrregcount=0  --machine 64 --compile -cudart static     -DWIN32 -DWIN64 -DNDEBUG -D_CONSOLE -DWITHGPU -D_CRT_SECURE_NO_WARNINGS -D_MBCS -Xcompiler "/EHsc /W3 /nologo /O2 /Fdx64\Release\vc142.pdb /FS /Zi  /MD " -o x64\Release\GPUEngine.cu.obj "C:\crypto\code\repos\KeyScanner\src\GPU\GPUEngine.cu" 
+  
+  C:\crypto\code\repos\KeyScanner\src>"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.2\bin\nvcc.exe" -gencode=arch=compute_30,code=\"sm_30,compute_30\" -gencode=arch=compute_35,code=\"sm_35,compute_35\" -gencode=arch=compute_37,code=\"sm_37,compute_37\" -gencode=arch=compute_50,code=\"sm_50,compute_50\" -gencode=arch=compute_52,code=\"sm_52,compute_52\" -gencode=arch=compute_60,code=\"sm_60,compute_60\" -gencode=arch=compute_61,code=\"sm_61,compute_61\" -gencode=arch=compute_70,code=\"sm_70,compute_70\" -gencode=arch=compute_75,code=\"sm_75,compute_75\" --use-local-env -ccbin "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.29.30133\bin\HostX86\x64" -x cu  -IC:\crypto\code\lib\openssl\include -IC:\crypto\code\btc.current\secp256k1\include -IC:\crypto\code\repos\KeyScanner\msvc\gmp\include -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.2\include" -I"C:\crypto\code\vcpkg\scripts\buildsystems\msbuild\..\..\..\installed\x64-windows\include" -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.2\include"     --keep-dir x64\Release -maxrregcount=0  --machine 64 --compile -cudart static     -DWIN32 -DWIN64 -DNDEBUG -D_CONSOLE -DWITHGPU -D_CRT_SECURE_NO_WARNINGS -D_MBCS -Xcompiler "/EHsc /W3 /nologo /O2 /Fdx64\Release\vc142.pdb /FS /Zi  /MD " -o x64\Release\GPURand.cu.obj "C:\crypto\code\repos\KeyScanner\src\GPURand.cu" 
+C:/crypto/code/repos/KeyScanner/src/GPU/GPUEngine.cu(853): warning : variable "pubkey" was declared but never referenced
+  
+C:/crypto/code/repos/KeyScanner/src/GPU/GPUEngine.cu(853): warning : variable "pubkey" was declared but never referenced
+  
+C:/crypto/code/repos/KeyScanner/src/GPU/GPUEngine.cu(853): warning : variable "pubkey" was declared but never referenced
+  
+C:/crypto/code/repos/KeyScanner/src/GPU/GPUEngine.cu(853): warning : variable "pubkey" was declared but never referenced
+  
+  GPURand.cu
+C:\crypto\code\repos\KeyScanner\src\GPURand.h(135): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\crypto\code\repos\KeyScanner\src\GPURand.h(271): warning C4244: 'return': conversion from 'uint64_t' to 'int', possible loss of data
+C:\crypto\code\repos\KeyScanner\src\GPURand.h(275): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+C:\crypto\code\repos\KeyScanner\src\GPURand.h(471): warning C4244: 'argument': conversion from 'uint64_t' to 'int', possible loss of data
+C:\crypto\code\repos\KeyScanner\src\GPURand.h(494): warning C4244: 'argument': conversion from 'uint64_t' to 'int', possible loss of data
+C:\crypto\code\repos\KeyScanner\src\GPURand.h(538): warning C4244: 'argument': conversion from 'uint64_t' to 'int', possible loss of data
+C:\crypto\code\repos\KeyScanner\src\GPURand.h(559): warning C4244: 'argument': conversion from 'uint64_t' to 'int', possible loss of data
+C:\crypto\code\repos\KeyScanner\src\GPURand.h(600): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:/crypto/code/repos/KeyScanner/src/GPURand.cu(36): warning C4018: '<': signed/unsigned mismatch
+C:/crypto/code/repos/KeyScanner/src/GPURand.cu(40): warning C4244: 'argument': conversion from 'uint64_t' to 'unsigned int', possible loss of data
+C:/crypto/code/repos/KeyScanner/src/GPURand.cu(92): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:/crypto/code/repos/KeyScanner/src/GPU/GPUEngine.cu(853): warning : variable "pubkey" was declared but never referenced
+  
+C:/crypto/code/repos/KeyScanner/src/GPU/GPUEngine.cu(853): warning : variable "pubkey" was declared but never referenced
+  
