@@ -4,7 +4,9 @@ _BTC32 Private Key Experiments_
 These Probably aren't the Droids You're Looking For.
 
 Speaking of looking for things... I was thinking on the [BTC32 Puzzle](https://privatekeys.pw/faq#puzzle) about alternate searching algorithms, potential weaknesses in the RNG, alternative GPU solutions as alternatives to the scalar point multiplcation, ML solutions for discoverying patterns or anti-patterns that could lead to deterministic brute force exploits.
-![Screenshot](OldGrapesAndCodes.Jpg)
+
+![Screenshot](OldGrapesAndCodes.jpg)
+
 Motivation & considerations:
 
 Myself, I have an unrecoverable wallet with a fraction of a btc from ~2012.  Laptop hard drive failure.  Attempted a clean-room-ish physical reconstruction of the drive but many sectors were corrupted in the failure.
