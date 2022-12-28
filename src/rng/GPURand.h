@@ -1,6 +1,6 @@
 //#include "../KeyScanner/Secp256k1/secp256k1.h"
 #include <vector>
-#include "IntGroup.h"
+#include "../math/IntGroup.h"
 #include <thrust/host_vector.h>
 #include <thrust/generate.h>
 #include <thrust/random.h>

@@ -19,7 +19,7 @@
 #define GPUENGINEH
 
 #include <vector>
-#include "../SECP256k1.h"
+#include "../curve/SECP256k1.h"
 
 #define SEARCH_COMPRESSED 0
 #define SEARCH_UNCOMPRESSED 1

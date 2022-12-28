@@ -23,7 +23,7 @@
 #include <stdint.h>
 #include "../hash/sha256.h"
 #include "../hash/ripemd160.h"
-#include "../Timer.h"
+#include "../rng/Timer.h"
 
 #include "GPUMath.h"
 #include "GPUHash.h"

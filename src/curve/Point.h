@@ -18,7 +18,7 @@
 #ifndef POINTH
 #define POINTH
 
-#include "Int.h"
+#include "../math/Int.h"
 
 class Point
 {

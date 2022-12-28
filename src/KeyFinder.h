@@ -4,9 +4,9 @@
 #include <string>
 #include <vector>
 #include "SECP256k1.h"
-#include "Bloom.h"
-#include "GPU/GPUEngine.h"
-#include "GPURand.h"
+#include "search/Bloom.h"
+#include "gpu/GPUEngine.h"
+#include "rng/GPURand.h"
 
 
 #ifdef WIN64

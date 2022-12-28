@@ -1,10 +1,10 @@
 #include "KeyFinder.h"
-#include "GmpUtil.h"
-#include "Base58.h"
-#include "sha256.cpp"
+#include "math/GmpUtil.h"
+#include "hash/Base58.h"
+#include "refactorme/sha256.cpp"
 #include "hash/keccak160.h"
-#include "IntGroup.h"
-#include "Timer.h"
+#include "math/IntGroup.h"
+#include "rng/Timer.h"
 #include "hash/ripemd160.h"
 #include <cstring>
 #include <cmath>
@@ -20,7 +20,7 @@
 #include <pthread.h>
 #endif
 #include <chrono>
-#include "OpenSSLRNG.h"
+#include "rng/OpenSSLRNG.h"
 
 //#include <algorithm>
 

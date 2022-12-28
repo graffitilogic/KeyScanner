@@ -21,7 +21,7 @@
 #include <algorithm>
 #include <math.h>
 #include <emmintrin.h>
-#include "Timer.h"
+#include "../rng/Timer.h"
 
 #define MAX(x,y) (((x)>(y))?(x):(y))
 #define MIN(x,y) (((x)<(y))?(x):(y))

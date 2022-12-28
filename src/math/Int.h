@@ -20,7 +20,7 @@
 #ifndef BIGINTH
 #define BIGINTH
 
-#include "Random.h"
+#include "../rng/Random.h"
 #include <string>
 #include <vector>
 #include <inttypes.h>

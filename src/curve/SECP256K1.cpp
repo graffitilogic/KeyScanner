@@ -16,10 +16,10 @@
 */
 
 #include "SECP256k1.h"
-#include "hash/sha256.h"
-#include "hash/ripemd160.h"
-#include "hash/keccak160.h"
-#include "Base58.h"
+#include "../hash/sha256.h"
+#include "../hash/ripemd160.h"
+#include "../hash/keccak160.h"
+#include "../hash/Base58.h"
 #include <string.h>
 
 Secp256K1::Secp256K1()

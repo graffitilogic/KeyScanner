@@ -1,7 +1,7 @@
-#include "Timer.h"
+#include "rng/Timer.h"
 #include "KeyFinder.h"
-#include "Base58.h"
-#include "CmdParse.h"
+#include "hash/Base58.h"
+#include "parse/CmdParse.h"
 #include <fstream>
 #include <string>
 #include <string.h>

@@ -1,0 +1,170 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CudaCompile Include="..\src\GPU\GPUEngine.cu">
+      <Filter>gpu</Filter>
+    </CudaCompile>
+    <CudaCompile Include="..\src\rng\GPURand.cu">
+      <Filter>gpu</Filter>
+    </CudaCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\src\KeyFinder.cpp" />
+    <ClCompile Include="..\src\Main.cpp" />
+    <ClCompile Include="..\src\gpu\GPUGenerate.cpp">
+      <Filter>gpu</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\hash\Base58.cpp">
+      <Filter>hash</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\search\Bloom.cpp">
+      <Filter>search</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\parse\CmdParse.cpp">
+      <Filter>parse</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\math\GmpUtil.cpp">
+      <Filter>math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\math\Int.cpp">
+      <Filter>math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\math\IntGroup.cpp">
+      <Filter>math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\math\IntMod.cpp">
+      <Filter>math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\hash\keccak160.cpp">
+      <Filter>hash</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\curve\SECP256K1.cpp">
+      <Filter>curve</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\curve\Point.cpp">
+      <Filter>curve</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\refactorme\sha256.cpp">
+      <Filter>refactorme</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\rng\OpenSSLRNG.cpp">
+      <Filter>rng</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\rng\Random.cpp">
+      <Filter>rng</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\rng\Timer.cpp">
+      <Filter>rng</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\hash\ripemd160.cpp">
+      <Filter>hash</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\hash\ripemd160_sse.cpp">
+      <Filter>hash</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\hash\sha256.cpp">
+      <Filter>hash</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\hash\sha256_sse.cpp">
+      <Filter>hash</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\hash\sha512.cpp">
+      <Filter>hash</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\src\KeyFinder.h" />
+    <ClInclude Include="..\src\GPU\GPUBase58.h">
+      <Filter>gpu</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GPU\GPUCompute.h">
+      <Filter>gpu</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GPU\GPUEngine.h">
+      <Filter>gpu</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GPU\GPUHash.h">
+      <Filter>gpu</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GPU\GPUMath.h">
+      <Filter>gpu</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\rng\GPURand.h">
+      <Filter>gpu</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\hash\Base58.h">
+      <Filter>hash</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\search\Bloom.h">
+      <Filter>search</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\parse\CmdParse.h">
+      <Filter>parse</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\math\GmpUtil.h">
+      <Filter>math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\math\Int.h">
+      <Filter>math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\math\IntGroup.h">
+      <Filter>math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\hash\keccak160.h">
+      <Filter>hash</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\curve\SECP256k1.h">
+      <Filter>curve</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\curve\Point.h">
+      <Filter>curve</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\refactorme\sha256.h">
+      <Filter>refactorme</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\rng\OpenSSLRNG.h">
+      <Filter>rng</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\rng\Random.h">
+      <Filter>rng</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\rng\Timer.h">
+      <Filter>rng</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\hash\sha512.h">
+      <Filter>hash</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\hash\ripemd160.h">
+      <Filter>hash</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\hash\sha256.h">
+      <Filter>hash</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="hash">
+      <UniqueIdentifier>{019b37c9-a2e5-4b33-a3af-5f833a8540ea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="gpu">
+      <UniqueIdentifier>{9c609121-f24e-4062-91ff-5634d818e1c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="rng">
+      <UniqueIdentifier>{6f5dc96a-ec6d-49eb-939c-6313a7f595c2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="math">
+      <UniqueIdentifier>{c5a2745f-f807-4b97-9c4d-fd87bd9a4c2c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="curve">
+      <UniqueIdentifier>{cf6c61c2-6bcb-4084-8535-0a0b5b127c26}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="search">
+      <UniqueIdentifier>{84ee4e51-ab56-48dd-b430-ed312b6b16fc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="parse">
+      <UniqueIdentifier>{6e22cfd5-31eb-4c8b-a7b2-be35d8a4209e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="refactorme">
+      <UniqueIdentifier>{3a549ec9-6906-4435-9f75-8e05b000c0f0}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

@@ -1,7 +1,7 @@
 #include "CmdParse.h"
 #include <iostream>     // std::cout
 #include <fstream>      // std::ifstream
-#include "KeyFinder.h"
+#include "../KeyFinder.h"
 std::string stroka2 = "";
 
 

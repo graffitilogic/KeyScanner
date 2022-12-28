@@ -27,55 +27,57 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Base58.cpp" />
-    <ClCompile Include="Bloom.cpp" />
-    <ClCompile Include="CmdParse.cpp" />
-    <ClCompile Include="GmpUtil.cpp" />
-    <ClCompile Include="GPU\GPUGenerate.cpp" />
-    <ClCompile Include="hash\keccak160.cpp" />
-    <ClCompile Include="hash\ripemd160.cpp" />
-    <ClCompile Include="hash\ripemd160_sse.cpp" />
-    <ClCompile Include="hash\sha256.cpp" />
-    <ClCompile Include="hash\sha256_sse.cpp" />
-    <ClCompile Include="hash\sha512.cpp" />
-    <ClCompile Include="Int.cpp" />
-    <ClCompile Include="IntGroup.cpp" />
-    <ClCompile Include="IntMod.cpp" />
-    <ClCompile Include="KeyFinder.cpp" />
-    <ClCompile Include="Main.cpp" />
-    <ClCompile Include="OpenSSLRNG.cpp" />
-    <ClCompile Include="Point.cpp" />
-    <ClCompile Include="Random.cpp" />
-    <ClCompile Include="SECP256K1.cpp" />
-    <ClCompile Include="Timer.cpp" />
+    <ClCompile Include="..\src\curve\Point.cpp" />
+    <ClCompile Include="..\src\curve\SECP256K1.cpp" />
+    <ClCompile Include="..\src\gpu\GPUGenerate.cpp" />
+    <ClCompile Include="..\src\hash\Base58.cpp" />
+    <ClCompile Include="..\src\hash\keccak160.cpp" />
+    <ClCompile Include="..\src\hash\ripemd160.cpp" />
+    <ClCompile Include="..\src\hash\ripemd160_sse.cpp" />
+    <ClCompile Include="..\src\hash\sha256.cpp" />
+    <ClCompile Include="..\src\hash\sha256_sse.cpp" />
+    <ClCompile Include="..\src\hash\sha512.cpp" />
+    <ClCompile Include="..\src\KeyFinder.cpp" />
+    <ClCompile Include="..\src\Main.cpp" />
+    <ClCompile Include="..\src\math\GmpUtil.cpp" />
+    <ClCompile Include="..\src\math\Int.cpp" />
+    <ClCompile Include="..\src\math\IntGroup.cpp" />
+    <ClCompile Include="..\src\math\IntMod.cpp" />
+    <ClCompile Include="..\src\parse\CmdParse.cpp" />
+    <ClCompile Include="..\src\refactorme\sha256.cpp" />
+    <ClCompile Include="..\src\rng\OpenSSLRNG.cpp" />
+    <ClCompile Include="..\src\rng\Random.cpp" />
+    <ClCompile Include="..\src\rng\Timer.cpp" />
+    <ClCompile Include="..\src\search\Bloom.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Base58.h" />
-    <ClInclude Include="Bloom.h" />
-    <ClInclude Include="CmdParse.h" />
-    <ClInclude Include="GmpUtil.h" />
-    <ClInclude Include="GPURand.h" />
-    <ClInclude Include="GPU\GPUBase58.h" />
-    <ClInclude Include="GPU\GPUCompute.h" />
-    <ClInclude Include="GPU\GPUEngine.h" />
-    <ClInclude Include="GPU\GPUHash.h" />
-    <ClInclude Include="GPU\GPUMath.h" />
-    <ClInclude Include="hash\keccak160.h" />
-    <ClInclude Include="hash\ripemd160.h" />
-    <ClInclude Include="hash\sha256.h" />
-    <ClInclude Include="hash\sha512.h" />
-    <ClInclude Include="Int.h" />
-    <ClInclude Include="IntGroup.h" />
-    <ClInclude Include="KeyFinder.h" />
-    <ClInclude Include="OpenSSLRNG.h" />
-    <ClInclude Include="Point.h" />
-    <ClInclude Include="Random.h" />
-    <ClInclude Include="SECP256k1.h" />
-    <ClInclude Include="Timer.h" />
+    <ClInclude Include="..\src\curve\Point.h" />
+    <ClInclude Include="..\src\curve\SECP256k1.h" />
+    <ClInclude Include="..\src\GPU\GPUBase58.h" />
+    <ClInclude Include="..\src\GPU\GPUCompute.h" />
+    <ClInclude Include="..\src\GPU\GPUEngine.h" />
+    <ClInclude Include="..\src\GPU\GPUHash.h" />
+    <ClInclude Include="..\src\GPU\GPUMath.h" />
+    <ClInclude Include="..\src\hash\Base58.h" />
+    <ClInclude Include="..\src\hash\keccak160.h" />
+    <ClInclude Include="..\src\hash\ripemd160.h" />
+    <ClInclude Include="..\src\hash\sha256.h" />
+    <ClInclude Include="..\src\hash\sha512.h" />
+    <ClInclude Include="..\src\KeyFinder.h" />
+    <ClInclude Include="..\src\math\GmpUtil.h" />
+    <ClInclude Include="..\src\math\Int.h" />
+    <ClInclude Include="..\src\math\IntGroup.h" />
+    <ClInclude Include="..\src\parse\CmdParse.h" />
+    <ClInclude Include="..\src\refactorme\sha256.h" />
+    <ClInclude Include="..\src\rng\GPURand.h" />
+    <ClInclude Include="..\src\rng\OpenSSLRNG.h" />
+    <ClInclude Include="..\src\rng\Random.h" />
+    <ClInclude Include="..\src\rng\Timer.h" />
+    <ClInclude Include="..\src\search\Bloom.h" />
   </ItemGroup>
   <ItemGroup>
-    <CudaCompile Include="GPURand.cu" />
-    <CudaCompile Include="GPU\GPUEngine.cu" />
+    <CudaCompile Include="..\src\GPU\GPUEngine.cu" />
+    <CudaCompile Include="..\src\rng\GPURand.cu" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{C982E936-E84D-40E6-AA84-D439DC2D83A9}</ProjectGuid>
@@ -150,9 +152,16 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>
     </LinkIncremental>
+    <IntDir>$(SolutionDir)$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental />
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <IntDir>$(SolutionDir)$(Platform)\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release-With-Debug|x64'">
+    <IntDir>$(SolutionDir)$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -160,13 +169,13 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;WIN64;_DEBUG;_CONSOLE;WITHGPU;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <EnableEnhancedInstructionSet>StreamingSIMDExtensions</EnableEnhancedInstructionSet>
-      <AdditionalIncludeDirectories>C:\crypto\code\lib\0.98k\openssl-0.9.8k_X64\include;C:\crypto\code\btc.current\secp256k1\include;$(SolutionDir)gmp\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\crypto\code\lib\0.98k\openssl-0.9.8k_X64\include;C:\crypto\code\btc.current\secp256k1\include;$(SolutionDir)\..\depends\gmp\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
       <AdditionalDependencies>cudart_static.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;gmp.lib;libeay32.lib;ssleay32.lib;libsecp256k1.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>C:\crypto\code\btc.current\bitcoin\build_msvc\x64\Release\libsecp256k1;C:\crypto\code\lib\0.98k\openssl-0.9.8k_X64\lib;$(SolutionDir)gmp\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\crypto\code\btc.current\bitcoin\build_msvc\x64\Release\libsecp256k1;C:\crypto\code\lib\0.98k\openssl-0.9.8k_X64\lib;$(SolutionDir)\..\depends\gmp\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <CudaCompile>
       <TargetMachinePlatform>64</TargetMachinePlatform>
@@ -200,7 +209,7 @@
       <EnableEnhancedInstructionSet>StreamingSIMDExtensions</EnableEnhancedInstructionSet>
       <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
-      <AdditionalIncludeDirectories>C:\crypto\code\lib\openssl\include;C:\crypto\code\btc.current\secp256k1\include;$(SolutionDir)gmp\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\crypto\code\lib\openssl\include;C:\crypto\code\btc.current\secp256k1\include;$(SolutionDir)\..\depends\gmp\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -208,7 +217,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <SubSystem>Console</SubSystem>
       <AdditionalDependencies>cudart_static.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;gmp.lib;libeay32.lib;ssleay32.lib;libsecp256k1.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>C:\crypto\code\btc.current\bitcoin\build_msvc\x64\Release\libsecp256k1;C:\crypto\code\lib\0.98k\openssl-0.9.8k_X64\lib;$(SolutionDir)gmp\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\crypto\code\btc.current\bitcoin\build_msvc\x64\Release\libsecp256k1;C:\crypto\code\lib\0.98k\openssl-0.9.8k_X64\lib;$(SolutionDir)\..\depends\gmp\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <CudaCompile>
       <TargetMachinePlatform>64</TargetMachinePlatform>
@@ -250,7 +259,7 @@
       <EnableEnhancedInstructionSet>StreamingSIMDExtensions</EnableEnhancedInstructionSet>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
       <FavorSizeOrSpeed>Neither</FavorSizeOrSpeed>
-      <AdditionalIncludeDirectories>C:\crypto\code\lib\openssl\include;C:\crypto\code\btc.current\secp256k1\include;$(SolutionDir)gmp\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\crypto\code\lib\openssl\include;C:\crypto\code\btc.current\secp256k1\include;$(SolutionDir)\..\depends\gmp\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <SupportJustMyCode>true</SupportJustMyCode>
       <WholeProgramOptimization>false</WholeProgramOptimization>
@@ -263,7 +272,7 @@
       </OptimizeReferences>
       <SubSystem>Console</SubSystem>
       <AdditionalDependencies>cudart_static.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;gmp.lib;libeay32.lib;ssleay32.lib;libsecp256k1.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>C:\crypto\code\btc.current\bitcoin\build_msvc\x64\Release\libsecp256k1;C:\crypto\code\lib\0.98k\openssl-0.9.8k_X64\lib;$(SolutionDir)gmp\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\crypto\code\btc.current\bitcoin\build_msvc\x64\Release\libsecp256k1;C:\crypto\code\lib\0.98k\openssl-0.9.8k_X64\lib;$(SolutionDir)\..\depends\gmp\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <LinkTimeCodeGeneration />
     </Link>
     <CudaCompile>
