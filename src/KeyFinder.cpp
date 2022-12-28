@@ -1953,8 +1953,9 @@ void KeyFinder::getEvenlyDistributedGPUStartingKeys(Random::GPURand& rndGPU, Int
 			if (rKeyCount2 == 0) {
 				if (display > 0) {
 					printf("  Base Key     : Randomly changes %d start Private keys every %llu,000,000,000 on the counter\n", nbThread, rKey);
-					printf("  ROTOR Random : Min %d (bit) %s \n", rangeStart.GetBitLength(), rangeStart.GetBase16().c_str());
-					printf("  ROTOR Random : Max %d (bit) %s \n\n", rangeEnd.GetBitLength(), rangeEnd.GetBase16().c_str());
+					printf("  Random : Min %d (bit) %s \n", rangeStart.GetBitLength(), rangeStart.GetBase16().c_str());
+					printf("  Random : Max %d (bit) %s \n\n", rangeEnd.GetBitLength(), rangeEnd.GetBase16().c_str());
+					printf("  Method : Evenly Distributed, Thrust RNG, 16bit Assembly");
 				}
 			}
 
@@ -1963,7 +1964,7 @@ void KeyFinder::getEvenlyDistributedGPUStartingKeys(Random::GPURand& rndGPU, Int
 			uint64_t rKeyEst = (rKeyMultiplier * rKey);
 			uint64_t rKeyPer = rKeyEst / nbThread;
 
-			std::vector<Int> initial_Randoms = getGPURandomsED(rndGPU, rangeStart, rangeEnd, nbThread, rKeyPer);
+			std::vector<Int> initial_Randoms = getGPURandomsED3(rndGPU, rangeStart, rangeEnd, nbThread, rKeyPer);
 			//std::vector<Int> initial_Randoms = getGPURandomsED4(rndGPU, rangeStart, rangeEnd, nbThread, rKeyPer);
 
 			bool generatorContinue = true;
