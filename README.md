@@ -1,7 +1,11 @@
 # KeyScanner
 _BTC32 Private Key Experiments_
 
-These Probably aren't the Droids You're Looking For.
+These Probably aren't the Droids You're Looking For.  Before you send me a missive calling this derivative or uncreative or ill-fated, remember: I advised you not to go any further and you did anyway..
+
+--
+
+Still here?  Alrighty then.   C'mon in and grab a seat and a cup of joe and embrace the madness with me.
 
 Speaking of looking for things... I was thinking on the [BTC32 Puzzle](https://privatekeys.pw/faq#puzzle) about alternate searching algorithms, potential weaknesses in the RNG, alternative GPU solutions as alternatives to the scalar point multiplcation, ML solutions for discoverying patterns or anti-patterns that could lead to deterministic brute force exploits.
 
