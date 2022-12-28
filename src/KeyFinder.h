@@ -3,7 +3,7 @@
 
 #include <string>
 #include <vector>
-#include "SECP256k1.h"
+//#include "SECP256k1.h"
 #include "search/Bloom.h"
 #include "gpu/GPUEngine.h"
 #include "rng/GPURand.h"
@@ -99,10 +99,6 @@ private:
 	std::vector<Int> KeyFinder::getGPURandomsED3(Random::GPURand& rndGPU, Int min, Int max, uint64_t length, uint64_t rKeyPer);
 	std::vector<Int> KeyFinder::getGPURandomsED4(Random::GPURand& rndGPU, Int min, Int max, uint64_t length, uint64_t rKeyPer);
 
-	std::vector<Int> KeyFinder::getOpenSSLRandoms(Int min, Int max, uint64_t length, uint64_t rKeyPer);
-	std::vector<Int> KeyFinder::getOpenSSLRandoms2(Int min, Int max, uint64_t length, uint64_t rKeyPer);
-	std::vector<Int> KeyFinder::getOpenSSLRandoms3(Int min, Int max, uint64_t length, uint64_t rKeyPer);
-	std::vector<Int> KeyFinder::getOpenSSLRandoms4(Int min, Int max, uint64_t length, uint64_t rKeyPer);
 
 	std::vector<Int> KeyFinder::getGPUAssistedMaskedRandoms(Random::GPURand& rndGPU, Int min, Int max, uint64_t length);
 	std::vector<Int> KeyFinder::getGPUAssistedMaskedRandoms(Int min, Int max, uint64_t length);
