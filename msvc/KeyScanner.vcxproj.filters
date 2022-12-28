@@ -5,7 +5,7 @@
       <Filter>gpu</Filter>
     </CudaCompile>
     <CudaCompile Include="..\src\rng\GPURand.cu">
-      <Filter>gpu</Filter>
+      <Filter>rng</Filter>
     </CudaCompile>
   </ItemGroup>
   <ItemGroup>
@@ -47,9 +47,6 @@
     <ClCompile Include="..\src\refactorme\sha256.cpp">
       <Filter>refactorme</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\rng\OpenSSLRNG.cpp">
-      <Filter>rng</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\rng\Random.cpp">
       <Filter>rng</Filter>
     </ClCompile>
@@ -89,9 +86,6 @@
     <ClInclude Include="..\src\GPU\GPUMath.h">
       <Filter>gpu</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\rng\GPURand.h">
-      <Filter>gpu</Filter>
-    </ClInclude>
     <ClInclude Include="..\src\hash\Base58.h">
       <Filter>hash</Filter>
     </ClInclude>
@@ -122,9 +116,6 @@
     <ClInclude Include="..\src\refactorme\sha256.h">
       <Filter>refactorme</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\rng\OpenSSLRNG.h">
-      <Filter>rng</Filter>
-    </ClInclude>
     <ClInclude Include="..\src\rng\Random.h">
       <Filter>rng</Filter>
     </ClInclude>
@@ -139,6 +130,9 @@
     </ClInclude>
     <ClInclude Include="..\src\hash\sha256.h">
       <Filter>hash</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\rng\GPURand.h">
+      <Filter>rng</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
