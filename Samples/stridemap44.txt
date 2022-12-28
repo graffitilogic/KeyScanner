@@ -1,8 +1,0 @@
-8;0;repeat
-600;00000000001;stride;
-600;00000000100;stride;
-600;00000010000;stride;
-600;00001000000;stride;
-600;00100000000;stride;
-1;1;redistribute-distance-multiply;
-8;0;endrepeat;
