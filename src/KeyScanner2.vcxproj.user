@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LocalDebuggerCommandArguments>-g --gpui 0 --gpux 256,256 -m addresses --coin BTC -r 1 -o FOUND-test.txt --range f7001f2700000000:f7061f27ffffffff -i C:\crypto\code\repos\KeyScanner2\x64\Release\test-sorted2.bin</LocalDebuggerCommandArguments>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LocalDebuggerCommandArguments>-g --gpui 0 --gpux 256,256 -m addresses --coin BTC -r 1 -o FOUND-test.txt --range f7001f2700000000:f7061f27ffffffff -i C:\crypto\code\repos\KeyScanner2\x64\Release\test-sorted2.bin</LocalDebuggerCommandArguments>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release-With-Debug|x64'">
+    <LocalDebuggerCommandArguments>-g --gpui 0 --gpux 256,256 -m address --coin BTC -r 1 -o FOUNDTEST42.txt --range 20000000000:3ffffffffff 1E32GPWgDyeyQac4aJxm9HVoLrrEYPnM4N</LocalDebuggerCommandArguments>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release-With-Debug|Win32'">
+    <LocalDebuggerCommandArguments>-g --gpui 0 --gpux 256,256 -m address --coin BTC -r 4 -o FOUNDTEST.txt --range 200000000000:3fffffffffff 1F3JRMWudBaj48EhwcHDdpeuy2jwACNxjP</LocalDebuggerCommandArguments>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LocalDebuggerCommandArguments>-g --gpui 0 --gpux 256,256 -m address --coin BTC -r 2 -o FOUNDTEST.txt --range 200000000000:3fffffffffff 1F3JRMWudBaj48EhwcHDdpeuy2jwACNxjP</LocalDebuggerCommandArguments>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LocalDebuggerCommandArguments>-g --gpui 0 --gpux 256,256 -m address --coin BTC -r 2 -o FOUNDTEST.txt --range 200000000000:3fffffffffff 1F3JRMWudBaj48EhwcHDdpeuy2jwACNxjP</LocalDebuggerCommandArguments>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+  </PropertyGroup>
+</Project>

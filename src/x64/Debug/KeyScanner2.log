@@ -1,0 +1,144 @@
+﻿C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(513,5): warning MSB8028: The intermediate directory (x64\Debug\) contains files shared from another project (KeyScanner2.vcxproj).  This can lead to incorrect clean and rebuild behavior.
+cl : command line warning D9002: ignoring unknown option '/arch:SSE'
+  KeyFinder.cpp
+C:\crypto\code\repos\KeyScanner2\KeyScanner2\GPURand.h(135,1): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\crypto\code\repos\KeyScanner2\KeyScanner2\GPURand.h(271,11): warning C4244: 'return': conversion from 'uint64_t' to 'int', possible loss of data
+C:\crypto\code\repos\KeyScanner2\KeyScanner2\GPURand.h(275,1): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+C:\crypto\code\repos\KeyScanner2\KeyScanner2\GPURand.h(471,37): warning C4244: 'argument': conversion from 'uint64_t' to 'int', possible loss of data
+C:\crypto\code\repos\KeyScanner2\KeyScanner2\GPURand.h(494,25): warning C4244: 'argument': conversion from 'uint64_t' to 'int', possible loss of data
+C:\crypto\code\repos\KeyScanner2\KeyScanner2\GPURand.h(538,37): warning C4244: 'argument': conversion from 'uint64_t' to 'int', possible loss of data
+C:\crypto\code\repos\KeyScanner2\KeyScanner2\GPURand.h(559,25): warning C4244: 'argument': conversion from 'uint64_t' to 'int', possible loss of data
+C:\crypto\code\repos\KeyScanner2\KeyScanner2\GPURand.h(600,1): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\crypto\code\repos\KeyScanner2\KeyScanner2\sha256.cpp(120,61): warning C4267: 'argument': conversion from 'size_t' to 'unsigned int', possible loss of data
+C:\crypto\code\repos\KeyScanner2\KeyScanner2\KeyFinder.cpp(727,16): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\crypto\code\repos\KeyScanner2\KeyScanner2\KeyFinder.cpp(1246,39): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\crypto\code\repos\KeyScanner2\KeyScanner2\KeyFinder.cpp(1298,39): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\crypto\code\repos\KeyScanner2\KeyScanner2\KeyFinder.cpp(1350,38): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\crypto\code\repos\KeyScanner2\KeyScanner2\KeyFinder.cpp(1379,39): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\crypto\code\repos\KeyScanner2\KeyScanner2\KeyFinder.cpp(1428,38): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\crypto\code\repos\KeyScanner2\KeyScanner2\KeyFinder.cpp(1434,20): warning C4244: 'initializing': conversion from '_Rep' to 'uint16_t', possible loss of data
+          with
+          [
+              _Rep=__int64
+          ]
+C:\crypto\code\repos\KeyScanner2\KeyScanner2\KeyFinder.cpp(1452,39): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\crypto\code\repos\KeyScanner2\KeyScanner2\KeyFinder.cpp(1554,39): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\crypto\code\repos\KeyScanner2\KeyScanner2\KeyFinder.cpp(1613,39): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\crypto\code\repos\KeyScanner2\KeyScanner2\KeyFinder.cpp(1666,38): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\crypto\code\repos\KeyScanner2\KeyScanner2\KeyFinder.cpp(1695,39): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\crypto\code\repos\KeyScanner2\KeyScanner2\KeyFinder.cpp(1746,38): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\crypto\code\repos\KeyScanner2\KeyScanner2\KeyFinder.cpp(1775,39): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\crypto\code\repos\KeyScanner2\KeyScanner2\KeyFinder.cpp(2021,17): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\crypto\code\repos\KeyScanner2\KeyScanner2\KeyFinder.cpp(2516,57): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\crypto\code\repos\KeyScanner2\KeyScanner2\KeyFinder.cpp(3354,16): warning C4244: 'argument': conversion from 'double' to 'uint64_t', possible loss of data
+C:\crypto\code\repos\KeyScanner2\KeyScanner2\KeyFinder.cpp(3363,23): warning C4244: '=': conversion from 'double' to 'unsigned __int64', possible loss of data
+C:\crypto\code\repos\KeyScanner2\KeyScanner2\KeyFinder.cpp(3373,15): warning C4244: 'argument': conversion from 'double' to 'uint64_t', possible loss of data
+C:\crypto\code\repos\KeyScanner2\KeyScanner2\KeyFinder.cpp(3382,22): warning C4244: '=': conversion from 'double' to 'unsigned __int64', possible loss of data
+C:\crypto\code\repos\KeyScanner2\KeyScanner2\KeyFinder.cpp(3394,14): warning C4244: 'argument': conversion from 'double' to 'uint64_t', possible loss of data
+C:\crypto\code\repos\KeyScanner2\KeyScanner2\KeyFinder.cpp(3406,16): warning C4244: 'argument': conversion from 'double' to 'uint64_t', possible loss of data
+C:\crypto\code\repos\KeyScanner2\KeyScanner2\KeyFinder.cpp(3415,23): warning C4244: '=': conversion from 'double' to 'unsigned __int64', possible loss of data
+C:\crypto\code\repos\KeyScanner2\KeyScanner2\KeyFinder.cpp(3425,15): warning C4244: 'argument': conversion from 'double' to 'uint64_t', possible loss of data
+C:\crypto\code\repos\KeyScanner2\KeyScanner2\KeyFinder.cpp(3434,22): warning C4244: '=': conversion from 'double' to 'unsigned __int64', possible loss of data
+C:\crypto\code\repos\KeyScanner2\KeyScanner2\KeyFinder.cpp(3446,14): warning C4244: 'argument': conversion from 'double' to 'uint64_t', possible loss of data
+C:\crypto\code\repos\KeyScanner2\KeyScanner2\KeyFinder.cpp(3466,21): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\crypto\code\repos\KeyScanner2\KeyScanner2\KeyFinder.cpp(3476,21): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\crypto\code\repos\KeyScanner2\KeyScanner2\KeyFinder.cpp(3493,21): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\crypto\code\repos\KeyScanner2\KeyScanner2\KeyFinder.cpp(3506,21): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\crypto\code\repos\KeyScanner2\KeyScanner2\KeyFinder.cpp(3524,21): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\crypto\code\repos\KeyScanner2\KeyScanner2\KeyFinder.cpp(3535,21): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\crypto\code\repos\KeyScanner2\KeyScanner2\KeyFinder.cpp(3551,21): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\crypto\code\repos\KeyScanner2\KeyScanner2\KeyFinder.cpp(3564,21): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\crypto\code\repos\KeyScanner2\KeyScanner2\KeyFinder.cpp(3589,22): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\crypto\code\repos\KeyScanner2\KeyScanner2\KeyFinder.cpp(3599,22): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\crypto\code\repos\KeyScanner2\KeyScanner2\KeyFinder.cpp(3616,22): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\crypto\code\repos\KeyScanner2\KeyScanner2\KeyFinder.cpp(3629,22): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\crypto\code\repos\KeyScanner2\KeyScanner2\KeyFinder.cpp(3647,22): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\crypto\code\repos\KeyScanner2\KeyScanner2\KeyFinder.cpp(3658,22): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\crypto\code\repos\KeyScanner2\KeyScanner2\KeyFinder.cpp(3674,22): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\crypto\code\repos\KeyScanner2\KeyScanner2\KeyFinder.cpp(3687,22): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\crypto\code\repos\KeyScanner2\KeyScanner2\KeyFinder.cpp(3709,22): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\crypto\code\repos\KeyScanner2\KeyScanner2\KeyFinder.cpp(3719,22): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\crypto\code\repos\KeyScanner2\KeyScanner2\KeyFinder.cpp(3736,22): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\crypto\code\repos\KeyScanner2\KeyScanner2\KeyFinder.cpp(3735,18): warning C4477: 'printf' : format string '%lf' requires an argument of type 'double', but variadic argument 4 has type 'unsigned __int64'
+C:\crypto\code\repos\KeyScanner2\KeyScanner2\KeyFinder.cpp(3735,18): warning C4477: 'printf' : format string '%.2f' requires an argument of type 'double', but variadic argument 5 has type 'unsigned __int64'
+C:\crypto\code\repos\KeyScanner2\KeyScanner2\KeyFinder.cpp(3735,18): warning C4477: 'printf' : format string '%s' requires an argument of type 'char *', but variadic argument 6 has type 'unsigned __int64'
+C:\crypto\code\repos\KeyScanner2\KeyScanner2\KeyFinder.cpp(3742,12): warning C4474: 'printf' : too many arguments passed for format string
+C:\crypto\code\repos\KeyScanner2\KeyScanner2\KeyFinder.cpp(3742,12): message : placeholders and their parameters expect 6 variadic arguments, but 9 were provided
+C:\crypto\code\repos\KeyScanner2\KeyScanner2\KeyFinder.cpp(3752,22): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\crypto\code\repos\KeyScanner2\KeyScanner2\KeyFinder.cpp(3770,22): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\crypto\code\repos\KeyScanner2\KeyScanner2\KeyFinder.cpp(3781,22): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\crypto\code\repos\KeyScanner2\KeyScanner2\KeyFinder.cpp(3797,22): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\crypto\code\repos\KeyScanner2\KeyScanner2\KeyFinder.cpp(3810,22): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\crypto\code\repos\KeyScanner2\KeyScanner2\KeyFinder.cpp(3837,21): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\crypto\code\repos\KeyScanner2\KeyScanner2\KeyFinder.cpp(3846,21): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\crypto\code\repos\KeyScanner2\KeyScanner2\KeyFinder.cpp(3862,21): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\crypto\code\repos\KeyScanner2\KeyScanner2\KeyFinder.cpp(3874,21): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\crypto\code\repos\KeyScanner2\KeyScanner2\KeyFinder.cpp(3891,21): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\crypto\code\repos\KeyScanner2\KeyScanner2\KeyFinder.cpp(3901,21): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\crypto\code\repos\KeyScanner2\KeyScanner2\KeyFinder.cpp(3916,21): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\crypto\code\repos\KeyScanner2\KeyScanner2\KeyFinder.cpp(3928,21): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\crypto\code\repos\KeyScanner2\KeyScanner2\KeyFinder.cpp(3952,22): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\crypto\code\repos\KeyScanner2\KeyScanner2\KeyFinder.cpp(3961,22): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\crypto\code\repos\KeyScanner2\KeyScanner2\KeyFinder.cpp(3977,22): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\crypto\code\repos\KeyScanner2\KeyScanner2\KeyFinder.cpp(3989,22): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\crypto\code\repos\KeyScanner2\KeyScanner2\KeyFinder.cpp(4006,22): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\crypto\code\repos\KeyScanner2\KeyScanner2\KeyFinder.cpp(4016,22): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\crypto\code\repos\KeyScanner2\KeyScanner2\KeyFinder.cpp(4031,22): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\crypto\code\repos\KeyScanner2\KeyScanner2\KeyFinder.cpp(4043,22): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\crypto\code\repos\KeyScanner2\KeyScanner2\KeyFinder.cpp(4064,22): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\crypto\code\repos\KeyScanner2\KeyScanner2\KeyFinder.cpp(4073,22): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\crypto\code\repos\KeyScanner2\KeyScanner2\KeyFinder.cpp(4089,22): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\crypto\code\repos\KeyScanner2\KeyScanner2\KeyFinder.cpp(4101,22): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\crypto\code\repos\KeyScanner2\KeyScanner2\KeyFinder.cpp(4118,22): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\crypto\code\repos\KeyScanner2\KeyScanner2\KeyFinder.cpp(4128,22): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\crypto\code\repos\KeyScanner2\KeyScanner2\KeyFinder.cpp(4143,22): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\crypto\code\repos\KeyScanner2\KeyScanner2\KeyFinder.cpp(4155,22): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\crypto\code\repos\KeyScanner2\KeyScanner2\KeyFinder.cpp(4184,21): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\crypto\code\repos\KeyScanner2\KeyScanner2\KeyFinder.cpp(4194,21): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\crypto\code\repos\KeyScanner2\KeyScanner2\KeyFinder.cpp(4211,21): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\crypto\code\repos\KeyScanner2\KeyScanner2\KeyFinder.cpp(4226,21): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\crypto\code\repos\KeyScanner2\KeyScanner2\KeyFinder.cpp(4246,21): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\crypto\code\repos\KeyScanner2\KeyScanner2\KeyFinder.cpp(4257,21): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\crypto\code\repos\KeyScanner2\KeyScanner2\KeyFinder.cpp(4273,21): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\crypto\code\repos\KeyScanner2\KeyScanner2\KeyFinder.cpp(4288,21): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\crypto\code\repos\KeyScanner2\KeyScanner2\KeyFinder.cpp(4315,22): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\crypto\code\repos\KeyScanner2\KeyScanner2\KeyFinder.cpp(4325,22): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\crypto\code\repos\KeyScanner2\KeyScanner2\KeyFinder.cpp(4342,22): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\crypto\code\repos\KeyScanner2\KeyScanner2\KeyFinder.cpp(4359,22): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\crypto\code\repos\KeyScanner2\KeyScanner2\KeyFinder.cpp(4381,22): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\crypto\code\repos\KeyScanner2\KeyScanner2\KeyFinder.cpp(4392,22): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\crypto\code\repos\KeyScanner2\KeyScanner2\KeyFinder.cpp(4408,22): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\crypto\code\repos\KeyScanner2\KeyScanner2\KeyFinder.cpp(4425,22): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\crypto\code\repos\KeyScanner2\KeyScanner2\KeyFinder.cpp(4451,22): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\crypto\code\repos\KeyScanner2\KeyScanner2\KeyFinder.cpp(4461,22): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\crypto\code\repos\KeyScanner2\KeyScanner2\KeyFinder.cpp(4478,22): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\crypto\code\repos\KeyScanner2\KeyScanner2\KeyFinder.cpp(4494,22): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\crypto\code\repos\KeyScanner2\KeyScanner2\KeyFinder.cpp(4515,22): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\crypto\code\repos\KeyScanner2\KeyScanner2\KeyFinder.cpp(4526,22): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\crypto\code\repos\KeyScanner2\KeyScanner2\KeyFinder.cpp(4542,22): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\crypto\code\repos\KeyScanner2\KeyScanner2\KeyFinder.cpp(4558,22): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\crypto\code\repos\KeyScanner2\KeyScanner2\KeyFinder.cpp(4588,21): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\crypto\code\repos\KeyScanner2\KeyScanner2\KeyFinder.cpp(4597,21): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\crypto\code\repos\KeyScanner2\KeyScanner2\KeyFinder.cpp(4613,21): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\crypto\code\repos\KeyScanner2\KeyScanner2\KeyFinder.cpp(4627,21): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\crypto\code\repos\KeyScanner2\KeyScanner2\KeyFinder.cpp(4646,21): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\crypto\code\repos\KeyScanner2\KeyScanner2\KeyFinder.cpp(4656,21): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\crypto\code\repos\KeyScanner2\KeyScanner2\KeyFinder.cpp(4671,21): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\crypto\code\repos\KeyScanner2\KeyScanner2\KeyFinder.cpp(4685,21): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\crypto\code\repos\KeyScanner2\KeyScanner2\KeyFinder.cpp(4711,22): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\crypto\code\repos\KeyScanner2\KeyScanner2\KeyFinder.cpp(4720,22): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\crypto\code\repos\KeyScanner2\KeyScanner2\KeyFinder.cpp(4736,22): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\crypto\code\repos\KeyScanner2\KeyScanner2\KeyFinder.cpp(4752,22): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\crypto\code\repos\KeyScanner2\KeyScanner2\KeyFinder.cpp(4773,22): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\crypto\code\repos\KeyScanner2\KeyScanner2\KeyFinder.cpp(4783,22): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\crypto\code\repos\KeyScanner2\KeyScanner2\KeyFinder.cpp(4798,22): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\crypto\code\repos\KeyScanner2\KeyScanner2\KeyFinder.cpp(4814,22): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\crypto\code\repos\KeyScanner2\KeyScanner2\KeyFinder.cpp(4839,22): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\crypto\code\repos\KeyScanner2\KeyScanner2\KeyFinder.cpp(4848,22): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\crypto\code\repos\KeyScanner2\KeyScanner2\KeyFinder.cpp(4864,22): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\crypto\code\repos\KeyScanner2\KeyScanner2\KeyFinder.cpp(4879,22): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\crypto\code\repos\KeyScanner2\KeyScanner2\KeyFinder.cpp(4899,22): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\crypto\code\repos\KeyScanner2\KeyScanner2\KeyFinder.cpp(4909,22): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\crypto\code\repos\KeyScanner2\KeyScanner2\KeyFinder.cpp(4924,22): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\crypto\code\repos\KeyScanner2\KeyScanner2\KeyFinder.cpp(4939,22): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+  KeyScanner2.vcxproj -> C:\crypto\code\repos\KeyScanner2\x64\Debug\KeyScanner.exe
