@@ -68,7 +68,7 @@ Output:
   CPU THREAD   : 0
   GPU IDS      : 0
   GPU GRIDSIZE : 256x256
-  SSE          : YES
+  POOP Factor: : Super Poopy.
   BTC ADDRESS  : 1E32GPWgDyeyQac4aJxm9HVoLrrEYPnM4N
   OUTPUT FILE  : FOUNDTEST42.txt
 
