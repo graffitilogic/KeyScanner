@@ -35,8 +35,9 @@ Imagine the security implications if this wasn't the case, though.  I'm not just
 
 This was originally heavily based on experiments from [BitCrack](https://github.com/brichard19/BitCrack) by [brichard19](https://github.com/brichard19) and includes quality of life improvements contributed from [BitCrack2](https://github.com/secp8x32/BitCrack2) by [secpk8x32](https://github.com/secp8x32) 
 and since incorporates the the epic foundational work of [VanitySearch] (https://github.com/JeanLucPons/VanitySearch) by [JeanLucPons] (https://github.com/JeanLucPons) and some really nice project reorganization and ideas from (now missing?) -> (https://github.com/phrutis/Rotor-Cuda.git)
+Sorry, I'm sure I'm missing others who deserve a look and credit but the chain-of-fork / custody here is muddy because of folks changing their names and/or deleting their repos.
 
-Anything clever here probably came from those guys, show them some love.  Anything hackneyed and bs probably came from me, throwing things against the wall. This is CUDA only, sorry.  My boring real job keeps me pretty busy so multi-platform isn't in the cards for this hobby project atm.
+Anything clever here probably came from those folks, show them some love.  Anything hackneyed and BS probably came from me throwing things against the wall. This is CUDA only, sorry.  My boring real job keeps me pretty busy so multi-platform isn't in the cards for this hobby project atm.
 
 This is highly experimental and fluid.
 
