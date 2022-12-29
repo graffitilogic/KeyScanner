@@ -1,7 +1,11 @@
 # KeyScanner
 _BTC32 Private Key Experiments_
 
-These Probably aren't the Droids You're Looking For.
+These Probably aren't the Droids You're Looking For.  Before you send me a missive calling this derivative or uncreative or ill-fated, remember: I advised you not to go any further and you did anyway..
+
+--
+
+Still here?  Alrighty then.   C'mon in and grab a seat and a cup of joe and embrace the madness with me.
 
 Speaking of looking for things... I was thinking on the [BTC32 Puzzle](https://privatekeys.pw/faq#puzzle) about alternate searching algorithms, potential weaknesses in the RNG, alternative GPU solutions as alternatives to the scalar point multiplcation, ML solutions for discoverying patterns or anti-patterns that could lead to deterministic brute force exploits.
 
@@ -35,8 +39,9 @@ Imagine the security implications if this wasn't the case, though.  I'm not just
 
 This was originally heavily based on experiments from [BitCrack](https://github.com/brichard19/BitCrack) by [brichard19](https://github.com/brichard19) and includes quality of life improvements contributed from [BitCrack2](https://github.com/secp8x32/BitCrack2) by [secpk8x32](https://github.com/secp8x32) 
 and since incorporates the the epic foundational work of [VanitySearch] (https://github.com/JeanLucPons/VanitySearch) by [JeanLucPons] (https://github.com/JeanLucPons) and some really nice project reorganization and ideas from (now missing?) -> (https://github.com/phrutis/Rotor-Cuda.git)
+Sorry, I'm sure I'm missing others who deserve a look and credit but the chain-of-fork / custody here is muddy because of folks changing their names and/or deleting their repos.
 
-Anything clever here probably came from those guys, show them some love.  Anything hackneyed and bs probably came from me, throwing things against the wall. This is CUDA only, sorry.  My boring real job keeps me pretty busy so multi-platform isn't in the cards for this hobby project atm.
+Anything clever here probably came from those folks, show them some love.  Anything hackneyed and BS probably came from me throwing things against the wall. This is CUDA only, sorry.  My boring real job keeps me pretty busy so multi-platform isn't in the cards for this hobby project atm.
 
 This is highly experimental and fluid.
 
@@ -63,7 +68,7 @@ Output:
   CPU THREAD   : 0
   GPU IDS      : 0
   GPU GRIDSIZE : 256x256
-  SSE          : YES
+  POOP Factor: : Super Poopy.
   BTC ADDRESS  : 1E32GPWgDyeyQac4aJxm9HVoLrrEYPnM4N
   OUTPUT FILE  : FOUNDTEST42.txt
 
