@@ -124,9 +124,39 @@ Output:
   =================================================================================
   [00:44:51] [R: 672] [2ADE6BE64E8] [F: 1] [GPU: 1.16 Gk/s] [T: 3,114,253,942,784]
 ```
+# Scanning 66..
 
-Note: The hash rate reported about was pretty low, that particular run used OpenSSL instead of the Thrust for RNG so the Key Generation wasn't performant. Keep in mind, lower R values will regenerate keys more frequently, which is at least partially CPU bound.   Higher R values lean more on the GPU.
+```
+keyscanner -g --gpui 0 --gpux 256,256 -m address --coin BTC -r 69 -o FOUND66.txt --range 20000000000000000:3ffffffffffffffff 13zb1hQbWVsc2S7ZTZnP2G4undNNpdh5so
+```
 
+Output:
+```
+  KeyScanner v2.01
+
+  COMP MODE    : COMPRESSED
+  COIN TYPE    : BITCOIN
+  SEARCH MODE  : Single Address
+  DEVICE       : GPU
+  CPU THREAD   : 0
+  GPU IDS      : 0
+  GPU GRIDSIZE : 256x256
+  SSE          : YES
+  BTC ADDRESS  : 13zb1hQbWVsc2S7ZTZnP2G4undNNpdh5so
+  OUTPUT FILE  : FOUND66.txt
+
+  Start Time   : Thu Dec 29 23:50:37 2022
+
+  GPU          : GPU #0 NVIDIA GeForce RTX 3070 (46x128 cores) Grid(256x256)
+  Base Key     : Randomly changes 65536 start Private keys every 69,000,000,000 on the counter
+  Random : Min 66 (bit) 20000000000000000
+  Random : Max 66 (bit) 3FFFFFFFFFFFFFFFF
+  Method : Evenly Distributed, Thrust RNG, 16bit Assembly
+
+  [00:03:58] [R: 4] [2DA527C016B11CD17] [F: 0] [GPU: 1.11 Gk/s] [T: 287,494,373,376]
+```
+
+Note: Lower R values will regenerate keys more frequently, which is at least partially CPU bound.   Higher R values lean more on the GPU, using VanitySearch's key addition algorithm. 
 
 Known Issues:
 
