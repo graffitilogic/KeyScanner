@@ -91,7 +91,7 @@ Output:
 
 # For Testing 42: 
 ```
-keyscanner -g --gpui 0 --gpux 256,256 -m address --coin BTC -r 1 -o FOUNDTEST42.txt --range 20000000000:3ffffffffff 1E32GPWgDyeyQac4aJxm9HVoLrrEYPnM4N
+keyscanner -g --gpui 0 --gpux 256,256 -m address --coin BTC -r 4 -o FOUNDTEST42.txt --range 20000000000:3ffffffffff 1E32GPWgDyeyQac4aJxm9HVoLrrEYPnM4N
 ```
 Output:
 ```
@@ -107,21 +107,22 @@ Output:
   BTC ADDRESS  : 1E32GPWgDyeyQac4aJxm9HVoLrrEYPnM4N
   OUTPUT FILE  : FOUNDTEST42.txt
 
-  Start Time   : Wed Dec 28 16:57:07 2022
+  Start Time   : Thu Dec 29 18:43:57 2022
 
   GPU          : GPU #0 NVIDIA GeForce RTX 3070 (46x128 cores) Grid(256x256)
-  Base Key     : Randomly changes 65536 start Private keys every 1,000,000,000 on the counter
-  ROTOR Random : Min 42 (bit) 20000000000
-  ROTOR Random : Max 42 (bit) 3FFFFFFFFFF
+  Base Key     : Randomly changes 65536 start Private keys every 4,000,000,000 on the counter
+  Random : Min 42 (bit) 20000000000
+  Random : Max 42 (bit) 3FFFFFFFFFF
+  Method : Evenly Distributed, Thrust RNG, 16bit Assembly
 
-  [01:11:51] [R: 2109] [3F109054000] [F: 0] [GPU: 575.19 Mk/s] [T: 2,481,283,137,536]
+  [Thread: 57344]   [331A9B9C9EA] ] [F: 0] [GPU: 1.16 Gk/s] [T: 3,113,582,854,144]
   =================================================================================
   PubAddress: 1E32GPWgDyeyQac4aJxm9HVoLrrEYPnM4N
   Priv (WIF): p2pkh:KwDiBf89QgGbjEhKnhXJuH7LrciVrZi3qYjgd9zzYEemjCVJ3vo9
   Priv (HEX): 2A221C58D8F
   PubK (HEX): 03EEC88385BE9DA803A0D6579798D977A5D0C7F80917DAB49CB73C9E3927142CB6
   =================================================================================
-  [01:11:52] [R: 2109] [3FF7FD53162] [F: 1] [GPU: 560.07 Mk/s] [T: 2,482,222,661,632]
+  [00:44:51] [R: 672] [2ADE6BE64E8] [F: 1] [GPU: 1.16 Gk/s] [T: 3,114,253,942,784]
 ```
 
 Note: The hash rate reported about was pretty low, that particular run used OpenSSL instead of the Thrust for RNG so the Key Generation wasn't performant. Keep in mind, lower R values will regenerate keys more frequently, which is at least partially CPU bound.   Higher R values lean more on the GPU.
