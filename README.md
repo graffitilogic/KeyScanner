@@ -69,7 +69,6 @@ Output:
   CPU THREAD   : 0
   GPU IDS      : 0
   GPU GRIDSIZE : 256x256
-  SSE          : YES
   BTC ADDRESS  : 1HBtApAFA9B2YZw3G2YKSMCtb3dVnjuNe2
   OUTPUT FILE  : FOUNDTEST38.txt
 
@@ -87,10 +86,11 @@ Output:
   Priv (HEX): 22382FACD0
   PubK (HEX): 03C060E1E3771CBECCB38E119C2414702F3F5181A89652538851D2E3886BDD70C6
   =================================================================================
+
 ```
 
 # For Testing 42: 
-````
+```
 keyscanner -g --gpui 0 --gpux 256,256 -m address --coin BTC -r 1 -o FOUNDTEST42.txt --range 20000000000:3ffffffffff 1E32GPWgDyeyQac4aJxm9HVoLrrEYPnM4N
 ```
 Output:
@@ -104,7 +104,6 @@ Output:
   CPU THREAD   : 0
   GPU IDS      : 0
   GPU GRIDSIZE : 256x256
-  SSE          : YES
   BTC ADDRESS  : 1E32GPWgDyeyQac4aJxm9HVoLrrEYPnM4N
   OUTPUT FILE  : FOUNDTEST42.txt
 
