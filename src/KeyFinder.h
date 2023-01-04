@@ -94,11 +94,13 @@ private:
 	std::vector<Int> KeyFinder::getGPUAssistedRandoms(Int min, Int max, uint64_t length);
 	std::vector<Int> KeyFinder::getGPUAssistedRandoms32(Int min, Int max, uint64_t length);
 	
+	std::vector<Int> KeyFinder::getGPURandomsEDX(Random::GPURand& rndGPU, Int min, Int max, uint64_t length, uint64_t rKeyPer);
 	std::vector<Int> KeyFinder::getGPURandomsED(Random::GPURand& rndGPU, Int min, Int max, uint64_t length, uint64_t rKeyPer);
 	std::vector<Int> KeyFinder::getGPURandomsED2(Random::GPURand& rndGPU, Int min, Int max, uint64_t length, uint64_t rKeyPer);
 	std::vector<Int> KeyFinder::getGPURandomsED3(Random::GPURand& rndGPU, Int min, Int max, uint64_t length, uint64_t rKeyPer);
 	std::vector<Int> KeyFinder::getGPURandomsED4(Random::GPURand& rndGPU, Int min, Int max, uint64_t length, uint64_t rKeyPer);
 
+	std::vector<Int> KeyFinder::getGPURandoms_Masked_Oversample(Random::GPURand& rndGPU, Int min, Int max, uint64_t length, uint64_t rKeyPer);
 
 	std::vector<Int> KeyFinder::getGPUAssistedMaskedRandoms(Random::GPURand& rndGPU, Int min, Int max, uint64_t length);
 	std::vector<Int> KeyFinder::getGPUAssistedMaskedRandoms(Int min, Int max, uint64_t length);
@@ -108,6 +110,7 @@ private:
 	void getGPUStartingKeys3(Int& tRangeStart, Int& tRangeEnd, int groupSize, int nbThread, Int* keys, Point* p);
 
 	void getEvenlyDistributedGPUStartingKeys(Random::GPURand& rndGPU, Int& tRangeStart, Int& tRangeEnd, int groupSize, int nbThread, Int* keys, Point* p);
+	void getOverSampledGPUStartingKeys(Random::GPURand& rndGPU, Int& tRangeStart, Int& tRangeEnd, int groupSize, int nbThread, Int* keys, Point* p);
 
 	void getGPUStartingKeysViaThrust(Int& tRangeStart, Int& tRangeEnd, int groupSize, int nbThread, Int* keys, Point* p);
 	void getGPUStartingKeysViaThrust(Random::GPURand& rndGPU, Int& tRangeStart, Int& tRangeEnd, int groupSize, int nbThread, Int* keys, Point* p);

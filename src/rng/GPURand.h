@@ -122,8 +122,11 @@ namespace Random
 			std::vector<std::vector<unsigned int>>().swap(randomizers);
 
 			//fill
-			if (rand_buffer.size()==0) rand_buffer = Random::RandomHelper::getStaticAssemblyBuffer(0x0, 0xffff);
-			randomizers = Random::RandomHelper::getRandomizers(seed, 0x0, 0xffff, len, width);
+			unsigned int min = 0x0;
+			unsigned int max = 0xffff;
+
+			if (rand_buffer.size()==0) rand_buffer = Random::RandomHelper::getStaticAssemblyBuffer(min, max);
+			randomizers = Random::RandomHelper::getRandomizers(seed, min, max, len, width);
 			randomizer_rotations = 0;
 		}
 

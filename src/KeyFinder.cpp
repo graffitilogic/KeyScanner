@@ -1212,10 +1212,66 @@ bool custom_comparer(Int val1, Int val2) {
 	return val1.IsLower(&val2);
 }
 
-
-
-std::vector<Int> KeyFinder::getGPURandomsED(Random::GPURand& rndGPU, Int min, Int max, uint64_t length, uint64_t rKeyPer) {
+std::vector<Int> KeyFinder::getGPURandomsEDX(Random::GPURand& rndGPU, Int min, Int max, uint64_t length, uint64_t rKeyPer) {
 	//uses thrust, doesn't sort the net, uses max-min as spacing
+	Int rKeyMask;
+	rKeyMask.SetInt64(rKeyPer);
+
+	uint64_t NET_SIZE = 1024;
+	uint32_t right_pad = rKeyMask.GetBase16Length() - 1;
+
+	//Int floor = Int((uint64_t)65535);
+	uint64_t timeSeed = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
+
+	//if (rndGPU.getRandomizersSize() == 0) 	rndGPU.loadRandomizers(timeSeed, NET_SIZE);
+	if (true) rndGPU.loadRandomizers(timeSeed, NET_SIZE, max.DeriveRandomizerWidth());
+
+	uint64_t middleKeyCount = length / NET_SIZE;
+	uint64_t spacerCount = length;
+
+	vector<Int> results;
+	vector<Int> preResults = rndGPU.getRandomPool(min, max, NET_SIZE);
+
+	Int totalDistance = max;
+	totalDistance.Sub(&min);
+
+	Int spacing = totalDistance;
+	spacing.Div(spacerCount);
+
+	//sort doesn't matter in this method - std::sort(preResults.begin(), preResults.end(), custom_comparer);
+
+	int lastIndex = preResults.size() - 1;
+	for (int i = 0; i < preResults.size(); i++) {
+
+		Int adjustedKey = preResults[i];
+		adjustedKey.ZeroRight(right_pad);
+		results.push_back(adjustedKey);
+
+		Int previousKey = preResults[i];
+		for (int m = 0; m < middleKeyCount; m++) {
+			previousKey.Add(&spacing);
+
+			if (previousKey.IsGreater(&max)) {
+				previousKey = max;
+				Int reverse_Spacing = spacing;
+				reverse_Spacing.Div(2 * (m + 1));
+				previousKey.Sub(&reverse_Spacing);
+			}
+
+			adjustedKey = previousKey;
+			adjustedKey.ZeroRight(right_pad);
+			results.push_back(adjustedKey);
+		}
+
+	}
+
+
+	return results;
+}
+
+//uses thrust, doesn't sort the net, uses max-min as spacing
+std::vector<Int> KeyFinder::getGPURandomsED(Random::GPURand& rndGPU, Int min, Int max, uint64_t length, uint64_t rKeyPer) {
+
 	Int rKeyMask;
 	rKeyMask.SetInt64(rKeyPer);
 
@@ -1271,9 +1327,9 @@ std::vector<Int> KeyFinder::getGPURandomsED(Random::GPURand& rndGPU, Int min, In
 	return results;
 }
 
+//uses thrust, sorts the net, uses middle distance division as spacing
 std::vector<Int> KeyFinder::getGPURandomsED2(Random::GPURand& rndGPU, Int min, Int max, uint64_t length, uint64_t rKeyPer) {
 
-	//uses thrust, sorts the net, uses middle distance division as spacing
 	Int rKeyMask;
 	rKeyMask.SetInt64(rKeyPer);
 
@@ -1348,7 +1404,7 @@ std::vector<Int> KeyFinder::getGPURandomsED3(Random::GPURand& rndGPU, Int min, I
 	int CHUNK_SIZE = 4;
 	int KEY_LEN = max.GetBase16().size();
 
-	uint64_t NET_SIZE = 1024;
+	uint64_t NET_SIZE = 8192;
 	uint32_t right_pad = rKeyMask.GetBase16Length() - 1;
 
 	//Int floor = Int((uint64_t)65535);
@@ -1389,7 +1445,7 @@ std::vector<Int> KeyFinder::getGPURandomsED3(Random::GPURand& rndGPU, Int min, I
 		keyPartDistance.Div(middleKeyCount);
 
 		Int adjustedKey = preResults[i];
-		adjustedKey.ZeroRight(right_pad);
+		//adjustedKey.ZeroRight(right_pad);
 		results.push_back(adjustedKey);
 
 		Int previousKey = preResults[i];
@@ -1412,7 +1468,6 @@ std::vector<Int> KeyFinder::getGPURandomsED3(Random::GPURand& rndGPU, Int min, I
 
 	return results;
 }
-
 
 //chunksort based middle-distance division calc
 std::vector<Int> KeyFinder::getGPURandomsED4(Random::GPURand& rndGPU, Int min, Int max, uint64_t length, uint64_t rKeyPer) {
@@ -1508,6 +1563,124 @@ std::vector<Int> KeyFinder::getGPURandomsED4(Random::GPURand& rndGPU, Int min, I
 
 	}
 	
+
+	return results;
+}
+
+//uses thrust, sorts the net, uses middle distance division as spacing
+std::vector<Int> KeyFinder::getGPURandoms_Masked_Oversample(Random::GPURand& rndGPU, Int min, Int max, uint64_t length, uint64_t rKeyPer) {
+
+	Int rKeyMask;
+	rKeyMask.SetInt64(rKeyPer);
+
+	uint64_t SAMPLE_POOL_SIZE = 1024 * 160;// 1024 * 128;
+	//SAMPLE_POOL_SIZE = 8192;
+
+	Int POOL_MIN;
+	Int POOL_MAX;
+
+	POOL_MIN.SetBase16("1000000000000000000000000000000000000000000000000000000000000000");
+	POOL_MAX.SetBase16("FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEBAAEDCE6AF48A03BBFD25E8CD0364140");
+
+
+	uint64_t NET_SIZE = 1600;// 1024;
+	uint64_t MASK_SIZE = POOL_MAX.GetBase16Length() -  max.GetBase16Length();
+
+	uint32_t right_pad = rKeyMask.GetBase16Length() - 1;
+	uint64_t timeSeed = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
+	rndGPU.loadRandomizers(timeSeed, SAMPLE_POOL_SIZE, POOL_MAX.DeriveRandomizerWidth());
+
+
+	vector<Int> results;
+	vector<Int> preResults;
+	vector<Int> keyPool = rndGPU.getRandomPool(POOL_MIN, POOL_MAX, SAMPLE_POOL_SIZE);
+	if (rKeyCount2 == 0) {
+		if (display > 0) {
+			printf("  Generator : Generated %d full-length starting keys\n", keyPool.size());
+		}
+	}
+
+	for (int k = 0; k < keyPool.size(); k++) {
+		Int maskedKey = keyPool[k];
+		maskedKey.ZeroLeft(MASK_SIZE);
+
+		if (maskedKey.IsGreater(&min) && maskedKey.IsLower(&max)) {
+			preResults.push_back(maskedKey);
+		}
+		if (preResults.size() == NET_SIZE) break;
+	}
+
+	if (rKeyCount2 == 0) {
+		if (display > 0) {
+			printf("  Generator : Extracted %d masked keys for given keyspace range\n", preResults.size());
+		}
+	}
+
+	std::sort(preResults.begin(), preResults.end(), custom_comparer);
+	
+	uint64_t middleKeyCount = length / preResults.size();
+
+
+	if (rKeyCount2 == 0) {
+		if (display > 0) {
+			printf("  Generator : Sorted %d base keys\n", preResults.size());
+			printf("  Generator : Interleaving %d middle keys per base key\n", middleKeyCount);
+		}
+	}
+
+	int overFlowCount = 0;
+	int middleCount = 0;
+	int lastIndex = preResults.size() - 1;
+	for (int i = 0; i < preResults.size(); i++) {
+		Int distance;
+		if (i == 0) {
+			distance = preResults[i];
+			distance.Sub(&min);
+		}
+		else if (i == lastIndex) {
+			distance = max;
+			distance.Sub(&preResults[lastIndex]);
+		}
+		else {
+			distance = preResults[i + 1];
+			distance.Sub(&preResults[i]);
+		}
+
+		Int spacing = distance;
+
+		spacing.Div(middleKeyCount);
+
+		Int adjustedKey = preResults[i];
+		adjustedKey.ZeroRight(right_pad);
+		results.push_back(adjustedKey);
+
+		Int previousKey = preResults[i];
+		for (int m = 0; m < middleKeyCount; m++) {
+			previousKey.Add(&spacing);  //binary feather any overflow back into the range
+			if (previousKey.IsGreater(&max)) {
+				previousKey = max;
+				Int reverse_Spacing = spacing;
+				reverse_Spacing.Div(2 * (m + 1));
+				previousKey.Sub(&reverse_Spacing);
+				overFlowCount++;
+			}
+			adjustedKey = previousKey;
+			adjustedKey.ZeroRight(right_pad);
+			results.push_back(adjustedKey);
+			middleCount++;
+		}
+
+	}
+
+	if (rKeyCount2 == 0) {
+		if (display > 0) {
+			printf("  Generator : %d middle keys generated\n", middleCount);
+			if (overFlowCount > 0) {
+				printf("  Generator : %d overflow keys remediated\n", overFlowCount);
+			}
+			printf("  Generator : %d startung keys generated.\n\n", (int)results.size());
+		}
+	}
 
 	return results;
 }
@@ -1618,7 +1791,7 @@ void KeyFinder::getGPUStartingKeys(Int & tRangeStart, Int & tRangeEnd, int group
 			
 			if (rKeyCount2 == 0) {
 				if (display > 0) {
-					printf("  Base Key     : Randomly changes %d start Private keys every %llu,000,000,000 on the counter\n", nbThread, rKey);
+					printf("  Start Keys : Randomly regenerates %d starting keys every %llu,000,000,000 on the counter\n", nbThread, rKey);
 					printf("  ROTOR Random : Min %d (bit) %s \n", rangeStart.GetBitLength(), rangeStart.GetBase16().c_str());
 					printf("  ROTOR Random : Max %d (bit) %s \n\n", rangeEnd.GetBitLength(), rangeEnd.GetBase16().c_str());
 				}
@@ -1665,7 +1838,7 @@ void KeyFinder::getGPUStartingKeys(Int & tRangeStart, Int & tRangeEnd, int group
 						}
 					}
 					if (display > 0) {
-						printf("  Base Key     : Randomly changes %d start Private keys every %llu,000,000,000 on the counter\n\n", nbThread, rKey);
+						printf("  Start Keys : Randomly regenerates %d starting keys every %llu,000,000,000 on the counter\n\n", nbThread, rKey);
 					}
 				}
 
@@ -1710,7 +1883,7 @@ void KeyFinder::getGPUStartingKeys(Int & tRangeStart, Int & tRangeEnd, int group
 				if (rKeyCount2 == 0) {
 					if (display > 0) {
 						printf("  Rotor Random : Private keys random 95%% (252-256) bit + 5%% (248-252) bit\n");
-						printf("  Base Key     : Randomly changes %d start Private keys every %llu,000,000,000 on the counter\n\n", nbThread, rKey);
+						printf("  Start Keys : Randomly regenerates %d starting keys every %llu,000,000,000 on the counter\n\n", nbThread, rKey);
 					}
 				}
 
@@ -1830,7 +2003,7 @@ void KeyFinder::getGPUStartingKeys2(Int& tRangeStart, Int& tRangeEnd, int groupS
 
 			if (rKeyCount2 == 0) {
 				if (display > 0) {
-					printf("  Base Key     : Randomly changes %d start Private keys every %llu,000,000,000 on the counter\n", nbThread, rKey);
+					printf("  Start Keys : Randomly regenerates %d starting keys every %llu,000,000,000 on the counter\n", nbThread, rKey);
 					printf("  ROTOR Random : Min %d (bit) %s \n", rangeStart.GetBitLength(), rangeStart.GetBase16().c_str());
 					printf("  ROTOR Random : Max %d (bit) %s \n\n", rangeEnd.GetBitLength(), rangeEnd.GetBase16().c_str());
 				}
@@ -1891,7 +2064,7 @@ void KeyFinder::getGPUStartingKeys3(Int& tRangeStart, Int& tRangeEnd, int groupS
 
 			if (rKeyCount2 == 0) {
 				if (display > 0) {
-					printf("  Base Key     : Randomly changes %d start Private keys every %llu,000,000,000 on the counter\n", nbThread, rKey);
+					printf("  Start Keys : Randomly regenerates %d starting keys every %llu,000,000,000 on the counter\n", nbThread, rKey);
 					printf("  ROTOR Random : Min %d (bit) %s \n", rangeStart.GetBitLength(), rangeStart.GetBase16().c_str());
 					printf("  ROTOR Random : Max %d (bit) %s \n\n", rangeEnd.GetBitLength(), rangeEnd.GetBase16().c_str());
 				}
@@ -1952,10 +2125,10 @@ void KeyFinder::getEvenlyDistributedGPUStartingKeys(Random::GPURand& rndGPU, Int
 
 			if (rKeyCount2 == 0) {
 				if (display > 0) {
-					printf("  Base Key     : Randomly changes %d start Private keys every %llu,000,000,000 on the counter\n", nbThread, rKey);
+					printf("  Start Keys : Randomly regenerates %d starting keys every %llu,000,000,000 on the counter\n", nbThread, rKey);
 					printf("  Random : Min %d (bit) %s \n", rangeStart.GetBitLength(), rangeStart.GetBase16().c_str());
-					printf("  Random : Max %d (bit) %s \n\n", rangeEnd.GetBitLength(), rangeEnd.GetBase16().c_str());
-					printf("  Method : Evenly Distributed, Thrust RNG, 16bit Assembly");
+					printf("  Random : Max %d (bit) %s \n", rangeEnd.GetBitLength(), rangeEnd.GetBase16().c_str());
+					printf("  Method : Evenly Distributed, Thrust RNG, 16bit Assembly\n\n");
 				}
 			}
 
@@ -2004,6 +2177,67 @@ void KeyFinder::getEvenlyDistributedGPUStartingKeys(Random::GPURand& rndGPU, Int
 	}
 }
 
+void KeyFinder::getOverSampledGPUStartingKeys(Random::GPURand& rndGPU, Int& tRangeStart, Int& tRangeEnd, int groupSize, int nbThread, Int* keys, Point* p)
+{
+	int REPORTING_INTERVAL = 128;
+	if (rKey > 0) {
+		//printf("  ROTOR Random : Min %d (bit) %s \n", rangeStart.GetBitLength(), rangeStart.GetBase16().c_str());
+		//printf("  ROTOR Random : Max %d (bit) %s \n\n", rangeEnd.GetBitLength(), rangeEnd.GetBase16().c_str());
+		if (rangeDiff2.GetBitLength() > 1) {
+
+			if (rKeyCount2 == 0) {
+				if (display > 0) {
+					printf("  Start Keys : Randomly regenerates %d starting keys every %llu,000,000,000 on the counter\n", nbThread, rKey);
+					printf("  Random : Min %d (bit) %s \n", rangeStart.GetBitLength(), rangeStart.GetBase16().c_str());
+					printf("  Random : Max %d (bit) %s \n", rangeEnd.GetBitLength(), rangeEnd.GetBase16().c_str());
+					printf("  Method : Oversampled, then masked to keyspace, Thrust RNG, 16bit Assembly\n");
+				}
+			}
+
+			//Determine the right pad space by rKey 
+			uint64_t rKeyMultiplier = 1000000000;
+			uint64_t rKeyEst = (rKeyMultiplier * rKey);
+			uint64_t rKeyPer = rKeyEst / nbThread;
+
+			std::vector<Int> initial_Randoms = getGPURandoms_Masked_Oversample(rndGPU, rangeStart, rangeEnd, nbThread, rKeyPer);
+
+			bool generatorContinue = true;
+			int keyCount = 0;
+			while (generatorContinue) {
+
+
+				if (keyCount < nbThread) {
+
+					gpucores = keyCount;
+
+					keys[keyCount] = initial_Randoms[keyCount];
+					//keys[keyCount] = kRnd;
+					rhex = keys[keyCount];
+
+					//std::string derivedKey = keys[keyCount].GetBase16();  //for inspection
+
+					if (display > 0 && (keyCount % 8192 == 0)) {
+						printf("\r  [Thread: %d]   [%s] ", keyCount, keys[keyCount].GetBase16().c_str());
+					}
+
+					Int k(keys + keyCount);
+					k.Add((uint64_t)(groupSize / 2));
+					p[keyCount] = secp->ComputePublicKey(&k);
+
+					keyCount++;
+				}
+				else {
+					generatorContinue = false;
+					break;
+				}
+
+
+			}
+		}
+
+	}
+}
+
 
 void KeyFinder::getGPUStartingKeysViaThrust(Int& tRangeStart, Int& tRangeEnd, int groupSize, int nbThread, Int* keys, Point* p)
 {
@@ -2014,7 +2248,7 @@ void KeyFinder::getGPUStartingKeysViaThrust(Int& tRangeStart, Int& tRangeEnd, in
 
 			if (rKeyCount2 == 0) {
 				if (display > 0) {
-					printf("  Base Key     : Randomly changes %d start Private keys every %llu,000,000,000 on the counter\n", nbThread, rKey);
+					printf("  Start Keys : Randomly regenerates %d starting keys every %llu,000,000,000 on the counter\n", nbThread, rKey);
 					printf("  ROTOR Random : Min %d (bit) %s \n", rangeStart.GetBitLength(), rangeStart.GetBase16().c_str());
 					printf("  ROTOR Random : Max %d (bit) %s \n\n", rangeEnd.GetBitLength(), rangeEnd.GetBase16().c_str());
 				}
@@ -2073,7 +2307,7 @@ void KeyFinder::getGPUStartingKeysViaThrust(Random::GPURand& rndGPU, Int& tRange
 
 			if (rKeyCount2 == 0) {
 				if (display > 0) {
-					printf("  Base Key     : Randomly changes %d start Private keys every %llu,000,000,000 on the counter\n", nbThread, rKey);
+					printf("  Start Keys : Randomly regenerates %d starting keys every %llu,000,000,000 on the counter\n", nbThread, rKey);
 					printf("  ROTOR Random : Min %d (bit) %s \n", rangeStart.GetBitLength(), rangeStart.GetBase16().c_str());
 					printf("  ROTOR Random : Max %d (bit) %s \n\n", rangeEnd.GetBitLength(), rangeEnd.GetBase16().c_str());
 				}
@@ -2138,7 +2372,7 @@ void KeyFinder::getGPUStartingKeysAndParts(Int& tRangeStart, Int& tRangeEnd, int
 
 			if (rKeyCount2 == 0) {
 				if (display > 0) {
-					printf("  Base Key     : Randomly changes %d start Private keys every %llu,000,000,000 on the counter\n", nbThread, rKey);
+					printf("  Start Keys : Randomly regenerates %d starting keys every %llu,000,000,000 on the counter\n", nbThread, rKey);
 					printf("  ROTOR Random : Min %d (bit) %s \n", rangeStart.GetBitLength(), rangeStart.GetBase16().c_str());
 					printf("  ROTOR Random : Max %d (bit) %s \n\n", rangeEnd.GetBitLength(), rangeEnd.GetBase16().c_str());
 				}
@@ -2240,7 +2474,7 @@ void KeyFinder::getGPUStartingKeysWithParts(Int& tRangeStart, Int& tRangeEnd, in
 
 			if (rKeyCount2 == 0) {
 				if (display > 0) {
-					printf("  Base Key     : Randomly changes %d start Private keys every %llu,000,000,000 on the counter\n", nbThread, rKey);
+					printf("  Start Keys : Randomly regenerates %d starting keys every %llu,000,000,000 on the counter\n", nbThread, rKey);
 					printf("  ROTOR Random : Min %d (bit) %s \n", rangeStart.GetBitLength(), rangeStart.GetBase16().c_str());
 					printf("  ROTOR Random : Max %d (bit) %s \n\n", rangeEnd.GetBitLength(), rangeEnd.GetBase16().c_str());
 				}
@@ -2495,7 +2729,8 @@ void KeyFinder::FindKeyGPUThrust(TH_PARAM* ph)
 
 	//getGPUStartingKeysAndParts(tRangeStart, tRangeEnd, g->GetGroupSize(), nbThread, keys, keyparts, p);
 	//getGPUStartingKeysViaThrust(rndGPU, tRangeStart, tRangeEnd, groupSize, nbThread, keys, p);
-	getEvenlyDistributedGPUStartingKeys(rndGPU, tRangeStart, tRangeEnd, groupSize, nbThread, keys, p);
+	//getEvenlyDistributedGPUStartingKeys(rndGPU, tRangeStart, tRangeEnd, groupSize, nbThread, keys, p);
+	getOverSampledGPUStartingKeys(rndGPU, tRangeStart, tRangeEnd, groupSize, nbThread, keys, p);
 
 	ok = g->SetKeys(p);
 
@@ -2506,8 +2741,9 @@ void KeyFinder::FindKeyGPUThrust(TH_PARAM* ph)
 	// GPU Thread
 	while (ok && !endOfSearch) {
 
-		if (ph->rKeyRequest) {		
-			getEvenlyDistributedGPUStartingKeys(rndGPU, tRangeStart, tRangeEnd, groupSize, nbThread, keys, p);
+		if (ph->rKeyRequest) {	
+			getOverSampledGPUStartingKeys(rndGPU, tRangeStart, tRangeEnd, groupSize, nbThread, keys, p);
+			//getEvenlyDistributedGPUStartingKeys(rndGPU, tRangeStart, tRangeEnd, groupSize, nbThread, keys, p);
 			//getGPUStartingKeysViaThrust(rndGPU, tRangeStart, tRangeEnd, g->GetGroupSize(), nbThread, keys, p);
 			//getGPUStartingKeys2(tRangeStart, tRangeEnd, g->GetGroupSize(), nbThread, keys, p);
 			ok = g->SetKeys(p);
