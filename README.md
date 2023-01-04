@@ -53,9 +53,45 @@ What I wanted out of this project was essentially a billion-spins-per-second pri
 
 I'm a jack-of-all-trades / master-of-none, so .. be patient with me. ¯\_(ツ)_/¯
 
-# For Testing:  
+# For Testing 38: 
 ```
-keyscanner -g --gpui 0 --gpux 256,256 -m address --coin BTC -r 1 -o FOUNDTEST42.txt --range 20000000000:3ffffffffff 1E32GPWgDyeyQac4aJxm9HVoLrrEYPnM4N
+keyscanner -g --gpui 0 --gpux 256,256 -m address --coin BTC -r 76 -o FOUNDTEST38.txt --range 2000000000:3fffffffff 1HBtApAFA9B2YZw3G2YKSMCtb3dVnjuNe2
+```
+
+Output:
+```
+  KeyScanner v2.01
+
+  COMP MODE    : COMPRESSED
+  COIN TYPE    : BITCOIN
+  SEARCH MODE  : Single Address
+  DEVICE       : GPU
+  CPU THREAD   : 0
+  GPU IDS      : 0
+  GPU GRIDSIZE : 256x256
+  BTC ADDRESS  : 1HBtApAFA9B2YZw3G2YKSMCtb3dVnjuNe2
+  OUTPUT FILE  : FOUNDTEST38.txt
+
+  Start Time   : Thu Dec 29 00:07:30 2022
+
+  GPU          : GPU #0 NVIDIA GeForce RTX 3070 (46x128 cores) Grid(256x256)
+  Base Key     : Randomly changes 65536 start Private keys every 76,000,000,000 on the counter
+  Random : Min 38 (bit) 2000000000
+  Random : Max 38 (bit) 3FFFFFFFFF
+
+  [00:04:45] [R: 4] [312B3F8AB0] [F: 0] [GPU: 1.32 Gk/s] [T: 374,735,896,576]
+  =================================================================================
+  PubAddress: 1HBtApAFA9B2YZw3G2YKSMCtb3dVnjuNe2
+  Priv (WIF): p2pkh:KwDiBf89QgGbjEhKnhXJuH7LrciVrZi3qYjgd9P3MahktLW5315v
+  Priv (HEX): 22382FACD0
+  PubK (HEX): 03C060E1E3771CBECCB38E119C2414702F3F5181A89652538851D2E3886BDD70C6
+  =================================================================================
+
+```
+
+# For Testing 42: 
+```
+keyscanner -g --gpui 0 --gpux 256,256 -m address --coin BTC -r 4 -o FOUNDTEST42.txt --range 20000000000:3ffffffffff 1E32GPWgDyeyQac4aJxm9HVoLrrEYPnM4N
 ```
 Output:
 ```
@@ -68,29 +104,59 @@ Output:
   CPU THREAD   : 0
   GPU IDS      : 0
   GPU GRIDSIZE : 256x256
-  POOP Factor: : Super Poopy.
   BTC ADDRESS  : 1E32GPWgDyeyQac4aJxm9HVoLrrEYPnM4N
   OUTPUT FILE  : FOUNDTEST42.txt
 
-  Start Time   : Wed Dec 28 11:27:02 2022
+  Start Time   : Thu Dec 29 18:43:57 2022
 
   GPU          : GPU #0 NVIDIA GeForce RTX 3070 (46x128 cores) Grid(256x256)
-  Base Key     : Randomly changes 65536 start Private keys every 1,000,000,000 on the counter
-  ROTOR Random : Min 42 (bit) 20000000000
-  ROTOR Random : Max 42 (bit) 3FFFFFFFFFF
+  Base Key     : Randomly changes 65536 start Private keys every 4,000,000,000 on the counter
+  Random : Min 42 (bit) 20000000000
+  Random : Max 42 (bit) 3FFFFFFFFFF
+  Method : Evenly Distributed, Thrust RNG, 16bit Assembly
 
-  [00:01:39] [R: 392] [3D70309E4B8] [F: 0] [GPU: 573.08 Mk/s] [T: 4,623,532,294,144]
+  [Thread: 57344]   [331A9B9C9EA] ] [F: 0] [GPU: 1.16 Gk/s] [T: 3,113,582,854,144]
   =================================================================================
   PubAddress: 1E32GPWgDyeyQac4aJxm9HVoLrrEYPnM4N
   Priv (WIF): p2pkh:KwDiBf89QgGbjEhKnhXJuH7LrciVrZi3qYjgd9zzYEemjCVJ3vo9
   Priv (HEX): 2A221C58D8F
   PubK (HEX): 03EEC88385BE9DA803A0D6579798D977A5D0C7F80917DAB49CB73C9E3927142CB6
   =================================================================================
-  [00:01:40] [R: 392] [3FF4FC9A22C] [F: 1] [GPU: 573.31 Mk/s] [T: 4,624,471,818,240]
+  [00:44:51] [R: 672] [2ADE6BE64E8] [F: 1] [GPU: 1.16 Gk/s] [T: 3,114,253,942,784]
+```
+# Scanning 66..
+
+```
+keyscanner -g --gpui 0 --gpux 256,256 -m address --coin BTC -r 69 -o FOUND66.txt --range 20000000000000000:3ffffffffffffffff 13zb1hQbWVsc2S7ZTZnP2G4undNNpdh5so
 ```
 
-Note: The hash rate reported about was pretty low, that particular run used OpenSSL instead of the Thrust for RNG so the Key Generation wasn't performant. Keep in mind, lower R values will regenerate keys more frequently, which is at least partially CPU bound.   Higher R values lean more on the GPU.
+Output:
+```
+  KeyScanner v2.01
 
+  COMP MODE    : COMPRESSED
+  COIN TYPE    : BITCOIN
+  SEARCH MODE  : Single Address
+  DEVICE       : GPU
+  CPU THREAD   : 0
+  GPU IDS      : 0
+  GPU GRIDSIZE : 256x256
+  SSE          : YES
+  BTC ADDRESS  : 13zb1hQbWVsc2S7ZTZnP2G4undNNpdh5so
+  OUTPUT FILE  : FOUND66.txt
+
+  Start Time   : Thu Dec 29 23:50:37 2022
+
+  GPU          : GPU #0 NVIDIA GeForce RTX 3070 (46x128 cores) Grid(256x256)
+  Base Key     : Randomly changes 65536 start Private keys every 69,000,000,000 on the counter
+  Random : Min 66 (bit) 20000000000000000
+  Random : Max 66 (bit) 3FFFFFFFFFFFFFFFF
+  Method : Evenly Distributed, Thrust RNG, 16bit Assembly
+
+  [00:03:58] [R: 4] [2DA527C016B11CD17] [F: 0] [GPU: 1.11 Gk/s] [T: 287,494,373,376]
+```
+
+Note: Lower R values will regenerate keys more frequently, which is at least partially CPU bound.   Higher R values lean more on the GPU, using VanitySearch's key addition algorithm. 
 
 Known Issues:
 
