@@ -1574,7 +1574,7 @@ std::vector<Int> KeyFinder::getGPURandoms_Masked_Oversample(Random::GPURand& rnd
 	rKeyMask.SetInt64(rKeyPer);
 
 	
-	uint64_t SAMPLE_POOL_SIZE = 1024 * 8196;// 1024 * 128;
+	uint64_t SAMPLE_POOL_SIZE = 1024 * 8196;
 
 	Int POOL_MIN;
 	Int POOL_MAX;
@@ -1583,9 +1583,10 @@ std::vector<Int> KeyFinder::getGPURandoms_Masked_Oversample(Random::GPURand& rnd
 	POOL_MAX.SetBase16("FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEBAAEDCE6AF48A03BBFD25E8CD0364140");
 
 
-	uint64_t NET_SIZE = 1600;// 1024;
+	uint64_t NET_SIZE = 3200;
 	uint64_t MASK_SIZE = POOL_MAX.GetBase16Length() -  max.GetBase16Length();
 
+	NET_SIZE = length;
 	uint32_t right_pad = rKeyMask.GetBase16Length() - 1;
 	uint64_t timeSeed = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
 	rndGPU.loadRandomizers(timeSeed, SAMPLE_POOL_SIZE, POOL_MAX.DeriveRandomizerWidth());
@@ -1610,66 +1611,71 @@ std::vector<Int> KeyFinder::getGPURandoms_Masked_Oversample(Random::GPURand& rnd
 		if (preResults.size() == NET_SIZE) break;
 	}
 
-	if (rKeyCount2 == 0) {
-		if (display > 0) {
-			printf("  Generator : Extracted %d masked keys for given keyspace range\n", preResults.size());
-		}
-	}
 
-	std::sort(preResults.begin(), preResults.end(), custom_comparer);
-	
 	uint64_t middleKeyCount = length / preResults.size();
-
-
-	if (rKeyCount2 == 0) {
-		if (display > 0) {
-			printf("  Generator : Sorted %d base keys\n", preResults.size());
-			printf("  Generator : Interleaving %d middle keys per base key\n", middleKeyCount);
-		}
-	}
-
 	int overFlowCount = 0;
 	int middleCount = 0;
 	int lastIndex = preResults.size() - 1;
-	for (int i = 0; i < preResults.size(); i++) {
-		Int distance;
-		if (i == 0) {
-			distance = preResults[i];
-			distance.Sub(&min);
-		}
-		else if (i == lastIndex) {
-			distance = max;
-			distance.Sub(&preResults[lastIndex]);
-		}
-		else {
-			distance = preResults[i + 1];
-			distance.Sub(&preResults[i]);
-		}
 
-		Int spacing = distance;
-
-		spacing.Div(middleKeyCount);
-
-		Int adjustedKey = preResults[i];
-		adjustedKey.ZeroRight(right_pad);
-		results.push_back(adjustedKey);
-
-		Int previousKey = preResults[i];
-		for (int m = 0; m < middleKeyCount; m++) {
-			previousKey.Add(&spacing);  //binary feather any overflow back into the range
-			if (previousKey.IsGreater(&max)) {
-				previousKey = max;
-				Int reverse_Spacing = spacing;
-				reverse_Spacing.Div(2 * (m + 1));
-				previousKey.Sub(&reverse_Spacing);
-				overFlowCount++;
+	if (preResults.size() < length) { //only sort and middle key if there are keys remaining to generate
+		if (rKeyCount2 == 0) {
+			if (display > 0) {
+				printf("  Generator : Extracted %d masked keys for given keyspace range\n", preResults.size());
 			}
-			adjustedKey = previousKey;
+		}
+
+		std::sort(preResults.begin(), preResults.end(), custom_comparer);
+
+		if (rKeyCount2 == 0) {
+			if (display > 0) {
+				printf("  Generator : Sorted %d base keys\n", preResults.size());
+				printf("  Generator : Interleaving %d middle keys per base key\n", middleKeyCount);
+			}
+		}
+
+		for (int i = 0; i < preResults.size(); i++) {
+			Int distance;
+			if (i == 0) {
+				distance = preResults[i];
+				distance.Sub(&min);
+			}
+			else if (i == lastIndex) {
+				distance = max;
+				distance.Sub(&preResults[lastIndex]);
+			}
+			else {
+				distance = preResults[i + 1];
+				distance.Sub(&preResults[i]);
+			}
+
+			Int spacing = distance;
+
+			spacing.Div(middleKeyCount);
+
+			Int adjustedKey = preResults[i];
 			adjustedKey.ZeroRight(right_pad);
 			results.push_back(adjustedKey);
-			middleCount++;
-		}
 
+			Int previousKey = preResults[i];
+			for (int m = 0; m < middleKeyCount; m++) {
+				previousKey.Add(&spacing);  //binary feather any overflow back into the range
+				if (previousKey.IsGreater(&max)) {
+					previousKey = max;
+					Int reverse_Spacing = spacing;
+					reverse_Spacing.Div(2 * (m + 1));
+					previousKey.Sub(&reverse_Spacing);
+					overFlowCount++;
+				}
+				adjustedKey = previousKey;
+				adjustedKey.ZeroRight(right_pad);
+				results.push_back(adjustedKey);
+				middleCount++;
+			}
+
+		}
+	}
+	else {
+		results = preResults;
 	}
 
 	if (rKeyCount2 == 0) {
