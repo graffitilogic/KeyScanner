@@ -1,0 +1,563 @@
+C:\crypto\code\repos\KeyScanner\msvc\x64\Release>keyscanner -g --gpui 0 --gpux 256,256 -m address --coin BTC -r 1 -o FOUNDTEST38.txt --range 2000000000:3fffffffff 1HBtApAFA9B2YZw3G2YKSMCtb3dVnjuNe2
+
+  KeyScanner v2.01
+
+  COMP MODE    : COMPRESSED
+  COIN TYPE    : BITCOIN
+  SEARCH MODE  : Single Address
+  DEVICE       : GPU
+  CPU THREAD   : 0
+  GPU IDS      : 0
+  GPU GRIDSIZE : 256x256
+  SSE          : YES
+  BTC ADDRESS  : 1HBtApAFA9B2YZw3G2YKSMCtb3dVnjuNe2
+  OUTPUT FILE  : FOUNDTEST38.txt
+
+  Start Time   : Thu Jan  5 09:46:16 2023
+
+  GPU          : GPU #0 NVIDIA GeForce RTX 3070 (46x128 cores) Grid(256x256)
+  Start Keys : Randomly regenerates 65536 starting keys every 1,000,000,000 on the counter
+  Random : Min 38 (bit) 2000000000
+  Random : Max 38 (bit) 3FFFFFFFFF
+  Method : Oversampled, then masked to keyspace, Thrust RNG, 16bit Assembly
+  Generator : Generated 8392704 full-length starting keys
+  Generator : Extracted 65536 masked keys for given keyspace range
+  Generator : Sorted 65536 base keys
+  Generator : Interleaving 1 middle keys per base key
+  Generator : 65536 middle keys generated
+  Generator : 131072 starting keys generated.
+
+  [00:00:08] [R: 1] [2FE92B39FC] [F: 0] [GPU: 167.57 Mk/s] [T: 1,342,177,280]
+  =================================================================================
+  PubAddress: 1HBtApAFA9B2YZw3G2YKSMCtb3dVnjuNe2
+  Priv (WIF): p2pkh:KwDiBf89QgGbjEhKnhXJuH7LrciVrZi3qYjgd9P3MahktLW5315v
+  Priv (HEX): 22382FACD0
+  PubK (HEX): 03C060E1E3771CBECCB38E119C2414702F3F5181A89652538851D2E3886BDD70C6
+  =================================================================================
+
+  =================================================================================
+  PubAddress: 1HBtApAFA9B2YZw3G2YKSMCtb3dVnjuNe2
+  Priv (WIF): p2pkh:KwDiBf89QgGbjEhKnhXJuH7LrciVrZi3qYjgd9P3MahktLW5315v
+  Priv (HEX): 22382FACD0
+  PubK (HEX): 03C060E1E3771CBECCB38E119C2414702F3F5181A89652538851D2E3886BDD70C6
+  =================================================================================
+  [00:00:09] [R: 1] [2FE92B43F7] [F: 2] [GPU: 167.49 Mk/s] [T: 2,550,136,832]
+
+  BYE
+
+C:\crypto\code\repos\KeyScanner\msvc\x64\Release>keyscanner -g --gpui 0 --gpux 256,256 -m address --coin BTC -r 1 -o FOUNDTEST38.txt --range 2000000000:3fffffffff 1HBtApAFA9B2YZw3G2YKSMCtb3dVnjuNe2
+
+  KeyScanner v2.01
+
+  COMP MODE    : COMPRESSED
+  COIN TYPE    : BITCOIN
+  SEARCH MODE  : Single Address
+  DEVICE       : GPU
+  CPU THREAD   : 0
+  GPU IDS      : 0
+  GPU GRIDSIZE : 256x256
+  SSE          : YES
+  BTC ADDRESS  : 1HBtApAFA9B2YZw3G2YKSMCtb3dVnjuNe2
+  OUTPUT FILE  : FOUNDTEST38.txt
+
+  Start Time   : Thu Jan  5 09:46:33 2023
+
+  GPU          : GPU #0 NVIDIA GeForce RTX 3070 (46x128 cores) Grid(256x256)
+  Start Keys : Randomly regenerates 65536 starting keys every 1,000,000,000 on the counter
+  Random : Min 38 (bit) 2000000000
+  Random : Max 38 (bit) 3FFFFFFFFF
+  Method : Oversampled, then masked to keyspace, Thrust RNG, 16bit Assembly
+  Generator : Generated 8392704 full-length starting keys
+  Generator : Extracted 65536 masked keys for given keyspace range
+  Generator : Sorted 65536 base keys
+  Generator : Interleaving 1 middle keys per base key
+  Generator : 65536 middle keys generated
+  Generator : 131072 starting keys generated.
+
+  [00:26:52] [R: 199] [300D78F9FC] [F: 0] [GPU: 167.55 Mk/s] [T: 263,872,053,248]
+  =================================================================================
+  PubAddress: 1HBtApAFA9B2YZw3G2YKSMCtb3dVnjuNe2
+  Priv (WIF): p2pkh:KwDiBf89QgGbjEhKnhXJuH7LrciVrZi3qYjgd9P3MahktLW5315v
+  Priv (HEX): 22382FACD0
+  PubK (HEX): 03C060E1E3771CBECCB38E119C2414702F3F5181A89652538851D2E3886BDD70C6
+  =================================================================================
+
+  =================================================================================
+  PubAddress: 1HBtApAFA9B2YZw3G2YKSMCtb3dVnjuNe2
+  Priv (WIF): p2pkh:KwDiBf89QgGbjEhKnhXJuH7LrciVrZi3qYjgd9P3MahktLW5315v
+  Priv (HEX): 22382FACD0
+  PubK (HEX): 03C060E1E3771CBECCB38E119C2414702F3F5181A89652538851D2E3886BDD70C6
+  =================================================================================
+  [00:26:53] [R: 199] [300D7903F9] [F: 2] [GPU: 167.58 Mk/s] [T: 265,080,012,800]
+
+  BYE
+
+C:\crypto\code\repos\KeyScanner\msvc\x64\Release>keyscanner -g --gpui 0 --gpux 256,256 -m address --coin BTC -r 1 -o FOUNDTEST38.txt --range 2000000000:3fffffffff 1HBtApAFA9B2YZw3G2YKSMCtb3dVnjuNe2
+
+  KeyScanner v2.01
+
+  COMP MODE    : COMPRESSED
+  COIN TYPE    : BITCOIN
+  SEARCH MODE  : Single Address
+  DEVICE       : GPU
+  CPU THREAD   : 0
+  GPU IDS      : 0
+  GPU GRIDSIZE : 256x256
+  SSE          : YES
+  BTC ADDRESS  : 1HBtApAFA9B2YZw3G2YKSMCtb3dVnjuNe2
+  OUTPUT FILE  : FOUNDTEST38.txt
+
+  Start Time   : Thu Jan  5 10:13:33 2023
+
+  GPU          : GPU #0 NVIDIA GeForce RTX 3070 (46x128 cores) Grid(256x256)
+  Start Keys : Randomly regenerates 65536 starting keys every 1,000,000,000 on the counter
+  Random : Min 38 (bit) 2000000000
+  Random : Max 38 (bit) 3FFFFFFFFF
+  Method : Oversampled, then masked to keyspace, Thrust RNG, 16bit Assembly
+  Generator : Generated 8392704 full-length starting keys
+  Generator : Extracted 65536 masked keys for given keyspace range
+  Generator : Sorted 65536 base keys
+  Generator : Interleaving 1 middle keys per base key
+  Generator : 65536 middle keys generated
+  Generator : 131072 starting keys generated.
+
+  [00:07:29] [R: 56] [2FFE8C87FC] [F: 0] [GPU: 133.99 Mk/s] [T: 74,490,839,040]
+  =================================================================================
+  PubAddress: 1HBtApAFA9B2YZw3G2YKSMCtb3dVnjuNe2
+  Priv (WIF): p2pkh:KwDiBf89QgGbjEhKnhXJuH7LrciVrZi3qYjgd9P3MahktLW5315v
+  Priv (HEX): 22382FACD0
+  PubK (HEX): 03C060E1E3771CBECCB38E119C2414702F3F5181A89652538851D2E3886BDD70C6
+  =================================================================================
+
+  =================================================================================
+  PubAddress: 1HBtApAFA9B2YZw3G2YKSMCtb3dVnjuNe2
+  Priv (WIF): p2pkh:KwDiBf89QgGbjEhKnhXJuH7LrciVrZi3qYjgd9P3MahktLW5315v
+  Priv (HEX): 22382FACD0
+  PubK (HEX): 03C060E1E3771CBECCB38E119C2414702F3F5181A89652538851D2E3886BDD70C6
+  =================================================================================
+  [00:07:30] [R: 56] [2FFE8C91F8] [F: 2] [GPU: 167.57 Mk/s] [T: 75,698,798,592]
+
+  BYE
+
+C:\crypto\code\repos\KeyScanner\msvc\x64\Release>keyscanner -g --gpui 0 --gpux 256,256 -m address --coin BTC -r 1 -o FOUNDTEST38.txt --range 2000000000:3fffffffff 1HBtApAFA9B2YZw3G2YKSMCtb3dVnjuNe2
+
+  KeyScanner v2.01
+
+  COMP MODE    : COMPRESSED
+  COIN TYPE    : BITCOIN
+  SEARCH MODE  : Single Address
+  DEVICE       : GPU
+  CPU THREAD   : 0
+  GPU IDS      : 0
+  GPU GRIDSIZE : 256x256
+  SSE          : YES
+  BTC ADDRESS  : 1HBtApAFA9B2YZw3G2YKSMCtb3dVnjuNe2
+  OUTPUT FILE  : FOUNDTEST38.txt
+
+  Start Time   : Thu Jan  5 10:21:12 2023
+
+  GPU          : GPU #0 NVIDIA GeForce RTX 3070 (46x128 cores) Grid(256x256)
+  Start Keys : Randomly regenerates 65536 starting keys every 1,000,000,000 on the counter
+  Random : Min 38 (bit) 2000000000
+  Random : Max 38 (bit) 3FFFFFFFFF
+  Method : Oversampled, then masked to keyspace, Thrust RNG, 16bit Assembly
+  Generator : Generated 8392704 full-length starting keys
+  Generator : Extracted 65536 masked keys for given keyspace range
+  Generator : Sorted 65536 base keys
+  Generator : Interleaving 1 middle keys per base key
+  Generator : 65536 middle keys generated
+  Generator : 131072 starting keys generated.
+
+  [00:00:57] [R: 7] [3007E388FD] [F: 0] [GPU: 150.82 Mk/s] [T: 10,066,329,600]
+  =================================================================================
+  PubAddress: 1HBtApAFA9B2YZw3G2YKSMCtb3dVnjuNe2
+  Priv (WIF): p2pkh:KwDiBf89QgGbjEhKnhXJuH7LrciVrZi3qYjgd9P3MahktLW5315v
+  Priv (HEX): 22382FACD0
+  PubK (HEX): 03C060E1E3771CBECCB38E119C2414702F3F5181A89652538851D2E3886BDD70C6
+  =================================================================================
+
+  =================================================================================
+  PubAddress: 1HBtApAFA9B2YZw3G2YKSMCtb3dVnjuNe2
+  Priv (WIF): p2pkh:KwDiBf89QgGbjEhKnhXJuH7LrciVrZi3qYjgd9P3MahktLW5315v
+  Priv (HEX): 22382FACD0
+  PubK (HEX): 03C060E1E3771CBECCB38E119C2414702F3F5181A89652538851D2E3886BDD70C6
+  =================================================================================
+  [00:00:58] [R: 7] [3007E391F8] [F: 2] [GPU: 150.71 Mk/s] [T: 11,140,071,424]
+
+  BYE
+
+C:\crypto\code\repos\KeyScanner\msvc\x64\Release>keyscanner -g --gpui 0 --gpux 256,256 -m address --coin BTC -r 5 -o FOUNDTEST38.txt --range 2000000000:3fffffffff 1HBtApAFA9B2YZw3G2YKSMCtb3dVnjuNe2
+
+  KeyScanner v2.01
+
+  COMP MODE    : COMPRESSED
+  COIN TYPE    : BITCOIN
+  SEARCH MODE  : Single Address
+  DEVICE       : GPU
+  CPU THREAD   : 0
+  GPU IDS      : 0
+  GPU GRIDSIZE : 256x256
+  SSE          : YES
+  BTC ADDRESS  : 1HBtApAFA9B2YZw3G2YKSMCtb3dVnjuNe2
+  OUTPUT FILE  : FOUNDTEST38.txt
+
+  Start Time   : Thu Jan  5 10:22:17 2023
+
+  GPU          : GPU #0 NVIDIA GeForce RTX 3070 (46x128 cores) Grid(256x256)
+  Start Keys : Randomly regenerates 65536 starting keys every 5,000,000,000 on the counter
+  Random : Min 38 (bit) 2000000000
+  Random : Max 38 (bit) 3FFFFFFFFF
+  Method : Oversampled, then masked to keyspace, Thrust RNG, 16bit Assembly
+  Generator : Generated 8392704 full-length starting keys
+  Generator : Extracted 65536 masked keys for given keyspace range
+  Generator : Sorted 65536 base keys
+  Generator : Interleaving 1 middle keys per base key
+  Generator : 65536 middle keys generated
+  Generator : 131072 starting keys generated.
+
+  [00:03:31] [R: 19] [2FFCF625F1] [F: 0] [GPU: 301.47 Mk/s] [T: 103,347,650,560]
+  =================================================================================
+  PubAddress: 1HBtApAFA9B2YZw3G2YKSMCtb3dVnjuNe2
+  Priv (WIF): p2pkh:KwDiBf89QgGbjEhKnhXJuH7LrciVrZi3qYjgd9P3MahktLW5315v
+  Priv (HEX): 22382FACD0
+  PubK (HEX): 03C060E1E3771CBECCB38E119C2414702F3F5181A89652538851D2E3886BDD70C6
+  =================================================================================
+
+  =================================================================================
+  PubAddress: 1HBtApAFA9B2YZw3G2YKSMCtb3dVnjuNe2
+  Priv (WIF): p2pkh:KwDiBf89QgGbjEhKnhXJuH7LrciVrZi3qYjgd9P3MahktLW5315v
+  Priv (HEX): 22382FACD0
+  PubK (HEX): 03C060E1E3771CBECCB38E119C2414702F3F5181A89652538851D2E3886BDD70C6
+  =================================================================================
+  [00:03:32] [R: 19] [2FFCF641E5] [F: 2] [GPU: 469.03 Mk/s] [T: 104,689,827,840]
+
+  BYE
+
+C:\crypto\code\repos\KeyScanner\msvc\x64\Release>keyscanner -g --gpui 0 --gpux 256,256 -m address --coin BTC -r 5 -o FOUNDTEST38.txt --range 2000000000:3fffffffff 1HBtApAFA9B2YZw3G2YKSMCtb3dVnjuNe2
+
+  KeyScanner v2.01
+
+  COMP MODE    : COMPRESSED
+  COIN TYPE    : BITCOIN
+  SEARCH MODE  : Single Address
+  DEVICE       : GPU
+  CPU THREAD   : 0
+  GPU IDS      : 0
+  GPU GRIDSIZE : 256x256
+  SSE          : YES
+  BTC ADDRESS  : 1HBtApAFA9B2YZw3G2YKSMCtb3dVnjuNe2
+  OUTPUT FILE  : FOUNDTEST38.txt
+
+  Start Time   : Thu Jan  5 10:25:57 2023
+
+  GPU          : GPU #0 NVIDIA GeForce RTX 3070 (46x128 cores) Grid(256x256)
+  Start Keys : Randomly regenerates 65536 starting keys every 5,000,000,000 on the counter
+  Random : Min 38 (bit) 2000000000
+  Random : Max 38 (bit) 3FFFFFFFFF
+  Method : Oversampled, then masked to keyspace, Thrust RNG, 16bit Assembly
+  Generator : Generated 8392704 full-length starting keys
+  Generator : Extracted 65536 masked keys for given keyspace range
+  Generator : Sorted 65536 base keys
+  Generator : Interleaving 1 middle keys per base key
+  Generator : 65536 middle keys generated
+  Generator : 131072 starting keys generated.
+
+  [00:02:14] [R: 12] [300A1C27EF] [F: 0] [GPU: 318.34 Mk/s] [T: 65,900,904,448]
+  =================================================================================
+  PubAddress: 1HBtApAFA9B2YZw3G2YKSMCtb3dVnjuNe2
+  Priv (WIF): p2pkh:KwDiBf89QgGbjEhKnhXJuH7LrciVrZi3qYjgd9P3MahktLW5315v
+  Priv (HEX): 22382FACD0
+  PubK (HEX): 03C060E1E3771CBECCB38E119C2414702F3F5181A89652538851D2E3886BDD70C6
+  =================================================================================
+
+  =================================================================================
+  PubAddress: 1HBtApAFA9B2YZw3G2YKSMCtb3dVnjuNe2
+  Priv (WIF): p2pkh:KwDiBf89QgGbjEhKnhXJuH7LrciVrZi3qYjgd9P3MahktLW5315v
+  Priv (HEX): 22382FACD0
+  PubK (HEX): 03C060E1E3771CBECCB38E119C2414702F3F5181A89652538851D2E3886BDD70C6
+  =================================================================================
+  [00:02:15] [R: 12] [300A1C44E6] [F: 2] [GPU: 485.96 Mk/s] [T: 67,243,081,728]
+
+  BYE
+
+C:\crypto\code\repos\KeyScanner\msvc\x64\Release>keyscanner -g --gpui 0 --gpux 256,256 -m address --coin BTC -r 5 -o FOUNDTEST38.txt --range 2000000000:3fffffffff 1HBtApAFA9B2YZw3G2YKSMCtb3dVnjuNe2
+
+  KeyScanner v2.01
+
+  COMP MODE    : COMPRESSED
+  COIN TYPE    : BITCOIN
+  SEARCH MODE  : Single Address
+  DEVICE       : GPU
+  CPU THREAD   : 0
+  GPU IDS      : 0
+  GPU GRIDSIZE : 256x256
+  SSE          : YES
+  BTC ADDRESS  : 1HBtApAFA9B2YZw3G2YKSMCtb3dVnjuNe2
+  OUTPUT FILE  : FOUNDTEST38.txt
+
+  Start Time   : Thu Jan  5 10:28:20 2023
+
+  GPU          : GPU #0 NVIDIA GeForce RTX 3070 (46x128 cores) Grid(256x256)
+  Start Keys : Randomly regenerates 65536 starting keys every 5,000,000,000 on the counter
+  Random : Min 38 (bit) 2000000000
+  Random : Max 38 (bit) 3FFFFFFFFF
+  Method : Oversampled, then masked to keyspace, Thrust RNG, 16bit Assembly
+  Generator : Generated 8392704 full-length starting keys
+  Generator : Extracted 65536 masked keys for given keyspace range
+  Generator : Sorted 65536 base keys
+  Generator : Interleaving 1 middle keys per base key
+  Generator : 65536 middle keys generated
+  Generator : 131072 starting keys generated.
+
+  [00:16:24] [R: 89] [2FF2F025F5] [F: 0] [GPU: 301.66 Mk/s] [T: 471,238,443,008]
+  =================================================================================
+  PubAddress: 1HBtApAFA9B2YZw3G2YKSMCtb3dVnjuNe2
+  Priv (WIF): p2pkh:KwDiBf89QgGbjEhKnhXJuH7LrciVrZi3qYjgd9P3MahktLW5315v
+  Priv (HEX): 22382FACD0
+  PubK (HEX): 03C060E1E3771CBECCB38E119C2414702F3F5181A89652538851D2E3886BDD70C6
+  =================================================================================
+
+  =================================================================================
+  PubAddress: 1HBtApAFA9B2YZw3G2YKSMCtb3dVnjuNe2
+  Priv (WIF): p2pkh:KwDiBf89QgGbjEhKnhXJuH7LrciVrZi3qYjgd9P3MahktLW5315v
+  Priv (HEX): 22382FACD0
+  PubK (HEX): 03C060E1E3771CBECCB38E119C2414702F3F5181A89652538851D2E3886BDD70C6
+  =================================================================================
+  [00:16:25] [R: 89] [2FF2F041EB] [F: 2] [GPU: 469.12 Mk/s] [T: 472,580,620,288]
+
+  BYE
+
+C:\crypto\code\repos\KeyScanner\msvc\x64\Release>keyscanner -g --gpui 0 --gpux 256,256 -m address --coin BTC -r 5 -o FOUNDTEST38.txt --range 2000000000:3fffffffff 1HBtApAFA9B2YZw3G2YKSMCtb3dVnjuNe2
+
+  KeyScanner v2.01
+
+  COMP MODE    : COMPRESSED
+  COIN TYPE    : BITCOIN
+  SEARCH MODE  : Single Address
+  DEVICE       : GPU
+  CPU THREAD   : 0
+  GPU IDS      : 0
+  GPU GRIDSIZE : 256x256
+  SSE          : YES
+  BTC ADDRESS  : 1HBtApAFA9B2YZw3G2YKSMCtb3dVnjuNe2
+  OUTPUT FILE  : FOUNDTEST38.txt
+
+  Start Time   : Thu Jan  5 10:44:53 2023
+
+  GPU          : GPU #0 NVIDIA GeForce RTX 3070 (46x128 cores) Grid(256x256)
+  Start Keys : Randomly regenerates 65536 starting keys every 5,000,000,000 on the counter
+  Random : Min 38 (bit) 2000000000
+  Random : Max 38 (bit) 3FFFFFFFFF
+  Method : Oversampled, then masked to keyspace, Thrust RNG, 16bit Assembly
+  Generator : Generated 8392704 full-length starting keys
+  Generator : Extracted 65536 masked keys for given keyspace range
+  Generator : Sorted 65536 base keys
+  Generator : Interleaving 1 middle keys per base key
+  Generator : 65536 middle keys generated
+  Generator : 131072 starting keys generated.
+
+  [00:25:59] [R: 141] [300F3227F3] [F: 0] [GPU: 318.55 Mk/s] [T: 750,679,752,704]
+  =================================================================================
+  PubAddress: 1HBtApAFA9B2YZw3G2YKSMCtb3dVnjuNe2
+  Priv (WIF): p2pkh:KwDiBf89QgGbjEhKnhXJuH7LrciVrZi3qYjgd9P3MahktLW5315v
+  Priv (HEX): 22382FACD0
+  PubK (HEX): 03C060E1E3771CBECCB38E119C2414702F3F5181A89652538851D2E3886BDD70C6
+  =================================================================================
+
+  =================================================================================
+  PubAddress: 1HBtApAFA9B2YZw3G2YKSMCtb3dVnjuNe2
+  Priv (WIF): p2pkh:KwDiBf89QgGbjEhKnhXJuH7LrciVrZi3qYjgd9P3MahktLW5315v
+  Priv (HEX): 22382FACD0
+  PubK (HEX): 03C060E1E3771CBECCB38E119C2414702F3F5181A89652538851D2E3886BDD70C6
+  =================================================================================
+  [00:26:00] [R: 141] [300F3244EB] [F: 2] [GPU: 486.07 Mk/s] [T: 752,021,929,984]
+
+  BYE
+
+C:\crypto\code\repos\KeyScanner\msvc\x64\Release>keyscanner -g --gpui 0 --gpux 256,256 -m address --coin BTC -r 64 -o FOUNDTEST38.txt --range 2000000000:3fffffffff 1HBtApAFA9B2YZw3G2YKSMCtb3dVnjuNe2
+
+  KeyScanner v2.01
+
+  COMP MODE    : COMPRESSED
+  COIN TYPE    : BITCOIN
+  SEARCH MODE  : Single Address
+  DEVICE       : GPU
+  CPU THREAD   : 0
+  GPU IDS      : 0
+  GPU GRIDSIZE : 256x256
+  SSE          : YES
+  BTC ADDRESS  : 1HBtApAFA9B2YZw3G2YKSMCtb3dVnjuNe2
+  OUTPUT FILE  : FOUNDTEST38.txt
+
+  Start Time   : Thu Jan  5 11:11:01 2023
+
+  GPU          : GPU #0 NVIDIA GeForce RTX 3070 (46x128 cores) Grid(256x256)
+  Start Keys : Randomly regenerates 65536 starting keys every 64,000,000,000 on the counter
+  Random : Min 38 (bit) 2000000000
+  Random : Max 38 (bit) 3FFFFFFFFF
+  Method : Oversampled, then masked to keyspace, Thrust RNG, 16bit Assembly
+  Generator : Generated 8392704 full-length starting keys
+  Generator : Extracted 65536 masked keys for given keyspace range
+  Generator : Sorted 65536 base keys
+  Generator : Interleaving 1 middle keys per base key
+  Generator : 65536 middle keys generated
+  Generator : 131072 starting keys generated.
+
+  [00:03:35] [R: 3] [2FE532626E] [F: 0] [GPU: 1.32 Gk/s] [T: 256,758,513,664]
+  =================================================================================
+  PubAddress: 1HBtApAFA9B2YZw3G2YKSMCtb3dVnjuNe2
+  Priv (WIF): p2pkh:KwDiBf89QgGbjEhKnhXJuH7LrciVrZi3qYjgd9P3MahktLW5315v
+  Priv (HEX): 22382FACD0
+  PubK (HEX): 03C060E1E3771CBECCB38E119C2414702F3F5181A89652538851D2E3886BDD70C6
+  =================================================================================
+
+  =================================================================================
+  PubAddress: 1HBtApAFA9B2YZw3G2YKSMCtb3dVnjuNe2
+  Priv (WIF): p2pkh:KwDiBf89QgGbjEhKnhXJuH7LrciVrZi3qYjgd9P3MahktLW5315v
+  Priv (HEX): 22382FACD0
+  PubK (HEX): 03C060E1E3771CBECCB38E119C2414702F3F5181A89652538851D2E3886BDD70C6
+  =================================================================================
+  [00:03:36] [R: 3] [2FE532B153] [F: 2] [GPU: 1.32 Gk/s] [T: 258,100,690,944]
+
+  BYE
+
+C:\crypto\code\repos\KeyScanner\msvc\x64\Release>keyscanner -g --gpui 0 --gpux 256,256 -m address --coin BTC -r 64 -o FOUNDTEST38.txt --range 2000000000:3fffffffff 1HBtApAFA9B2YZw3G2YKSMCtb3dVnjuNe2
+
+  KeyScanner v2.01
+
+  COMP MODE    : COMPRESSED
+  COIN TYPE    : BITCOIN
+  SEARCH MODE  : Single Address
+  DEVICE       : GPU
+  CPU THREAD   : 0
+  GPU IDS      : 0
+  GPU GRIDSIZE : 256x256
+  SSE          : YES
+  BTC ADDRESS  : 1HBtApAFA9B2YZw3G2YKSMCtb3dVnjuNe2
+  OUTPUT FILE  : FOUNDTEST38.txt
+
+  Start Time   : Thu Jan  5 11:14:45 2023
+
+  GPU          : GPU #0 NVIDIA GeForce RTX 3070 (46x128 cores) Grid(256x256)
+  Start Keys : Randomly regenerates 65536 starting keys every 64,000,000,000 on the counter
+  Random : Min 38 (bit) 2000000000
+  Random : Max 38 (bit) 3FFFFFFFFF
+  Method : Oversampled, then masked to keyspace, Thrust RNG, 16bit Assembly
+  Generator : Generated 8392704 full-length starting keys
+  Generator : Extracted 65536 masked keys for given keyspace range
+  Generator : Sorted 65536 base keys
+  Generator : Interleaving 1 middle keys per base key
+  Generator : 65536 middle keys generated
+  Generator : 131072 starting keys generated.
+
+  [00:03:26] [R: 3] [300D0F9C39] [F: 0] [GPU: 1.32 Gk/s] [T: 244,276,264,960]
+  =================================================================================
+  PubAddress: 1HBtApAFA9B2YZw3G2YKSMCtb3dVnjuNe2
+  Priv (WIF): p2pkh:KwDiBf89QgGbjEhKnhXJuH7LrciVrZi3qYjgd9P3MahktLW5315v
+  Priv (HEX): 22382FACD0
+  PubK (HEX): 03C060E1E3771CBECCB38E119C2414702F3F5181A89652538851D2E3886BDD70C6
+  =================================================================================
+
+  =================================================================================
+  PubAddress: 1HBtApAFA9B2YZw3G2YKSMCtb3dVnjuNe2
+  Priv (WIF): p2pkh:KwDiBf89QgGbjEhKnhXJuH7LrciVrZi3qYjgd9P3MahktLW5315v
+  Priv (HEX): 22382FACD0
+  PubK (HEX): 03C060E1E3771CBECCB38E119C2414702F3F5181A89652538851D2E3886BDD70C6
+  =================================================================================
+  [00:03:27] [R: 3] [300D0FEB1E] [F: 2] [GPU: 1.32 Gk/s] [T: 245,618,442,240]
+
+  BYE
+
+C:\crypto\code\repos\KeyScanner\msvc\x64\Release>keyscanner -g --gpui 0 --gpux 256,256 -m address --coin BTC -r 64 -o FOUNDTEST38.txt --range 2000000000:3fffffffff 1HBtApAFA9B2YZw3G2YKSMCtb3dVnjuNe2
+
+  KeyScanner v2.01
+
+  COMP MODE    : COMPRESSED
+  COIN TYPE    : BITCOIN
+  SEARCH MODE  : Single Address
+  DEVICE       : GPU
+  CPU THREAD   : 0
+  GPU IDS      : 0
+  GPU GRIDSIZE : 256x256
+  SSE          : YES
+  BTC ADDRESS  : 1HBtApAFA9B2YZw3G2YKSMCtb3dVnjuNe2
+  OUTPUT FILE  : FOUNDTEST38.txt
+
+  Start Time   : Thu Jan  5 11:18:20 2023
+
+  GPU          : GPU #0 NVIDIA GeForce RTX 3070 (46x128 cores) Grid(256x256)
+  Start Keys : Randomly regenerates 65536 starting keys every 64,000,000,000 on the counter
+  Random : Min 38 (bit) 2000000000
+  Random : Max 38 (bit) 3FFFFFFFFF
+  Method : Oversampled, then masked to keyspace, Thrust RNG, 16bit Assembly
+  Generator : Generated 8392704 full-length starting keys
+  Generator : Extracted 65536 masked keys for given keyspace range
+  Generator : Sorted 65536 base keys
+  Generator : Interleaving 1 middle keys per base key
+  Generator : 65536 middle keys generated
+  Generator : 131072 starting keys generated.
+
+  [00:03:35] [R: 3] [2FF1FF698A] [F: 0] [GPU: 1.32 Gk/s] [T: 255,953,207,296]
+  =================================================================================
+  PubAddress: 1HBtApAFA9B2YZw3G2YKSMCtb3dVnjuNe2
+  Priv (WIF): p2pkh:KwDiBf89QgGbjEhKnhXJuH7LrciVrZi3qYjgd9P3MahktLW5315v
+  Priv (HEX): 22382FACD0
+  PubK (HEX): 03C060E1E3771CBECCB38E119C2414702F3F5181A89652538851D2E3886BDD70C6
+  =================================================================================
+
+  =================================================================================
+  PubAddress: 1HBtApAFA9B2YZw3G2YKSMCtb3dVnjuNe2
+  Priv (WIF): p2pkh:KwDiBf89QgGbjEhKnhXJuH7LrciVrZi3qYjgd9P3MahktLW5315v
+  Priv (HEX): 22382FACD0
+  PubK (HEX): 03C060E1E3771CBECCB38E119C2414702F3F5181A89652538851D2E3886BDD70C6
+  =================================================================================
+  [00:03:36] [R: 3] [2FF1FFB772] [F: 2] [GPU: 1.31 Gk/s] [T: 257,161,166,848]
+
+  BYE
+
+C:\crypto\code\repos\KeyScanner\msvc\x64\Release>keyscanner -g --gpui 0 --gpux 256,256 -m address --coin BTC -r 64 -o FOUNDTEST38.txt --range 2000000000:3fffffffff 1HBtApAFA9B2YZw3G2YKSMCtb3dVnjuNe2
+
+  KeyScanner v2.01
+
+  COMP MODE    : COMPRESSED
+  COIN TYPE    : BITCOIN
+  SEARCH MODE  : Single Address
+  DEVICE       : GPU
+  CPU THREAD   : 0
+  GPU IDS      : 0
+  GPU GRIDSIZE : 256x256
+  SSE          : YES
+  BTC ADDRESS  : 1HBtApAFA9B2YZw3G2YKSMCtb3dVnjuNe2
+  OUTPUT FILE  : FOUNDTEST38.txt
+
+  Start Time   : Thu Jan  5 11:22:04 2023
+
+  GPU          : GPU #0 NVIDIA GeForce RTX 3070 (46x128 cores) Grid(256x256)
+  Start Keys : Randomly regenerates 65536 starting keys every 64,000,000,000 on the counter
+  Random : Min 38 (bit) 2000000000
+  Random : Max 38 (bit) 3FFFFFFFFF
+  Method : Oversampled, then masked to keyspace, Thrust RNG, 16bit Assembly
+  Generator : Generated 8392704 full-length starting keys
+  Generator : Extracted 65536 masked keys for given keyspace range
+  Generator : Sorted 65536 base keys
+  Generator : Interleaving 1 middle keys per base key
+  Generator : 65536 middle keys generated
+  Generator : 131072 starting keys generated.
+
+  [00:03:03] [R: 3] [2FDE1B84A4] [F: 0] [GPU: 1.32 Gk/s] [T: 213,540,405,248]
+  =================================================================================
+  PubAddress: 1HBtApAFA9B2YZw3G2YKSMCtb3dVnjuNe2
+  Priv (WIF): p2pkh:KwDiBf89QgGbjEhKnhXJuH7LrciVrZi3qYjgd9P3MahktLW5315v
+  Priv (HEX): 22382FACD0
+  PubK (HEX): 03C060E1E3771CBECCB38E119C2414702F3F5181A89652538851D2E3886BDD70C6
+  =================================================================================
+
+  =================================================================================
+  PubAddress: 1HBtApAFA9B2YZw3G2YKSMCtb3dVnjuNe2
+  Priv (WIF): p2pkh:KwDiBf89QgGbjEhKnhXJuH7LrciVrZi3qYjgd9P3MahktLW5315v
+  Priv (HEX): 22382FACD0
+  PubK (HEX): 03C060E1E3771CBECCB38E119C2414702F3F5181A89652538851D2E3886BDD70C6
+  =================================================================================
+  [00:03:04] [R: 3] [2FDE1BD285] [F: 2] [GPU: 1.31 Gk/s] [T: 214,748,364,800]
+
+  BYE
