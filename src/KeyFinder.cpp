@@ -1573,8 +1573,8 @@ std::vector<Int> KeyFinder::getGPURandoms_Masked_Oversample(Random::GPURand& rnd
 	Int rKeyMask;
 	rKeyMask.SetInt64(rKeyPer);
 
-	uint64_t SAMPLE_POOL_SIZE = 1024 * 160;// 1024 * 128;
-	//SAMPLE_POOL_SIZE = 8192;
+	
+	uint64_t SAMPLE_POOL_SIZE = 1024 * 8196;// 1024 * 128;
 
 	Int POOL_MIN;
 	Int POOL_MAX;
@@ -1678,7 +1678,7 @@ std::vector<Int> KeyFinder::getGPURandoms_Masked_Oversample(Random::GPURand& rnd
 			if (overFlowCount > 0) {
 				printf("  Generator : %d overflow keys remediated\n", overFlowCount);
 			}
-			printf("  Generator : %d startung keys generated.\n\n", (int)results.size());
+			printf("  Generator : %d starting keys generated.\n\n", (int)results.size());
 		}
 	}
 
