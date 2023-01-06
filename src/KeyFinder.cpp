@@ -32,7 +32,7 @@ Point _2Gn;
 
 KeyFinder::KeyFinder(const std::string& inputFile, int compMode, int searchMode, int coinType, bool useGpu,
 	const std::string& outputFile, bool useSSE, uint32_t maxFound, uint64_t rKey, int nbit2, int next, int zet, int display,
-	const std::string& rangeStart, const std::string& rangeEnd, bool& should_exit)
+	const std::string& rangeStart, const std::string& rangeEnd, bool& should_exit, int maxSeconds)
 {
 	this->compMode = compMode;
 	this->useGpu = useGpu;
@@ -42,6 +42,7 @@ KeyFinder::KeyFinder(const std::string& inputFile, int compMode, int searchMode,
 	this->inputFile = inputFile;
 	this->maxFound = maxFound;
 	this->rKey = rKey;
+	this->maxSeconds = maxSeconds;
 	this->nbit2 = nbit2;
 	this->next = next;
 	this->zet = zet;
@@ -147,7 +148,7 @@ KeyFinder::KeyFinder(const std::string& inputFile, int compMode, int searchMode,
 
 KeyFinder::KeyFinder(const std::vector<unsigned char>& hashORxpoint, int compMode, int searchMode, int coinType,
 	bool useGpu, const std::string& outputFile, bool useSSE, uint32_t maxFound, uint64_t rKey, int nbit2, int next, int zet, int display,
-	const std::string& rangeStart, const std::string& rangeEnd, bool& should_exit)
+	const std::string& rangeStart, const std::string& rangeEnd, bool& should_exit, int maxSeconds)
 {
 	this->compMode = compMode;
 	this->useGpu = useGpu;
@@ -156,6 +157,7 @@ KeyFinder::KeyFinder(const std::vector<unsigned char>& hashORxpoint, int compMod
 	this->nbGPUThread = 0;
 	this->maxFound = maxFound;
 	this->rKey = rKey;
+	this->maxSeconds = maxSeconds;
 	this->next = next;
 	this->zet = zet;
 	this->display = display;
@@ -3360,6 +3362,7 @@ void KeyFinder::Search(int nbThread, std::vector<int> gpuId, std::vector<int> gr
 			}
 		}
 		
+		//I dunno why this was done this way...   need to refactor it but I try not to pay attention to it b/c it tweaks my refactor OCD tendancies
 		if (years88 > 300) {
 
 			if (display > 0) {
@@ -4881,7 +4884,7 @@ void KeyFinder::Search(int nbThread, std::vector<int> gpuId, std::vector<int> gr
 		lastCount = count;
 		lastGPUCount = gpuCount;
 		t0 = t1;
-		if (should_exit || nbFoundKey >= targetCounter || completedPerc > 100.5)
+		if (should_exit || nbFoundKey >= targetCounter || completedPerc > 100.5  || (maxSeconds > 0 && t1 > maxSeconds))
 			endOfSearch = true;
 	}
 

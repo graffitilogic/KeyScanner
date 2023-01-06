@@ -53,6 +53,7 @@ void usage()
 	printf("                                               :+COUNT\n");
 	printf("                                               Where START, END, COUNT are in hex format\n");
 	printf("-r, --rkey Rkey                          : Reloads random start Private key every (-r 10 = 10.000.000.000), default is disabled\n");
+	printf("--maxseconds N                           : Maximum Seconds.   Stops processing after run clock exceeds this value. \n");
 	printf("-c, --check                              : Check the working of the codes\n");
 	printf("-n, --next                               : Range mode GPU save checkpoints every -n ? minutes (1-10000) Default: false\n");
 	printf("-n, --next                               : Random mode: What bit range to randomize? -n 1-256 Example -n 252 Default: 252-256 bit\n");
@@ -225,6 +226,8 @@ int main(int argc, char** argv)
 	uint32_t maxFound = 1024 * 64;
 
 	uint64_t rKey = 0;
+	uint64_t maxSeconds = 0;
+
 	int next = 0;
 	Int rangeStart;
 	Int rangeEnd;
@@ -253,6 +256,7 @@ int main(int argc, char** argv)
 	parser.add("", "--coin", true);
 	parser.add("", "--range", true);
 	parser.add("-r", "--rkey", true);
+	parser.add("", "--maxseconds", true);
 	parser.add("-v", "--version", false);
 	parser.add("-n", "--next", true);
 	parser.add("-z", "--zet", true);
@@ -344,6 +348,9 @@ int main(int argc, char** argv)
 			}
 			else if (optArg.equals("-r", "--rkey")) {
 				rKey = std::stoull(optArg.arg);
+			}
+			else if (optArg.equals("", "--maxseconds")) {
+				maxSeconds = std::stoull(optArg.arg);
 			}
 			else if (optArg.equals("-n", "--next")) {
 				next = std::stoull(optArg.arg);
@@ -598,8 +605,11 @@ int main(int argc, char** argv)
 		else
 			printf("\n");
 	}
-	printf("  SSE          : %s\n", useSSE ? "YES" : "NO");
-	
+
+	if (maxSeconds > 0) {
+		printf("  STOPPING AFTER	: %d seconds\n", maxSeconds);
+	}
+
 	if (coinType == COIN_BTC) {
 		switch (searchMode) {
 		case (int)SEARCH_MODE_MA:
@@ -639,12 +649,12 @@ int main(int argc, char** argv)
 		case (int)SEARCH_MODE_MA:
 		case (int)SEARCH_MODE_MX:
 			v = new KeyFinder(inputFile, compMode, searchMode, coinType, gpuEnable, outputFile, useSSE,
-				maxFound, rKey, nbit2, next, zet, display, rangeStart.GetBase16(), rangeEnd.GetBase16(), should_exit);
+				maxFound, rKey, nbit2, next, zet, display, rangeStart.GetBase16(), rangeEnd.GetBase16(), should_exit, maxSeconds);
 			break;
 		case (int)SEARCH_MODE_SA:
 		case (int)SEARCH_MODE_SX:
 			v = new KeyFinder(hashORxpoint, compMode, searchMode, coinType, gpuEnable, outputFile, useSSE,
-				maxFound, rKey, nbit2, next, zet, display, rangeStart.GetBase16(), rangeEnd.GetBase16(), should_exit);
+				maxFound, rKey, nbit2, next, zet, display, rangeStart.GetBase16(), rangeEnd.GetBase16(), should_exit, maxSeconds);
 			break;
 		default:
 			printf("\n\n  Nothing to do, exiting\n");

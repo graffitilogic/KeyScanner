@@ -40,11 +40,11 @@ public:
 
 	KeyFinder(const std::string& inputFile, int compMode, int searchMode, int coinType, bool useGpu, 
 		const std::string& outputFile, bool useSSE, uint32_t maxFound, uint64_t rKey, int nbit2, int next, int zet, int display,
-		const std::string& rangeStart, const std::string& rangeEnd, bool& should_exit);
+		const std::string& rangeStart, const std::string& rangeEnd, bool& should_exit, int maxSeconds);
 
 	KeyFinder(const std::vector<unsigned char>& hashORxpoint, int compMode, int searchMode, int coinType, 
 		bool useGpu, const std::string& outputFile, bool useSSE, uint32_t maxFound, uint64_t rKey, int nbit2, int next, int zet, int display,
-		const std::string& rangeStart, const std::string& rangeEnd, bool& should_exit);
+		const std::string& rangeStart, const std::string& rangeEnd, bool& should_exit, int maxSeconds);
 
 	~KeyFinder();
 
@@ -165,6 +165,7 @@ private:
 	uint64_t value777;
 	uint32_t maxFound;
 	uint64_t rKey;
+	uint64_t maxSeconds;
 	int next;
 	int zet;
 	int display;
