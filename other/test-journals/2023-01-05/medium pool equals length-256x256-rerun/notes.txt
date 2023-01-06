@@ -1,0 +1,9 @@
+
+inputs:
+
+uint64_t SAMPLE_POOL_SIZE = 1024 * 8196;
+uint64_t NET_SIZE = SAMPLE_POOL_SIZE;
+
+
+
+notes:

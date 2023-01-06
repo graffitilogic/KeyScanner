@@ -13,7 +13,7 @@ C:\crypto\code\repos\KeyScanner\msvc\x64\Release>keyscanner -g --gpui 0 --gpux 4
   BTC ADDRESS  : 1HBtApAFA9B2YZw3G2YKSMCtb3dVnjuNe2
   OUTPUT FILE  : FOUNDTEST38.txt
 
-  Start Time   : Thu Jan  5 13:48:07 2023
+  Start Time   : Thu Jan  5 15:37:10 2023
 
   GPU          : GPU #0 NVIDIA GeForce RTX 3070 (46x128 cores) Grid(460x256)
   Start Keys : Randomly regenerates 117760 starting keys every 1,000,000,000 on the counter
@@ -24,14 +24,14 @@ C:\crypto\code\repos\KeyScanner\msvc\x64\Release>keyscanner -g --gpui 0 --gpux 4
   Generator : 0 middle keys generated
   Generator : 117760 starting keys generated.
 
-  [00:10:45] [R: 54] [3870BF3C5C] [F: 0] [GPU: 90.29 Mk/s] [T: 124,927,344,640]
+  [Thread: 114688]   [2CE9BC4D65] [F: 0] [GPU: 0.00 Mk/s] [T: 69,698,846,720]
   =================================================================================
   PubAddress: 1HBtApAFA9B2YZw3G2YKSMCtb3dVnjuNe2
   Priv (WIF): p2pkh:KwDiBf89QgGbjEhKnhXJuH7LrciVrZi3qYjgd9P3MahktLW5315v
   Priv (HEX): 22382FACD0
   PubK (HEX): 03C060E1E3771CBECCB38E119C2414702F3F5181A89652538851D2E3886BDD70C6
   =================================================================================
-  [00:10:46] [R: 54] [3870BF4557] [F: 1] [GPU: 270.80 Mk/s] [T: 126,374,379,520]
+  [00:06:20] [R: 32] [3A1FCDFA17] [F: 1] [GPU: 90.33 Mk/s] [T: 70,422,364,160]
 
   BYE
 
@@ -50,7 +50,7 @@ C:\crypto\code\repos\KeyScanner\msvc\x64\Release>keyscanner -g --gpui 0 --gpux 4
   BTC ADDRESS  : 1HBtApAFA9B2YZw3G2YKSMCtb3dVnjuNe2
   OUTPUT FILE  : FOUNDTEST38.txt
 
-  Start Time   : Thu Jan  5 13:59:05 2023
+  Start Time   : Thu Jan  5 15:43:42 2023
 
   GPU          : GPU #0 NVIDIA GeForce RTX 3070 (46x128 cores) Grid(460x256)
   Start Keys : Randomly regenerates 117760 starting keys every 1,000,000,000 on the counter
@@ -61,14 +61,14 @@ C:\crypto\code\repos\KeyScanner\msvc\x64\Release>keyscanner -g --gpui 0 --gpux 4
   Generator : 0 middle keys generated
   Generator : 117760 starting keys generated.
 
-  [Thread: 114688]   [2B140AB0F0] [F: 0] [GPU: 0.00 Mk/s] [T: 50,887,393,280]
+  [00:00:25] [R: 2] [31CEFF065A] [F: 0] [GPU: 240.80 Mk/s] [T: 6,029,312,000]
   =================================================================================
   PubAddress: 1HBtApAFA9B2YZw3G2YKSMCtb3dVnjuNe2
   Priv (WIF): p2pkh:KwDiBf89QgGbjEhKnhXJuH7LrciVrZi3qYjgd9P3MahktLW5315v
   Priv (HEX): 22382FACD0
   PubK (HEX): 03C060E1E3771CBECCB38E119C2414702F3F5181A89652538851D2E3886BDD70C6
   =================================================================================
-  [00:04:23] [R: 22] [33980B4F93] [F: 1] [GPU: 120.40 Mk/s] [T: 51,852,083,200]
+  [00:00:36] [R: 3] [3A97955132] [F: 1] [GPU: 30.12 Mk/s] [T: 6,511,656,960]
 
   BYE
 
@@ -87,7 +87,7 @@ C:\crypto\code\repos\KeyScanner\msvc\x64\Release>keyscanner -g --gpui 0 --gpux 4
   BTC ADDRESS  : 1HBtApAFA9B2YZw3G2YKSMCtb3dVnjuNe2
   OUTPUT FILE  : FOUNDTEST38.txt
 
-  Start Time   : Thu Jan  5 14:03:39 2023
+  Start Time   : Thu Jan  5 15:44:29 2023
 
   GPU          : GPU #0 NVIDIA GeForce RTX 3070 (46x128 cores) Grid(460x256)
   Start Keys : Randomly regenerates 117760 starting keys every 1,000,000,000 on the counter
@@ -98,14 +98,14 @@ C:\crypto\code\repos\KeyScanner\msvc\x64\Release>keyscanner -g --gpui 0 --gpux 4
   Generator : 0 middle keys generated
   Generator : 117760 starting keys generated.
 
-  [00:12:20] [R: 62] [3442DB8047] [F: 0] [GPU: 90.25 Mk/s] [T: 140,844,728,320]
+  [00:12:22] [R: 62] [2F4A807E51] [F: 0] [GPU: 90.40 Mk/s] [T: 136,021,278,720]
   =================================================================================
   PubAddress: 1HBtApAFA9B2YZw3G2YKSMCtb3dVnjuNe2
   Priv (WIF): p2pkh:KwDiBf89QgGbjEhKnhXJuH7LrciVrZi3qYjgd9P3MahktLW5315v
   Priv (HEX): 22382FACD0
   PubK (HEX): 03C060E1E3771CBECCB38E119C2414702F3F5181A89652538851D2E3886BDD70C6
   =================================================================================
-  [00:12:21] [R: 62] [3442DB8942] [F: 1] [GPU: 270.83 Mk/s] [T: 142,291,763,200]
+  [00:12:23] [R: 62] [2F4A80874E] [F: 1] [GPU: 271.01 Mk/s] [T: 137,468,313,600]
 
   BYE
 
@@ -124,7 +124,7 @@ C:\crypto\code\repos\KeyScanner\msvc\x64\Release>keyscanner -g --gpui 0 --gpux 4
   BTC ADDRESS  : 1HBtApAFA9B2YZw3G2YKSMCtb3dVnjuNe2
   OUTPUT FILE  : FOUNDTEST38.txt
 
-  Start Time   : Thu Jan  5 14:16:12 2023
+  Start Time   : Thu Jan  5 15:57:03 2023
 
   GPU          : GPU #0 NVIDIA GeForce RTX 3070 (46x128 cores) Grid(460x256)
   Start Keys : Randomly regenerates 117760 starting keys every 1,000,000,000 on the counter
@@ -135,14 +135,14 @@ C:\crypto\code\repos\KeyScanner\msvc\x64\Release>keyscanner -g --gpui 0 --gpux 4
   Generator : 0 middle keys generated
   Generator : 117760 starting keys generated.
 
-  [00:16:03] [R: 81] [2BA199C4E4] [F: 0] [GPU: 90.38 Mk/s] [T: 174,126,530,560]
+  [00:10:08] [R: 51] [3416E4019F] [F: 0] [GPU: 90.35 Mk/s] [T: 115,762,790,400]
   =================================================================================
   PubAddress: 1HBtApAFA9B2YZw3G2YKSMCtb3dVnjuNe2
   Priv (WIF): p2pkh:KwDiBf89QgGbjEhKnhXJuH7LrciVrZi3qYjgd9P3MahktLW5315v
   Priv (HEX): 22382FACD0
   PubK (HEX): 03C060E1E3771CBECCB38E119C2414702F3F5181A89652538851D2E3886BDD70C6
   =================================================================================
-  [00:16:04] [R: 81] [2BA199CDE2] [F: 1] [GPU: 271.13 Mk/s] [T: 175,573,565,440]
+  [00:10:09] [R: 51] [3416E40A9C] [F: 1] [GPU: 271.04 Mk/s] [T: 117,209,825,280]
 
   BYE
 
@@ -161,7 +161,7 @@ C:\crypto\code\repos\KeyScanner\msvc\x64\Release>keyscanner -g --gpui 0 --gpux 4
   BTC ADDRESS  : 1HBtApAFA9B2YZw3G2YKSMCtb3dVnjuNe2
   OUTPUT FILE  : FOUNDTEST38.txt
 
-  Start Time   : Thu Jan  5 14:32:28 2023
+  Start Time   : Thu Jan  5 16:07:24 2023
 
   GPU          : GPU #0 NVIDIA GeForce RTX 3070 (46x128 cores) Grid(460x256)
   Start Keys : Randomly regenerates 117760 starting keys every 5,000,000,000 on the counter
@@ -172,14 +172,14 @@ C:\crypto\code\repos\KeyScanner\msvc\x64\Release>keyscanner -g --gpui 0 --gpux 4
   Generator : 0 middle keys generated
   Generator : 117760 starting keys generated.
 
-  [00:04:16] [R: 18] [3B34989165] [F: 0] [GPU: 451.74 Mk/s] [T: 100,810,096,640]
+  [00:01:13] [R: 5] [23012B1C13] [F: 0] [GPU: 451.77 Mk/s] [T: 30,870,077,440]
   =================================================================================
   PubAddress: 1HBtApAFA9B2YZw3G2YKSMCtb3dVnjuNe2
   Priv (WIF): p2pkh:KwDiBf89QgGbjEhKnhXJuH7LrciVrZi3qYjgd9P3MahktLW5315v
   Priv (HEX): 22382FACD0
   PubK (HEX): 03C060E1E3771CBECCB38E119C2414702F3F5181A89652538851D2E3886BDD70C6
   =================================================================================
-  [00:04:17] [R: 18] [3B3498A65E] [F: 1] [GPU: 632.35 Mk/s] [T: 102,257,131,520]
+  [00:01:14] [R: 5] [23012B310D] [F: 1] [GPU: 632.46 Mk/s] [T: 32,317,112,320]
 
   BYE
 
@@ -198,7 +198,7 @@ C:\crypto\code\repos\KeyScanner\msvc\x64\Release>keyscanner -g --gpui 0 --gpux 4
   BTC ADDRESS  : 1HBtApAFA9B2YZw3G2YKSMCtb3dVnjuNe2
   OUTPUT FILE  : FOUNDTEST38.txt
 
-  Start Time   : Thu Jan  5 14:36:56 2023
+  Start Time   : Thu Jan  5 16:08:49 2023
 
   GPU          : GPU #0 NVIDIA GeForce RTX 3070 (46x128 cores) Grid(460x256)
   Start Keys : Randomly regenerates 117760 starting keys every 5,000,000,000 on the counter
@@ -209,14 +209,14 @@ C:\crypto\code\repos\KeyScanner\msvc\x64\Release>keyscanner -g --gpui 0 --gpux 4
   Generator : 0 middle keys generated
   Generator : 117760 starting keys generated.
 
-  [00:00:03] [R: 0] [3746ACD35A] [F: 0] [GPU: 1.45 Gk/s] [T: 4,341,104,640]
+  [00:02:37] [R: 11] [30AD9C10B0] [F: 0] [GPU: 451.41 Mk/s] [T: 62,704,844,800]
   =================================================================================
   PubAddress: 1HBtApAFA9B2YZw3G2YKSMCtb3dVnjuNe2
   Priv (WIF): p2pkh:KwDiBf89QgGbjEhKnhXJuH7LrciVrZi3qYjgd9P3MahktLW5315v
   Priv (HEX): 22382FACD0
   PubK (HEX): 03C060E1E3771CBECCB38E119C2414702F3F5181A89652538851D2E3886BDD70C6
   =================================================================================
-  [00:00:04] [R: 0] [3746AD034C] [F: 1] [GPU: 1.45 Gk/s] [T: 5,788,139,520]
+  [00:02:38] [R: 11] [30AD9C25A6] [F: 1] [GPU: 632.01 Mk/s] [T: 64,151,879,680]
 
   BYE
 
@@ -235,7 +235,7 @@ C:\crypto\code\repos\KeyScanner\msvc\x64\Release>keyscanner -g --gpui 0 --gpux 4
   BTC ADDRESS  : 1HBtApAFA9B2YZw3G2YKSMCtb3dVnjuNe2
   OUTPUT FILE  : FOUNDTEST38.txt
 
-  Start Time   : Thu Jan  5 14:37:11 2023
+  Start Time   : Thu Jan  5 16:11:38 2023
 
   GPU          : GPU #0 NVIDIA GeForce RTX 3070 (46x128 cores) Grid(460x256)
   Start Keys : Randomly regenerates 117760 starting keys every 5,000,000,000 on the counter
@@ -246,14 +246,21 @@ C:\crypto\code\repos\KeyScanner\msvc\x64\Release>keyscanner -g --gpui 0 --gpux 4
   Generator : 0 middle keys generated
   Generator : 117760 starting keys generated.
 
-  [00:00:31] [R: 2] [3CB631A51C] [F: 0] [GPU: 421.51 Mk/s] [T: 14,711,521,280]
+  [00:10:11] [R: 43] [31192E483E] [F: 0] [GPU: 481.70 Mk/s] [T: 232,007,925,760]
   =================================================================================
   PubAddress: 1HBtApAFA9B2YZw3G2YKSMCtb3dVnjuNe2
   Priv (WIF): p2pkh:KwDiBf89QgGbjEhKnhXJuH7LrciVrZi3qYjgd9P3MahktLW5315v
   Priv (HEX): 22382FACD0
   PubK (HEX): 03C060E1E3771CBECCB38E119C2414702F3F5181A89652538851D2E3886BDD70C6
   =================================================================================
-  [00:00:32] [R: 2] [3CB631B915] [F: 1] [GPU: 602.13 Mk/s] [T: 16,158,556,160]
+
+  =================================================================================
+  PubAddress: 1HBtApAFA9B2YZw3G2YKSMCtb3dVnjuNe2
+  Priv (WIF): p2pkh:KwDiBf89QgGbjEhKnhXJuH7LrciVrZi3qYjgd9P3MahktLW5315v
+  Priv (HEX): 22382FACD0
+  PubK (HEX): 03C060E1E3771CBECCB38E119C2414702F3F5181A89652538851D2E3886BDD70C6
+  =================================================================================
+  [00:10:12] [R: 43] [31192E5E35] [F: 2] [GPU: 662.21 Mk/s] [T: 233,454,960,640]
 
   BYE
 
@@ -272,7 +279,7 @@ C:\crypto\code\repos\KeyScanner\msvc\x64\Release>keyscanner -g --gpui 0 --gpux 4
   BTC ADDRESS  : 1HBtApAFA9B2YZw3G2YKSMCtb3dVnjuNe2
   OUTPUT FILE  : FOUNDTEST38.txt
 
-  Start Time   : Thu Jan  5 14:37:54 2023
+  Start Time   : Thu Jan  5 16:22:02 2023
 
   GPU          : GPU #0 NVIDIA GeForce RTX 3070 (46x128 cores) Grid(460x256)
   Start Keys : Randomly regenerates 117760 starting keys every 5,000,000,000 on the counter
@@ -283,14 +290,14 @@ C:\crypto\code\repos\KeyScanner\msvc\x64\Release>keyscanner -g --gpui 0 --gpux 4
   Generator : 0 middle keys generated
   Generator : 117760 starting keys generated.
 
-  [00:03:06] [R: 13] [2604F30526] [F: 0] [GPU: 451.63 Mk/s] [T: 74,522,296,320]
+  [00:07:03] [R: 30] [327109A88C] [F: 0] [GPU: 451.64 Mk/s] [T: 162,791,424,000]
   =================================================================================
   PubAddress: 1HBtApAFA9B2YZw3G2YKSMCtb3dVnjuNe2
   Priv (WIF): p2pkh:KwDiBf89QgGbjEhKnhXJuH7LrciVrZi3qYjgd9P3MahktLW5315v
   Priv (HEX): 22382FACD0
   PubK (HEX): 03C060E1E3771CBECCB38E119C2414702F3F5181A89652538851D2E3886BDD70C6
   =================================================================================
-  [00:03:07] [R: 13] [2604F31A1F] [F: 1] [GPU: 632.32 Mk/s] [T: 75,969,331,200]
+  [00:07:04] [R: 30] [327109BD84] [F: 1] [GPU: 632.19 Mk/s] [T: 164,238,458,880]
 
   BYE
 
@@ -309,7 +316,7 @@ C:\crypto\code\repos\KeyScanner\msvc\x64\Release>keyscanner -g --gpui 0 --gpux 4
   BTC ADDRESS  : 1HBtApAFA9B2YZw3G2YKSMCtb3dVnjuNe2
   OUTPUT FILE  : FOUNDTEST38.txt
 
-  Start Time   : Thu Jan  5 14:41:13 2023
+  Start Time   : Thu Jan  5 16:29:18 2023
 
   GPU          : GPU #0 NVIDIA GeForce RTX 3070 (46x128 cores) Grid(460x256)
   Start Keys : Randomly regenerates 117760 starting keys every 64,000,000,000 on the counter
@@ -320,14 +327,14 @@ C:\crypto\code\repos\KeyScanner\msvc\x64\Release>keyscanner -g --gpui 0 --gpux 4
   Generator : 0 middle keys generated
   Generator : 117760 starting keys generated.
 
-  [00:00:03] [R: 0] [30303FECC0] [F: 0] [GPU: 1.53 Gk/s] [T: 4,582,277,120]
+  [00:00:06] [R: 0] [31AEB37520] [F: 0] [GPU: 1.44 Gk/s] [T: 8,682,209,280]
   =================================================================================
   PubAddress: 1HBtApAFA9B2YZw3G2YKSMCtb3dVnjuNe2
   Priv (WIF): p2pkh:KwDiBf89QgGbjEhKnhXJuH7LrciVrZi3qYjgd9P3MahktLW5315v
   Priv (HEX): 22382FACD0
   PubK (HEX): 03C060E1E3771CBECCB38E119C2414702F3F5181A89652538851D2E3886BDD70C6
   =================================================================================
-  [00:00:04] [R: 0] [3030401EAF] [F: 1] [GPU: 1.51 Gk/s] [T: 6,029,312,000]
+  [00:00:07] [R: 0] [31AEB3A50B] [F: 1] [GPU: 1.44 Gk/s] [T: 10,129,244,160]
 
   BYE
 
@@ -346,7 +353,7 @@ C:\crypto\code\repos\KeyScanner\msvc\x64\Release>keyscanner -g --gpui 0 --gpux 4
   BTC ADDRESS  : 1HBtApAFA9B2YZw3G2YKSMCtb3dVnjuNe2
   OUTPUT FILE  : FOUNDTEST38.txt
 
-  Start Time   : Thu Jan  5 14:41:28 2023
+  Start Time   : Thu Jan  5 16:29:36 2023
 
   GPU          : GPU #0 NVIDIA GeForce RTX 3070 (46x128 cores) Grid(460x256)
   Start Keys : Randomly regenerates 117760 starting keys every 64,000,000,000 on the counter
@@ -357,14 +364,14 @@ C:\crypto\code\repos\KeyScanner\msvc\x64\Release>keyscanner -g --gpui 0 --gpux 4
   Generator : 0 middle keys generated
   Generator : 117760 starting keys generated.
 
-  [00:00:37] [R: 0] [21D38457ED] [F: 0] [GPU: 1.44 Gk/s] [T: 53,781,463,040]
+  [00:03:58] [R: 4] [30F38DF936] [F: 0] [GPU: 1.42 Gk/s] [T: 284,824,698,880]
   =================================================================================
   PubAddress: 1HBtApAFA9B2YZw3G2YKSMCtb3dVnjuNe2
   Priv (WIF): p2pkh:KwDiBf89QgGbjEhKnhXJuH7LrciVrZi3qYjgd9P3MahktLW5315v
   Priv (HEX): 22382FACD0
   PubK (HEX): 03C060E1E3771CBECCB38E119C2414702F3F5181A89652538851D2E3886BDD70C6
   =================================================================================
-  [00:00:38] [R: 0] [21D38487D9] [F: 1] [GPU: 1.44 Gk/s] [T: 55,228,497,920]
+  [00:03:59] [R: 4] [30F38E2828] [F: 1] [GPU: 1.42 Gk/s] [T: 286,271,733,760]
 
   BYE
 
@@ -383,7 +390,7 @@ C:\crypto\code\repos\KeyScanner\msvc\x64\Release>keyscanner -g --gpui 0 --gpux 4
   BTC ADDRESS  : 1HBtApAFA9B2YZw3G2YKSMCtb3dVnjuNe2
   OUTPUT FILE  : FOUNDTEST38.txt
 
-  Start Time   : Thu Jan  5 14:42:17 2023
+  Start Time   : Thu Jan  5 16:33:47 2023
 
   GPU          : GPU #0 NVIDIA GeForce RTX 3070 (46x128 cores) Grid(460x256)
   Start Keys : Randomly regenerates 117760 starting keys every 64,000,000,000 on the counter
@@ -394,14 +401,14 @@ C:\crypto\code\repos\KeyScanner\msvc\x64\Release>keyscanner -g --gpui 0 --gpux 4
   Generator : 0 middle keys generated
   Generator : 117760 starting keys generated.
 
-  [00:07:31] [R: 8] [2147BFDFD2] [F: 0] [GPU: 1.35 Gk/s] [T: 530,820,628,480]
+  [00:01:23] [R: 1] [3256FBC6CF] [F: 0] [GPU: 1.45 Gk/s] [T: 104,910,028,800]
   =================================================================================
   PubAddress: 1HBtApAFA9B2YZw3G2YKSMCtb3dVnjuNe2
   Priv (WIF): p2pkh:KwDiBf89QgGbjEhKnhXJuH7LrciVrZi3qYjgd9P3MahktLW5315v
   Priv (HEX): 22382FACD0
   PubK (HEX): 03C060E1E3771CBECCB38E119C2414702F3F5181A89652538851D2E3886BDD70C6
   =================================================================================
-  [00:07:32] [R: 8] [2147C00FC0] [F: 1] [GPU: 1.44 Gk/s] [T: 532,267,663,360]
+  [00:01:24] [R: 1] [3256FBF6C0] [F: 1] [GPU: 1.45 Gk/s] [T: 106,357,063,680]
 
   BYE
 
@@ -420,7 +427,7 @@ C:\crypto\code\repos\KeyScanner\msvc\x64\Release>keyscanner -g --gpui 0 --gpux 4
   BTC ADDRESS  : 1HBtApAFA9B2YZw3G2YKSMCtb3dVnjuNe2
   OUTPUT FILE  : FOUNDTEST38.txt
 
-  Start Time   : Thu Jan  5 14:50:02 2023
+  Start Time   : Thu Jan  5 16:35:22 2023
 
   GPU          : GPU #0 NVIDIA GeForce RTX 3070 (46x128 cores) Grid(460x256)
   Start Keys : Randomly regenerates 117760 starting keys every 64,000,000,000 on the counter
@@ -431,13 +438,13 @@ C:\crypto\code\repos\KeyScanner\msvc\x64\Release>keyscanner -g --gpui 0 --gpux 4
   Generator : 0 middle keys generated
   Generator : 117760 starting keys generated.
 
-  [00:01:11] [R: 1] [3106A6388A] [F: 0] [GPU: 1.48 Gk/s] [T: 87,304,437,760]
+  [00:02:24] [R: 2] [364B8F26BB] [F: 0] [GPU: 1.42 Gk/s] [T: 177,985,290,240]
   =================================================================================
   PubAddress: 1HBtApAFA9B2YZw3G2YKSMCtb3dVnjuNe2
   Priv (WIF): p2pkh:KwDiBf89QgGbjEhKnhXJuH7LrciVrZi3qYjgd9P3MahktLW5315v
   Priv (HEX): 22382FACD0
   PubK (HEX): 03C060E1E3771CBECCB38E119C2414702F3F5181A89652538851D2E3886BDD70C6
   =================================================================================
-  [00:01:12] [R: 1] [3106A66879] [F: 1] [GPU: 1.45 Gk/s] [T: 88,510,300,160]
+  [00:02:25] [R: 2] [364B8F55AB] [F: 1] [GPU: 1.42 Gk/s] [T: 179,432,325,120]
 
   BYE
