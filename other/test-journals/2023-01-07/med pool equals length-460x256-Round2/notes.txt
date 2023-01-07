@@ -1,3 +1,5 @@
+Question: Does sample pool size impact average time to solve?
+
 changes over previous round:
 460x256 grid for comparison against 256x256
 
