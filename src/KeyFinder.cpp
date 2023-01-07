@@ -1576,7 +1576,7 @@ std::vector<Int> KeyFinder::getGPURandoms_Masked_Oversample(Random::GPURand& rnd
 	rKeyMask.SetInt64(rKeyPer);
 
 	
-	uint64_t SAMPLE_POOL_SIZE = 1024 * 8196;
+	uint64_t SAMPLE_POOL_SIZE = 1024 * 32768;
 
 	Int POOL_MIN;
 	Int POOL_MAX;
